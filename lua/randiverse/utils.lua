@@ -6,9 +6,6 @@ M.slice_table = function(tbl, start, stop)
 	start = start or 1
 	stop = stop or #tbl
 
-	start = math.max(1, math.min(#tbl, start))
-	stop = math.max(1, math.min(#tbl, stop))
-
 	for i = start, stop do
 		table.insert(sliced, tbl[i])
 	end
