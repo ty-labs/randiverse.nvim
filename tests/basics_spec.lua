@@ -37,7 +37,7 @@ describe("randiverse basics", function()
 
 		set_lines({ 'value: ""' })
 		set_curpos({ 1, 9 })
-		vim.cmd("Randiverse int -s -1 -S -10")
+		vim.cmd("Randiverse int -s -10 -S -1")
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		for _, line in ipairs(lines) do
 			print(line)
@@ -45,7 +45,7 @@ describe("randiverse basics", function()
 
 		set_lines({ 'value: ""' })
 		set_curpos({ 1, 9 })
-		vim.cmd("Randiverse int -s tango -S -10")
+		vim.cmd("Randiverse int -s 10 -S 10")
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		for _, line in ipairs(lines) do
 			print(line)
@@ -53,7 +53,7 @@ describe("randiverse basics", function()
 	end)
 
 	it("test randiverse name command", function()
-		vim.cmd("Randiverse name")
+		vim.cmd("Randiverse name -l -f")
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		for _, line in ipairs(lines) do
 			print(line)
@@ -62,6 +62,34 @@ describe("randiverse basics", function()
 
 	it("test randiverse unknown command", function()
 		vim.cmd("Randiverse door")
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		for _, line in ipairs(lines) do
+			print(line)
+		end
+	end)
+
+	it("test randiverse float command", function()
+		set_lines({ 'value: ""' })
+		set_curpos({ 1, 9 })
+		vim.cmd("Randiverse float -decimals 4 -s 0 -S 1")
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		for _, line in ipairs(lines) do
+			print(line)
+		end
+
+		set_lines({ 'value: ""' })
+		set_curpos({ 1, 9 })
+		vim.cmd("Randiverse float -decimals 4 -s 10 -S 10")
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		for _, line in ipairs(lines) do
+			print(line)
+		end
+	end)
+
+	it("test randiverse country command", function()
+		set_lines({ 'value: ""' })
+		set_curpos({ 1, 9 })
+		vim.cmd("Randiverse country")
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		for _, line in ipairs(lines) do
 			print(line)

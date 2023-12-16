@@ -5,6 +5,7 @@ local utils = require("randiverse.utils")
 local int = require("randiverse.commands.int")
 local float = require("randiverse.commands.float")
 local name = require("randiverse.commands.name")
+local country = require("randiverse.commands.country")
 
 local M = {}
 
@@ -20,6 +21,7 @@ local randiverse_commands = {
 	int = int.normal_random_int,
 	float = float.normal_random_float,
 	name = name.normal_random_name,
+	country = country.normal_random_country,
 }
 
 M.randiverse = function(args)

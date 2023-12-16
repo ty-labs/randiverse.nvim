@@ -6,10 +6,12 @@ local expected_flags = {
 	start = {
 		bool = false,
 		validator = utils.string_is_integer,
+		transformer = utils.string_to_integer,
 	},
 	stop = {
 		bool = false,
 		validator = utils.string_is_integer,
+		transformer = utils.string_to_integer,
 	},
 }
 
@@ -22,11 +24,14 @@ M.normal_random_int = function(args)
 	print("inside normal_random_int")
 	args = args or {}
 	local parsed_flags = utils.parse_command_flags(args, flag_mappings)
-	utils.validate_command_args(expected_flags, parsed_flags)
+	local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
-	local start = parsed_flags["start"] or 1
-	local stop = parsed_flags["stop"] or 100
-
+	-- defaults: [1-100] range
+	local start = transformed_flags["start"] or 1
+	local stop = transformed_flags["stop"] or 100
+	if stop < start then
+		error("range stop can not be less than range start (consider the default [1-100] range when passing flags)")
+	end
 	local random_int = math.random(start, stop)
 
 	print("finished normal_random_int")

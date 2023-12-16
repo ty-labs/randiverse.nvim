@@ -28,8 +28,10 @@ M.parse_command_flags = function(args, flag_mappings)
 	return flags
 end
 
-M.validate_command_args = function(expected, received)
+M.validate_and_transform_command_flags = function(expected, received)
+	local transformed_flags = {}
 	for flag, value in pairs(received) do
+		-- perform checks on the command flags --
 		-- check if key is fictious
 		if not expected[flag] then
 			error("unknown flag: " .. flag)
@@ -46,13 +48,60 @@ M.validate_command_args = function(expected, received)
 		if not expected[flag]["bool"] and not expected[flag]["validator"](value) then
 			error("flag `" .. flag .. "` can not accept type of value `" .. value .. "`")
 		end
+
+		-- transform the command flags (if applicable) --
+		if expected[flag]["bool"] then
+			transformed_flags[flag] = true
+		else
+			transformed_flags[flag] = expected[flag]["transformer"](value)
+		end
 	end
-	return nil -- return true if they are valid (otherwise errors where unknown or invalid values)
+	return transformed_flags
 end
+
+-- common validator/transformers for command flags --
+M.FIRST_NAMES_FILE = "first_names.txt"
+M.LAST_NAMES_FILE = "last_names.txt"
+M.COUNTRIES_FILE = "countries.txt"
+M.WORDS_FILE = "words.txt"
 
 M.string_is_integer = function(s)
 	local n = tonumber(s)
 	return n ~= nil and n == math.floor(n)
+end
+
+M.string_to_integer = function(s)
+	return math.floor(tonumber(s) or 0)
+end
+
+-- for assets and reading --
+M.get_asset_path = function()
+	local path = debug.getinfo(1, "S").source:sub(2)
+	path = path:match("(.*/)")
+	return path .. "../assets/"
+end
+
+M.read_random_line = function(path)
+	local file, error = io.open(path, "r")
+	if not file then
+		print("Error opening file:", error)
+		vim.api.nvim_err_writeln("Unable to open file")
+		return
+	end
+
+	local file_size = file:seek("end")
+	file:seek("set", 0)
+
+	local random_position = math.random(file_size)
+
+	-- TODO: there is a basecase to consider if we had chosen last line already...
+	-- TODO: there needs to be a caching mechansim for file lengths to speed up process...
+	file:seek("set", random_position)
+	_ = file:read()
+
+	local line = file:read("*l")
+	file:close()
+	return line
 end
 
 return M
