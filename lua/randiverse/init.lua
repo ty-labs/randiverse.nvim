@@ -9,6 +9,7 @@ local name = require("randiverse.commands.name")
 local country = require("randiverse.commands.country")
 local word = require("randiverse.commands.word")
 local text = require("randiverse.commands.text")
+local ip = require("randiverse.commands.ip")
 
 local M = {}
 
@@ -27,6 +28,7 @@ local randiverse_commands = {
 	country = country.normal_random_country,
 	word = word.normal_random_word,
 	text = text.normal_random_text,
+	ip = ip.normal_random_ip,
 }
 
 M.randiverse = function(args)
