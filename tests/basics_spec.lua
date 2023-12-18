@@ -95,4 +95,24 @@ describe("randiverse basics", function()
 			print(line)
 		end
 	end)
+
+	it("test randiverse word command", function()
+		set_lines({ 'value: ""' })
+		set_curpos({ 1, 9 })
+		vim.cmd("Randiverse word")
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		for _, line in ipairs(lines) do
+			print(line)
+		end
+	end)
+
+	it("test randiverse text command", function()
+		set_lines({ 'value: ""' })
+		set_curpos({ 1, 9 })
+		vim.cmd("Randiverse text -s 10")
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		for _, line in ipairs(lines) do
+			print(line)
+		end
+	end)
 end)

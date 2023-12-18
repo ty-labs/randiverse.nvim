@@ -60,11 +60,6 @@ M.validate_and_transform_command_flags = function(expected, received)
 end
 
 -- common validator/transformers for command flags --
-M.FIRST_NAMES_FILE = "first_names.txt"
-M.LAST_NAMES_FILE = "last_names.txt"
-M.COUNTRIES_FILE = "countries.txt"
-M.WORDS_FILE = "words.txt"
-
 M.string_is_integer = function(s)
 	local n = tonumber(s)
 	return n ~= nil and n == math.floor(n)
@@ -74,13 +69,27 @@ M.string_to_integer = function(s)
 	return math.floor(tonumber(s) or 0)
 end
 
+M.string_is_valid_corpus = function(s)
+	return s == "short" or s == "medium" or s == "long"
+end
+
 -- for assets and reading --
+M.FIRST_NAMES_FILE = "names_first.txt"
+M.LAST_NAMES_FILE = "names_last.txt"
+M.COUNTRIES_FILE = "countries.txt"
+M.WORDS_SHORT_FILE = "words_short.txt"
+M.WORDS_MEDIUM_FILE = "words_medium.txt"
+M.WORDS_LONG_FILE = "words_long.txt"
+
 M.get_asset_path = function()
 	local path = debug.getinfo(1, "S").source:sub(2)
 	path = path:match("(.*/)")
 	return path .. "../assets/"
 end
 
+-- alternative:
+-- (1) function to take path and return a table with the file content (cache-able)
+-- (2) function to take path and return a random element which uses function #1
 M.read_random_line = function(path)
 	local file, error = io.open(path, "r")
 	if not file then
@@ -102,6 +111,14 @@ M.read_random_line = function(path)
 	local line = file:read("*l")
 	file:close()
 	return line
+end
+
+M.get_random_from_set = function(set)
+	local keys = {}
+	for k, _ in pairs(set) do
+		table.insert(keys, k)
+	end
+	return keys[math.random(#keys)]
 end
 
 return M

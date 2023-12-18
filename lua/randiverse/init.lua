@@ -2,10 +2,13 @@ local config = require("randiverse.config")
 local buffer = require("randiverse.buffer")
 local utils = require("randiverse.utils")
 
+-- import commands --
 local int = require("randiverse.commands.int")
 local float = require("randiverse.commands.float")
 local name = require("randiverse.commands.name")
 local country = require("randiverse.commands.country")
+local word = require("randiverse.commands.word")
+local text = require("randiverse.commands.text")
 
 local M = {}
 
@@ -22,6 +25,8 @@ local randiverse_commands = {
 	float = float.normal_random_float,
 	name = name.normal_random_name,
 	country = country.normal_random_country,
+	word = word.normal_random_word,
+	text = text.normal_random_text,
 }
 
 M.randiverse = function(args)

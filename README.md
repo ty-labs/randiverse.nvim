@@ -7,22 +7,24 @@ nvim --headless --noplugin -u tests/minimal_init.lua -c "PlenaryBustedDirectory 
 ```
 
 -- TODO: Refactor below functions in separate Lua modules to handle args & processing
-
--- M.normal_random_fname = function(args) end
---
--- M.normal_random_lname = function(args) end
---
--- M.normal_random_country = function(args) end
---
--- M.normal_random_phone = function(args) end
---
--- M.normal_random_letters = function(args) end
---
--- M.normal_random_lorem = function(args) end
---
--- M.normal_random_word = function(args) end
---
--- M.normal_random_date = function(args) end
+- int
+- float
+- name 
+- country
+- letter 
+- letter and number
+- word
+- text
+- lorem
+- uuid 
+- url
+- email
+- hex 
+- date 
+- time
+- phone
+- ipv4
+- ipv6
 
 looking for eyes on:
 - math.randomseed location
@@ -33,3 +35,5 @@ looking for eyes on:
 - flags for each of the potential commands + structure of passing flags (-flag=xx or -flag xx or etc.)
 - keymaps for the essential default commands?
 - method of exposing Randiverse API make sense?
+- better to have text files or just a function return long list of items to select random?
+- how to handle ability to get a random item where it starts with a letter? (text, in-memory table, split files, etc.) 
