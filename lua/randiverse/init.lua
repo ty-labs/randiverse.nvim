@@ -12,6 +12,7 @@ local text = require("randiverse.commands.text")
 local ip = require("randiverse.commands.ip")
 local date = require("randiverse.commands.date")
 local time = require("randiverse.commands.time")
+local datetime = require("randiverse.commands.datetime")
 local hexcolor = require("randiverse.commands.hexcolor")
 local lorem = require("randiverse.commands.lorem")
 
@@ -35,6 +36,7 @@ local randiverse_commands = {
 	ip = ip.normal_random_ip,
 	date = date.normal_random_date,
 	time = time.normal_random_time,
+	datetime = datetime.normal_random_datetime,
 	hexcolor = hexcolor.normal_random_hexcolor,
 	lorem = lorem.normal_random_lorem,
 }
