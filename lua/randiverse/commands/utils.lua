@@ -85,7 +85,7 @@ M.WORDS_LONG_FILE = "words_long.txt"
 M.get_asset_path = function()
 	local path = debug.getinfo(1, "S").source:sub(2)
 	path = path:match("(.*/)")
-	return path .. "../assets/"
+	return path .. "../data/"
 end
 
 -- alternative:

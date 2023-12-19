@@ -1,19 +1,21 @@
-local config = require("randiverse.config")
 local buffer = require("randiverse.buffer")
+local config = require("randiverse.config")
 local utils = require("randiverse.utils")
 
 -- import commands --
-local int = require("randiverse.commands.int")
-local float = require("randiverse.commands.float")
-local name = require("randiverse.commands.name")
 local country = require("randiverse.commands.country")
-local word = require("randiverse.commands.word")
-local text = require("randiverse.commands.text")
-local ip = require("randiverse.commands.ip")
 local datetime = require("randiverse.commands.datetime")
-local uuid = require("randiverse.commands.uuid")
+local email = require("randiverse.commands.email")
+local float = require("randiverse.commands.float")
 local hexcolor = require("randiverse.commands.hexcolor")
+local int = require("randiverse.commands.int")
+local ip = require("randiverse.commands.ip")
 local lorem = require("randiverse.commands.lorem")
+local name = require("randiverse.commands.name")
+local text = require("randiverse.commands.text")
+local url = require("randiverse.commands.url")
+local uuid = require("randiverse.commands.uuid")
+local word = require("randiverse.commands.word")
 
 local M = {}
 
@@ -26,17 +28,19 @@ M.buffer_setup = function(buffer_opts)
 end
 
 local randiverse_commands = {
-	int = int.normal_random_int,
-	float = float.normal_random_float,
-	name = name.normal_random_name,
 	country = country.normal_random_country,
-	word = word.normal_random_word,
-	text = text.normal_random_text,
-	ip = ip.normal_random_ip,
 	datetime = datetime.normal_random_datetime,
-	uuid = uuid.normal_random_uuid,
+	email = email.normal_random_email,
+	float = float.normal_random_float,
 	hexcolor = hexcolor.normal_random_hexcolor,
+	int = int.normal_random_int,
+	ip = ip.normal_random_ip,
 	lorem = lorem.normal_random_lorem,
+	name = name.normal_random_name,
+	text = text.normal_random_text,
+	url = url.normal_random_url,
+	uuid = uuid.normal_random_uuid,
+	word = word.normal_random_word,
 }
 
 M.randiverse = function(args)
