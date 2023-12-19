@@ -35,12 +35,13 @@ local ip_generators = {
 	ipv6 = function()
 		local ipv6_blocks = {}
 		for _ = 1, 8 do
-			table.insert(ipv6_blocks, string.format("%04x", math.random(0, 65535)))
+			table.insert(ipv6_blocks, string.format("%04X", math.random(0, 65535)))
 		end
 		return table.concat(ipv6_blocks, ":")
 	end,
 }
 
+-- TODO: Flag --lowercase / -l to enable Hexadecimal to be lower
 M.normal_random_ip = function(args)
 	print("inside normal_random_ip")
 

@@ -1,5 +1,6 @@
 local M = {}
 
+-- TODO: IDK if it responds to --sentence-length or similar flags...
 M.parse_command_flags = function(args, flag_mappings)
 	local flags = {}
 	local i = 1

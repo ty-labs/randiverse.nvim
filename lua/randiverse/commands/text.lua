@@ -35,6 +35,7 @@ local corpus_mappings = {
 -- TODO: Add a means to pass multiple corpuses into word for selection (Ex: Med + Long corpuses -- probably space separated after -c flag)
 -- TODO: Flag that specifies the start letter for the word!
 -- TODO: I sense in the future we need to refactor `read_random_line` s.t. there is caching or we return a table of all lines as text
+-- TODO: Flag -p/--paragraphs to enable # of paragraphs in output text (separated by \n\n)
 M.normal_random_text = function(args)
 	print("inside normal_random_text")
 

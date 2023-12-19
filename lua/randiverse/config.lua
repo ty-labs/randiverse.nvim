@@ -16,10 +16,11 @@ M.set_keymap = function(args)
 	vim.keymap.set(args.mode, args.lhs, args.rhs, args.opts)
 end
 
+-- TODO: Enable ability to override any command default values to user desire
 M.setup = function(user_opts)
 	-- 1st register the command
 	vim.cmd([[command! -nargs=* Randiverse lua require('randiverse').randiverse({<f-args>})]])
-	-- 2nd register the keymaps which call command w/ args
+	-- TODO: 2nd register the keymaps which call command w/ args
 
 	-- 3rd set seed for randomness
 	math.randomseed(os.time())
