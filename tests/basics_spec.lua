@@ -89,7 +89,7 @@ describe("randiverse basics", function()
 	it("test randiverse country command", function()
 		set_lines({ 'value: ""' })
 		set_curpos({ 1, 9 })
-		vim.cmd("Randiverse country")
+		vim.cmd("Randiverse country -c 2")
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		for _, line in ipairs(lines) do
 			print(line)
