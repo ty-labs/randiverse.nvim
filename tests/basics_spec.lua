@@ -119,7 +119,7 @@ describe("randiverse basics", function()
 	it("test randiverse ip command", function()
 		set_lines({ 'value: ""' })
 		set_curpos({ 1, 9 })
-		vim.cmd("Randiverse ip -v 6")
+		vim.cmd("Randiverse ip -v ipv6")
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		for _, line in ipairs(lines) do
 			print(line)

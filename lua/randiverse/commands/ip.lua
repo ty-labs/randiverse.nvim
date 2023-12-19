@@ -2,20 +2,21 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local ip_mappings = {
+	["4"] = "ipv4",
+	["6"] = "ipv6",
+	["ipv4"] = "ipv4",
+	["ipv6"] = "ipv6",
+}
+
 local expected_flags = {
 	version = {
 		bool = false,
 		validator = function(s)
-			return s == "ipv4" or s == "4" or s == "ipv6" or s == "6"
+			return ip_mappings[s] ~= nil
 		end,
 		transformer = function(s)
-			if s == "ipv4" or s == "ipv6" then
-				return s
-			end
-			if s == "4" then
-				return "ipv4"
-			end
-			return "ipv6"
+			return ip_mappings[s]
 		end,
 	},
 }
