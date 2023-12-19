@@ -145,4 +145,24 @@ describe("randiverse basics", function()
 			print(line)
 		end
 	end)
+
+	it("test randiverse date command", function()
+		set_lines({ 'value: ""' })
+		set_curpos({ 1, 9 })
+		vim.cmd("Randiverse date")
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		for _, line in ipairs(lines) do
+			print(line)
+		end
+	end)
+
+	it("test randiverse time command", function()
+		set_lines({ 'value: ""' })
+		set_curpos({ 1, 9 })
+		vim.cmd("Randiverse time")
+		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+		for _, line in ipairs(lines) do
+			print(line)
+		end
+	end)
 end)
