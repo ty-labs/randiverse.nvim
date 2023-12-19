@@ -139,7 +139,7 @@ describe("randiverse basics", function()
 	it("test randiverse lorem command", function()
 		set_lines({ 'value: ""' })
 		set_curpos({ 1, 9 })
-		vim.cmd("Randiverse lorem --length 200 --s short")
+		vim.cmd("Randiverse lorem --length 500 --s short")
 		local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 		for _, line in ipairs(lines) do
 			print(line)

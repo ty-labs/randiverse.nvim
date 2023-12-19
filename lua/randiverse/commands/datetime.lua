@@ -27,6 +27,7 @@ local flag_mappings = {
 	f = "format",
 }
 
+-- TODO: I would prefer to have datetime/date/time all wrapped under datetime
 M.normal_random_datetime = function(args)
 	print("inside normal_random_datetime")
 

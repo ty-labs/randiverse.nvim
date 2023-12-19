@@ -2,7 +2,7 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
-local sentence_length = {
+local sentence_lengths = {
 	["mixed"] = { 5, 100 },
 	["mixed-long"] = { 30, 100 },
 	["mixed-short"] = { 5, 30 },
@@ -12,10 +12,19 @@ local sentence_length = {
 }
 
 local expected_flags = {
-	paragraphs = {
+	length = {
 		bool = false,
-		validator = function(s) end,
-		transformer = function(s) end,
+		validator = utils.string_is_integer,
+		transformer = utils.string_to_integer,
+	},
+	["sentence-length"] = {
+		bool = false,
+		validator = function(s)
+			return sentence_lengths[s] ~= nil
+		end,
+		transformer = function(s)
+			return s
+		end,
 	},
 	comma = {
 		bool = false,
@@ -27,71 +36,61 @@ local expected_flags = {
 			return tonumber(s)
 		end,
 	},
-	length = {
+	paragraphs = {
 		bool = false,
 		validator = utils.string_is_integer,
 		transformer = utils.string_to_integer,
 	},
-	["sentence-length"] = {
-		bool = false,
-		validator = function(s)
-			return sentence_length[s] ~= nil
-		end,
-		transformer = function(s)
-			return s
-		end,
-	},
 }
 
 local flag_mappings = {
-	p = "paragraphs",
-	c = "comma",
-	s = "sentence-length",
 	l = "length",
+	s = "sentence-length",
+	c = "comma",
+	p = "paragraphs",
 }
 
--- PERF: These could use tables and joins instead of ".." operation
--- TODO: Next word should not be equal to previous word, check if last has comma before appending .
 local function generate_lorem_sentence(comma, corpus, length)
-	local sentence = ""
+	local sentence_table = {}
 
 	local last_comma = 0
 	for i = 1, length do
-		sentence = sentence .. corpus[math.random(#corpus)] .. " "
+		table.insert(sentence_table, corpus[math.random(#corpus)])
 
-		if (i - last_comma) > 2 and math.random() < comma then
-			sentence = sentence:sub(1, -2) .. ", "
+		if i < length and i - last_comma > 2 and math.random() < comma then
+			sentence_table[i] = sentence_table[i] .. ","
 			last_comma = i
 		end
 	end
 
-	sentence = (sentence:gsub("^%l", string.upper))
-	sentence = sentence:sub(1, -2) .. "."
+	sentence_table[1] = sentence_table[1]:gsub("^%l", string.upper)
+	sentence_table[length] = sentence_table[length] .. "."
 
-	return sentence
+	return table.concat(sentence_table, " ")
 end
 
 local function generate_lorem(flags)
 	local length = flags["length"] or 100
 	local comma = flags["comma"] or 0.1
 
-	local bounds = flags["sentence-length"] and sentence_length[flags["sentence-length"]]
-		or sentence_length["mixed-short"]
+	local bounds = flags["sentence-length"] and sentence_lengths[flags["sentence-length"]]
+		or sentence_lengths["mixed-short"]
 	local lower_bound, upper_bound = bounds[1], bounds[2]
 
-	local corpus = require("randiverse.assets.words_lorem")()
-	local lorem, lorem_length = "", 0
+	local corpus = require("randiverse.data.words_lorem")()
+	local lorem_table, lorem_length = {}, 0
 	while lorem_length + upper_bound <= length do
-		lorem = lorem .. generate_lorem_sentence(comma, corpus, math.random(lower_bound, upper_bound)) .. " "
-		_, lorem_length = lorem:gsub("%S+", "")
+		local sentence_length = math.random(lower_bound, upper_bound)
+		table.insert(lorem_table, generate_lorem_sentence(comma, corpus, sentence_length))
+		lorem_length = lorem_length + sentence_length
 	end
 
 	local remains = length - lorem_length
 	if remains > 2 then
-		lorem = lorem .. generate_lorem_sentence(comma, corpus, remains)
+		table.insert(lorem_table, generate_lorem_sentence(comma, corpus, remains))
 	end
 
-	return lorem
+	return table.concat(lorem_table, " ")
 end
 
 -- TODO: Flag -p/--paragraphs to enable # of paragraphs in output text (separated by \n\n)
