@@ -74,6 +74,15 @@ M.string_is_valid_corpus = function(s)
     return s == "short" or s == "medium" or s == "long"
 end
 
+M.string_is_probability = function(s)
+    local n = tonumber(s)
+    return n ~= nil and n >= 0.0 and n <= 1.0
+end
+
+M.string_to_number = function(s)
+    return tonumber(s)
+end
+
 -- for assets and reading --
 M.FIRST_NAMES_FILE = "names_first.txt"
 M.LAST_NAMES_FILE = "names_last.txt"

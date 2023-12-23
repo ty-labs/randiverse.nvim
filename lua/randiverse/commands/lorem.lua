@@ -28,13 +28,8 @@ local expected_flags = {
     },
     comma = {
         bool = false,
-        validator = function(s)
-            local n = tonumber(s)
-            return n ~= nil and n >= 0.0 and n <= 1.0
-        end,
-        transformer = function(s)
-            return tonumber(s)
-        end,
+        validator = utils.string_is_probability,
+        transformer = utils.string_to_number,
     },
     paragraphs = {
         bool = false,

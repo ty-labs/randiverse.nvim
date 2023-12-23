@@ -55,7 +55,7 @@ local flag_mappings = {
     t = "time",
 }
 
--- TODO: Add the ability to specify start/stop Y/M/D/H/M/S
+-- TODO: Add the ability to specify start/stop Y/M/D/H/M/S + ability to pass own string!
 M.normal_random_datetime = function(args)
     print("inside normal_random_datetime")
 

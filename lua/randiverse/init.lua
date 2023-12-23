@@ -2,7 +2,6 @@ local buffer = require("randiverse.buffer")
 local config = require("randiverse.config")
 local utils = require("randiverse.utils")
 
--- import commands --
 local country = require("randiverse.commands.country")
 local datetime = require("randiverse.commands.datetime")
 local email = require("randiverse.commands.email")

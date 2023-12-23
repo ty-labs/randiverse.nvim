@@ -3,40 +3,75 @@ local utils = require("randiverse.commands.utils")
 local M = {}
 
 local expected_flags = {
-    ["subdomain"] = {
-        bool = true,
+    ["subdomains"] = {
+        bool = false,
+        validator = utils.string_is_integer,
+        transformer = utils.string_to_integer,
     },
-    ["path"] = {
+    ["paths"] = {
+        bool = false,
+        validator = utils.string_is_integer,
+        transformer = utils.string_to_integer,
+    },
+    ["query-params"] = {
+        bool = false,
+        validator = utils.string_is_integer,
+        transformer = utils.string_to_integer,
+    },
+    ["fragement"] = {
         bool = true,
     },
 }
 
 local flag_mappings = {
-    s = "subdomain",
-    p = "path",
+    s = "subdomains",
+    p = "paths",
     q = "query-params",
     f = "fragement",
 }
 
--- create flags to add addition of # query params + fragement + subdomains + path
 M.normal_random_url = function(args)
     print("inside normal_random_email")
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
-    -- allow protocols/tld to be overridden in plugin configuration --
+    -- let protocols/tld to be overridden in plugin configuration! --
+    -- perhaps we should allow which corpus they choose strings for params? --
     local protocols = { "http", "https" }
     local domain = utils.read_random_line(utils.get_asset_path() .. utils.WORDS_LONG_FILE)
-    if transformed_flags["subdomain"] then
-        local subdomain = utils.read_random_line(utils.get_asset_path() .. utils.WORDS_SHORT_FILE)
-        domain = string.format("%s.%s", subdomain, domain)
+    if transformed_flags["subdomains"] then
+        local subdomains = {}
+        for _ = 1, transformed_flags["subdomains"] do
+            table.insert(subdomains, utils.read_random_line(utils.get_asset_path() .. utils.WORDS_SHORT_FILE))
+        end
+        domain = string.format("%s.%s", table.concat(subdomains, "."), domain)
     end
     local tld = { "com", "org", "net", "edu", "gov" }
 
     local random_url = string.format("%s://%s.%s", protocols[math.random(#protocols)], domain, tld[math.random(#tld)])
 
-    -- add path, params, then fragement if requested
+    -- add paths, params, then fragement if requested
+    -- there can be mulitple levels of paths...
+    if transformed_flags["paths"] then
+        local paths = {}
+        for _ = 1, transformed_flags["paths"] do
+            table.insert(paths, utils.read_random_line(utils.get_asset_path() .. utils.WORDS_MEDIUM_FILE))
+        end
+        random_url = random_url .. "/" .. table.concat(paths, "/")
+    end
+    if transformed_flags["query-params"] then
+        local query_params = {}
+        for _ = 1, transformed_flags["query-params"] do
+            local param = utils.read_random_line(utils.get_asset_path() .. utils.WORDS_MEDIUM_FILE)
+            local value = utils.read_random_line(utils.get_asset_path() .. utils.WORDS_MEDIUM_FILE)
+            table.insert(query_params, param .. "=" .. value)
+        end
+        random_url = random_url .. "?" .. table.concat(query_params, "&")
+    end
+    if transformed_flags["fragement"] then
+        random_url = random_url .. "#" .. utils.read_random_line(utils.get_asset_path() .. utils.WORDS_LONG_FILE)
+    end
 
     print("finished normal_random_email")
     return random_url
