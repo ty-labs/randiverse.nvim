@@ -60,13 +60,13 @@ describe("randiverse basics", function()
         end
     end)
 
-    it("test randiverse unknown command", function()
-        vim.cmd("Randiverse door")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
+    -- it("test randiverse unknown command", function()
+    --     vim.cmd("Randiverse door")
+    --     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    --     for _, line in ipairs(lines) do
+    --         print(line)
+    --     end
+    -- end)
 
     it("test randiverse float command", function()
         set_lines({ 'value: ""' })

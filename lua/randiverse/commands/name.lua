@@ -1,3 +1,4 @@
+local config = require("randiverse.config")
 local utils = require("randiverse.commands.utils")
 
 local M = {}
@@ -29,9 +30,12 @@ M.normal_random_name = function(args)
         include_lname = transformed_flags["lname"] or false
     end
 
-    local path = utils.get_asset_path()
-    local fname = include_fname and utils.read_random_line(path .. utils.FIRST_NAMES_FILE) or ""
-    local lname = include_lname and utils.read_random_line(path .. utils.LAST_NAMES_FILE) or ""
+    local fname = include_fname
+            and utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.FIRST)
+        or ""
+    local lname = include_lname
+            and utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST)
+        or ""
     local include_full_name = include_fname and include_lname
     local random_name = include_full_name and (fname .. " " .. lname) or (fname .. lname)
     print("finished normal_random_name")

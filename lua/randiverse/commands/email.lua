@@ -1,9 +1,10 @@
+local config = require("randiverse.config")
 local utils = require("randiverse.commands.utils")
 
 local M = {}
 
 local expected_flags = {
-    ["muddle"] = {
+    ["muddleness"] = {
         bool = false,
         validator = utils.string_is_probability,
         transformer = utils.string_to_number,
@@ -23,23 +24,22 @@ local expected_flags = {
 }
 
 local flag_mappings = {
-    m = "muddle",
+    m = "muddleness",
     l = "letters-only",
     a = "alphanumeric-only",
     s = "specials",
-    f = "first-name-position",
     c = "capitalize",
 }
 
--- TODO: Probability that first/last name is substring
+-- TODO: Probability that first/last name is substring + first/last name positions odds
 
--- Generally produces [fname/lname][separator][remaining fname/lname][0-2 letters]
+-- Generally produces username = [fname/lname][separator][remaining fname/lname][0-2 letters]
 local generate_username = function(flags)
-    local first_name = utils.read_random_line(utils.get_asset_path() .. utils.FIRST_NAMES_FILE)
-    local last_name = utils.read_random_line(utils.get_asset_path() .. utils.LAST_NAMES_FILE)
+    local first_name = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.FIRST)
+    local last_name = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST)
     local separators = { "_", "-", ".", "" }
 
-    -- default does not muddle but just
+    -- default does not muddleness but just
     local username_components = {}
     if math.random() < 0.6 then
         table.insert(username_components, first_name)
@@ -66,13 +66,13 @@ local generate_username = function(flags)
         end
     end
 
-    if flags["muddle"] then
+    if flags["muddleness"] then
         local chars = {}
         for char in table.concat(username_components):gmatch(".") do
             table.insert(chars, char)
         end
         for i = #chars, 1, -1 do
-            if math.random() <= flags["muddle"] then
+            if math.random() <= flags["muddleness"] then
                 -- TODO: don't allow separators to exist in 1 or last range!
                 local j = math.random(i)
                 chars[i], chars[j] = chars[j], chars[i]
@@ -93,7 +93,6 @@ M.normal_random_email = function(args)
     print("inside normal_random_email")
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
-    print(expected_flags["muddle"].transformer)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
     local username = generate_username(transformed_flags)

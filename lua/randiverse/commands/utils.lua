@@ -84,43 +84,24 @@ M.string_to_number = function(s)
 end
 
 -- for assets and reading --
-M.FIRST_NAMES_FILE = "names_first.txt"
-M.LAST_NAMES_FILE = "names_last.txt"
-M.COUNTRIES_FILE = "countries.txt"
-M.WORDS_SHORT_FILE = "words_short.txt"
-M.WORDS_MEDIUM_FILE = "words_medium.txt"
-M.WORDS_LONG_FILE = "words_long.txt"
+local file_cache = {}
 
-M.get_asset_path = function()
-    local path = debug.getinfo(1, "S").source:sub(2)
-    path = path:match("(.*/)")
-    return path .. "../data/"
+M.read_lines = function(path)
+    if file_cache[path] then
+        return file_cache[path]
+    end
+    -- TODO: Error catching?
+    local lines = {}
+    for line in io.lines(path) do
+        table.insert(lines, line)
+    end
+    file_cache[path] = lines
+    return lines
 end
 
--- alternative:
--- (1) function to take path and return a table with the file content (cache-able)
--- (2) function to take path and return a random element which uses function #1
 M.read_random_line = function(path)
-    local file, error = io.open(path, "r")
-    if not file then
-        print("Error opening file:", error)
-        vim.api.nvim_err_writeln("Unable to open file")
-        return
-    end
-
-    local file_size = file:seek("end")
-    file:seek("set", 0)
-
-    local random_position = math.random(file_size)
-
-    -- TODO: there is a basecase to consider if we had chosen last line already...
-    -- TODO: there needs to be a caching mechansim for file lengths to speed up process...
-    file:seek("set", random_position)
-    _ = file:read()
-
-    local line = file:read("*l")
-    file:close()
-    return line
+    local lines = M.read_lines(path)
+    return lines[math.random(#lines)]
 end
 
 M.get_random_from_set = function(set)
