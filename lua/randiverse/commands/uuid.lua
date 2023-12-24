@@ -18,7 +18,7 @@ M.normal_random_uuid = function(args)
 
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
-    local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
+    local _ = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
     local format = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
     local random_uuid = string.gsub(format, "[xy]", function(c)

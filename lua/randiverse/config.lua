@@ -61,6 +61,6 @@ M.setup = function(user_opts)
     math.randomseed(os.time())
 end
 
-M.buffer_setup = function(buffer_opts) end
+M.buffer_setup = function() end
 
 return M
