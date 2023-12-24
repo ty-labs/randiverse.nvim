@@ -1,3 +1,4 @@
+local config = require("randiverse.config")
 local utils = require("randiverse.commands.utils")
 
 local M = {}
@@ -26,12 +27,6 @@ local flag_mappings = {
     s = "size",
 }
 
-local corpus_mappings = {
-    short = utils.WORDS_SHORT_FILE,
-    medium = utils.WORDS_MEDIUM_FILE,
-    long = utils.WORDS_LONG_FILE,
-}
-
 -- TODO: Add a means to pass multiple corpuses into word for selection (Ex: Med + Long corpuses -- probably space separated after -c flag)
 -- TODO: Flag that specifies the start letter for the word!
 -- TODO: I sense in the future we need to refactor `read_random_line` s.t. there is caching or we return a table of all lines as text
@@ -42,6 +37,13 @@ M.normal_random_text = function(args)
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
+
+    -- cant put outside bc not known then --
+    local corpus_mappings = {
+        short = config.user_opts.data.word.SHORT,
+        medium = config.user_opts.data.word.MEDIUM,
+        long = config.user_opts.data.word.LONG,
+    }
 
     local corpus_set = {}
     if not transformed_flags["all"] and not transformed_flags["corpus"] then
