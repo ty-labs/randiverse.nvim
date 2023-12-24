@@ -44,21 +44,14 @@ local ip_generators = {
 
 -- TODO: Flag --lowercase / -l to enable Hexadecimal to be lower
 M.normal_random_ip = function(args)
-    print("inside normal_random_ip")
-
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
-    local random_ip = ""
     if not transformed_flags["version"] then
-        random_ip = ip_generators["ipv4"]()
-    else
-        random_ip = ip_generators[transformed_flags["version"]]()
+        return ip_generators["ipv4"]()
     end
-
-    print("finished normal_random_ip")
-    return random_ip
+    return ip_generators[transformed_flags["version"]]()
 end
 
 return M
