@@ -58,12 +58,10 @@ M.normal_random_text = function(args)
         corpus_set[corpus_mappings[transformed_flags["corpus"]]] = true
     end
 
-    local path = utils.get_asset_path()
     local corpus = utils.get_random_from_set(corpus_set)
     local words = {}
     for _ = 1, transformed_flags["size"] or 20 do
-        -- PERF: This will be slow for big 's' values and costly bc file open-close
-        table.insert(words, utils.read_random_line(path .. corpus))
+        table.insert(words, utils.read_random_line(config.user_opts.data.ROOT .. corpus))
     end
     local random_text = table.concat(words, " ")
 
