@@ -19,11 +19,11 @@ local expected_flags = {
         validator = function(s)
             return code_mappings[s] ~= nil
         end,
+        validator_error_msg = "value must be one of the following [2, 3, alpha-2, alpha-3]",
         transformer = function(s)
             return code_mappings[s]
         end,
     },
-    error_msg = "",
 }
 
 local flag_mappings = {
@@ -32,7 +32,8 @@ local flag_mappings = {
 }
 
 -- TODO: Flag for staring letter
--- TODO: Add validation for incompaitable flags
+-- TODO: Add cross-flag validations (code and numeric can't both be set...)
+-- TODO: Peraps v1 should only have ACTUAL countries and no accents?
 M.normal_random_country = function(args)
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)

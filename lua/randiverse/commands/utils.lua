@@ -1,6 +1,6 @@
 local M = {}
 
--- TODO: IDK if it responds to --sentence-length or similar flags...
+-- TODO: IDK if it responds to '--sentence-length' type flags...
 M.parse_command_flags = function(args, flag_mappings)
     local flags = {}
     local i = 1
@@ -35,19 +35,27 @@ M.validate_and_transform_command_flags = function(expected, received)
         -- perform checks on the command flags --
         -- check if key is fictious
         if not expected[flag] then
-            error("unknown flag: " .. flag)
+            error(string.format("unknown flag passed '%s'", flag))
         end
         -- check if key does not expect value but value provided
         if expected[flag]["bool"] and value ~= true then
-            error("flag `" .. flag .. "` is boolean and does not expect a value")
+            error(string.format("flag '%s' is boolean and does not expect a value", flag))
         end
         -- check if key does expect value but no value provided
         if not expected[flag]["bool"] and value == true then
-            error("flag `" .. flag .. "` expects a value and no value provided")
+            error(string.format("flag '%s' expects a value and no value was provided", flag))
         end
         -- check if key validator function works on flags with provided value
         if not expected[flag]["bool"] and not expected[flag]["validator"](value) then
-            error("flag `" .. flag .. "` can not accept type of value `" .. value .. "`")
+            -- TODO: This should return validator unique error message not generic!
+            error(
+                string.format(
+                    "flag '%s' can not accept value '%s': %s",
+                    flag,
+                    value,
+                    expected[flag]["validator_error_msg"]
+                )
+            )
         end
 
         -- transform the command flags (if applicable) --
