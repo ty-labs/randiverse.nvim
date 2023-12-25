@@ -54,7 +54,11 @@ M.randiverse = function(args)
         vim.api.nvim_err_writeln("`" .. command .. "` is not a known Randiverse command.")
         return
     end
-    local random_output = randiverse_commands[command](remaining_args)
+    local success, random_output = pcall(randiverse_commands[command], remaining_args)
+    if not success then
+        vim.api.nvim_err_writeln("Error in Randiverse: " .. random_output)
+        return
+    end
     buffer.curpos_insert_text(random_output)
     print("finished randiverse command")
 end

@@ -2,14 +2,7 @@ local config = require("randiverse.config")
 local country = require("randiverse.commands.country")
 local utils = require("randiverse.commands.utils")
 
-local contains = function(list, item)
-    for _, v in ipairs(list) do
-        if v == item then
-            return true
-        end
-    end
-    return false
-end
+local test_utils = require("tests.utils")
 
 describe("Randiverse 'country' command", function()
     it("should return a random country with no flags", function()
@@ -19,7 +12,7 @@ describe("Randiverse 'country' command", function()
             assert.same(type(random_country), "string")
             assert.is_true(#random_country >= 3)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.COUNTRIES),
                     random_country
                 )
@@ -38,7 +31,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 2)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA2),
                     random_country
                 )
@@ -57,7 +50,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 2)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA2),
                     random_country
                 )
@@ -76,7 +69,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 3)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA3),
                     random_country
                 )
@@ -95,7 +88,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 3)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA3),
                     random_country
                 )
@@ -114,7 +107,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 2)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA2),
                     random_country
                 )
@@ -133,7 +126,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 2)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA2),
                     random_country
                 )
@@ -152,7 +145,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 3)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA3),
                     random_country
                 )
@@ -171,7 +164,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%u]", ""))
             assert.is_true(#random_country == 3)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.ALPHA3),
                     random_country
                 )
@@ -189,7 +182,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%d]", ""))
             assert.is_true(#random_country == 3)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.NUMERIC),
                     random_country
                 )
@@ -207,7 +200,7 @@ describe("Randiverse 'country' command", function()
             assert.same(random_country, random_country:gsub("[^%d]", ""))
             assert.is_true(#random_country == 3)
             assert.is_true(
-                contains(
+                test_utils.list_contains(
                     utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.country.NUMERIC),
                     random_country
                 )
