@@ -120,4 +120,12 @@ M.get_random_from_set = function(set)
     return keys[math.random(#keys)]
 end
 
+M.concat_table_keys = function(tbl)
+    local keys = {}
+    for k, _ in pairs(tbl) do
+        table.insert(keys, k)
+    end
+    return table.concat(keys, ",")
+end
+
 return M

@@ -14,17 +14,58 @@ M.default_opts = {
             ALPHA3 = "countries_alpha3.txt",
             NUMERIC = "countries_numeric.txt",
         },
-        email = {},
+        email = {
+            domains = {},
+            tlds = {},
+        },
         lorem = {},
         name = {
             FIRST = "names_first.txt",
             LAST = "names_last.txt",
         },
-        url = {},
+        url = {
+            protocols = {},
+            tlds = {},
+        },
         word = {
             SHORT = "words_short.txt",
             MEDIUM = "words_medium.txt",
             LONG = "words_long.txt",
+        },
+    },
+    formats = {
+        datetime = {
+            datetime = {
+                iso = "%Y-%m-%dT%H:%M:%SZ",
+                rfc = "%a, %d %b %Y %H:%M:%S",
+                sortable = "%Y%m%d%H%M%S",
+                human = "%B %d, %Y %I:%M:%S %p",
+                short = "%m/%d/%y %H:%M:%S",
+                long = "%A, %B %d, %Y %I:%M:%S %p",
+                epoch = "%s",
+            },
+            date = {
+                iso = "%Y-%m-%d",
+                rfc = "%a, %d %b %Y",
+                sortable = "%Y%m%d",
+                human = "%B %d, %Y",
+                short = "%m/%d/%y",
+                long = "%A, %B %d, %Y",
+                epoch = "%s",
+            },
+            time = {
+                iso = "%H:%M:%S",
+                rfc = "%H:%M:%S",
+                sortable = "%H%M%S",
+                human = "%I:%M:%S %p",
+                short = "%H:%M:%S",
+                long = "%%I:%M:%S %p",
+            },
+            defaults = {
+                datetime = "%Y-%m-%dT%H:%M:%SZ",
+                date = "%Y-%m-%d",
+                time = "%H:%M:%S",
+            },
         },
     },
 }

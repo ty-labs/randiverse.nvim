@@ -1,41 +1,14 @@
+local config = require("randiverse.config")
 local utils = require("randiverse.commands.utils")
 
 local M = {}
 
-local format_mappings = {
-    datetime = {
-        iso = "%Y-%m-%dT%H:%M:%SZ",
-        rfc = "%a, %d %b %Y %H:%M:%S",
-        sortable = "%Y%m%d%H%M%S",
-        human = "%B %d, %Y %I:%M:%S %p",
-        short = "%m/%d/%y %H:%M:%S",
-        long = "%A, %B %d, %Y %I:%M:%S %p",
-        epoch = "%s",
-    },
-    date = {
-        iso = "%Y-%m-%d",
-        rfc = "%a, %d %b %Y",
-        sortable = "%Y%m%d",
-        human = "%B %d, %Y",
-        short = "%m/%d/%y",
-        long = "%A, %B %d, %Y",
-        epoch = "%s",
-    },
-    time = {
-        iso = "%H:%M:%S",
-        rfc = "%H:%M:%S",
-        sortable = "H%M%S",
-        human = "%I:%M:%S %p",
-        short = "%H:%M:%S",
-        long = "%%I:%M:%S %p",
-    },
-}
-
 local expected_flags = {
     format = {
         bool = false,
+        -- TODO: Somehow this needs to check better... being able to check the set flags..
         validator = function(s)
-            return format_mappings["datetime"][s] ~= nil
+            return true
         end,
         transformer = function(v)
             return v
@@ -55,10 +28,9 @@ local flag_mappings = {
     t = "time",
 }
 
--- TODO: Add the ability to specify start/stop Y/M/D/H/M/S + ability to pass own string!
+-- TODO: Add the ability to specify start/stop Y/M/D/H/M/S + ability to pass own datetime format string!
+-- TODO: Add cross-flag validations (code and numeric can't both be set...)
 M.normal_random_datetime = function(args)
-    print("inside normal_random_datetime")
-
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
@@ -70,6 +42,17 @@ M.normal_random_datetime = function(args)
         output_type = date .. time
     end
 
+    if
+        transformed_flags["format"]
+        and config.user_opts.formats.datetime[output_type][transformed_flags["format"]] == nil
+    then
+        local valid = string.format(
+            "value must be one of the following [%s]",
+            utils.concat_table_keys(config.user_opts.formats.datetime[output_type])
+        )
+        error(string.format("flag '%s' can not accept value '%s': %s", "format", transformed_flags["format"], valid))
+    end
+
     local curr_year = os.date("*t").year
     local timestamp = os.time({
         year = math.random(curr_year - 10, curr_year + 0),
@@ -79,11 +62,10 @@ M.normal_random_datetime = function(args)
         min = math.random(0, 59),
         sec = math.random(0, 59),
     })
-    local format = transformed_flags["format"] and format_mappings[output_type][transformed_flags["format"]]
-        or format_mappings[output_type]["iso"]
+    local format = transformed_flags["format"]
+            and config.user_opts.formats.datetime[output_type][transformed_flags["format"]]
+        or config.user_opts.formats.datetime.defaults[output_type]
     local random_datetime = os.date(format, timestamp)
-
-    print("finished normal_random_datetime")
     return random_datetime
 end
 
