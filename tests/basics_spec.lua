@@ -1,206 +1,206 @@
-local set_curpos = function(pos)
-    vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] - 1 })
-end
-local set_lines = function(lines)
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-end
-
-describe("randiverse basics", function()
-    before_each(function()
-        -- create & set the testing nvim testing buffer
-        local bufnr = vim.api.nvim_create_buf(true, true)
-        vim.api.nvim_win_set_buf(0, bufnr)
-    end)
-
-    it("test randiverse int command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse int")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse int --start 4 --stop 6")
-        lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse int -s -10 -S -1")
-        lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse int -s 10 -S 10")
-        lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse name command", function()
-        vim.cmd("Randiverse name -l -f")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    -- it("test randiverse unknown command", function()
-    --     vim.cmd("Randiverse door")
-    --     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    --     for _, line in ipairs(lines) do
-    --         print(line)
-    --     end
-    -- end)
-
-    it("test randiverse float command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse float -decimals 4 -s 0 -S 1")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse float -decimals 4 -s 10 -S 10")
-        lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse country command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse country -c 2")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse word command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse word")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse text command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse text -s 10")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse ip command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse ip -v ipv6")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse hexcolor command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse hexcolor")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse lorem command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse lorem --length 500 --s short -c 0.2")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse datetime command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse datetime -f human")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse datetime -f human --date --time")
-        lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse datetime -f human --date")
-        lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse datetime -f human --time")
-        lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse uuid command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse uuid")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse email command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse email -m 0.0")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-
-    it("test randiverse url command", function()
-        set_lines({ 'value: ""' })
-        set_curpos({ 1, 9 })
-        vim.cmd("Randiverse url -s 1 -f -p 1 -q 2")
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-            print(line)
-        end
-    end)
-end)
+-- local set_curpos = function(pos)
+--     vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] - 1 })
+-- end
+-- local set_lines = function(lines)
+--     vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+-- end
+--
+-- describe("randiverse basics", function()
+--     before_each(function()
+--         -- create & set the testing nvim testing buffer
+--         local bufnr = vim.api.nvim_create_buf(true, true)
+--         vim.api.nvim_win_set_buf(0, bufnr)
+--     end)
+--
+--     it("test randiverse int command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse int")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse int --start 4 --stop 6")
+--         lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse int -s -10 -S -1")
+--         lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse int -s 10 -S 10")
+--         lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse name command", function()
+--         vim.cmd("Randiverse name -l -f")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     -- it("test randiverse unknown command", function()
+--     --     vim.cmd("Randiverse door")
+--     --     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--     --     for _, line in ipairs(lines) do
+--     --         print(line)
+--     --     end
+--     -- end)
+--
+--     it("test randiverse float command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse float -decimals 4 -s 0 -S 1")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse float -decimals 4 -s 10 -S 10")
+--         lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse country command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse country -c 2")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse word command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse word")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse text command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse text -s 10")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse ip command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse ip -v ipv6")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse hexcolor command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse hexcolor")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse lorem command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse lorem --length 500 --s short -c 0.2")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse datetime command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse datetime -f human")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse datetime -f human --date --time")
+--         lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse datetime -f human --date")
+--         lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse datetime -f human --time")
+--         lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse uuid command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse uuid")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse email command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse email -m 0.0")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+--
+--     it("test randiverse url command", function()
+--         set_lines({ 'value: ""' })
+--         set_curpos({ 1, 9 })
+--         vim.cmd("Randiverse url -s 1 -f -p 1 -q 2")
+--         local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+--         for _, line in ipairs(lines) do
+--             print(line)
+--         end
+--     end)
+-- end)

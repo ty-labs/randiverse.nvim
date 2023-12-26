@@ -2,21 +2,26 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
-local expected_flags = {}
+local expected_flags = {
+    lowercase = {
+        bool = true,
+    },
+    cross_flags_validator = function(_) end,
+}
 
-local flag_mappings = {}
+local flag_mappings = {
+    l = "lowercase",
+}
 
--- TODO: Flag --lowercase / -l to enable Hexadecimal to be lower
 M.normal_random_hexcolor = function(args)
-    print("inside normal_random_hexcolor")
-
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
-    local _ = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
+    local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
-    local r = string.format("%02X", math.random(0, 255))
-    local g = string.format("%02X", math.random(0, 255))
-    local b = string.format("%02X", math.random(0, 255))
+    local format = transformed_flags["lowercase"] and "%02x" or "%02X"
+    local r = string.format(format, math.random(0, 255))
+    local g = string.format(format, math.random(0, 255))
+    local b = string.format(format, math.random(0, 255))
     return "#" .. r .. g .. b
 end
 

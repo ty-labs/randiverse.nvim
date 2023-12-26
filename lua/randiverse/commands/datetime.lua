@@ -6,12 +6,11 @@ local M = {}
 local expected_flags = {
     format = {
         bool = false,
-        -- TODO: Somehow this needs to check better... being able to check the set flags..
-        validator = function(_)
+        validator = function(_) -- TODO: perhaps validator should just return error? if false instead...
             return true
         end,
-        transformer = function(v)
-            return v
+        transformer = function(s)
+            return s
         end,
     },
     date = {
@@ -20,6 +19,21 @@ local expected_flags = {
     time = {
         bool = true,
     },
+    cross_flags_validator = function(flags)
+        local type = "datetime"
+        if flags["date"] or flags["time"] then
+            local date = flags["date"] and "date" or ""
+            local time = flags["time"] and "time" or ""
+            type = date .. time
+        end
+        if flags["format"] and config.user_opts.formats.datetime[type][flags["format"]] == nil then
+            local valid = string.format(
+                "value must be one of the following [%s]",
+                utils.concat_table_keys(config.user_opts.formats.datetime[type])
+            )
+            error(string.format("flag '%s' can not accept value '%s': %s", "format", flags["format"], valid))
+        end
+    end,
 }
 
 local flag_mappings = {

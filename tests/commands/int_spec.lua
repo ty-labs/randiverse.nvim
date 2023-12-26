@@ -124,7 +124,7 @@ describe("Randiverse 'int' command", function()
             "0",
         })
         assert.is_false(success)
-        assert.is_truthy(string.find(error, "the range stop can not be less than range start"))
+        assert.is_truthy(string.find(error, "the range stop can not be less than range start: currently %[1, 0%]"))
     end)
 
     it("should error when called with '-s' flag and no value", function()
