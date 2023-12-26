@@ -7,7 +7,7 @@ local expected_flags = {
     format = {
         bool = false,
         -- TODO: Somehow this needs to check better... being able to check the set flags..
-        validator = function(s)
+        validator = function(_)
             return true
         end,
         transformer = function(v)

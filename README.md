@@ -37,6 +37,7 @@ looking for eyes on:
 - method of exposing Randiverse API make sense?
 - better to have text files or just a function return long list of items to select random?
 - how to handle ability to get a random item where it starts with a letter? (text, in-memory table, split files, etc.) 
+- IK how to make it downloadable for Lazy... but how and which other managers should I consider and setting up infra for that..
 
 inspirations:
 - [Random Text Sublime Plugin](https://github.com/kimpettersen/random-sublime-text-plugin)

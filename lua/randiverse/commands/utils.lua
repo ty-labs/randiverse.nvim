@@ -74,6 +74,11 @@ M.string_is_integer = function(s)
     return n ~= nil and n == math.floor(n)
 end
 
+M.string_is_non_negative_integer = function(s)
+    local n = tonumber(s)
+    return n ~= nil and n == math.floor(n) and n > -1
+end
+
 M.string_to_integer = function(s)
     return math.floor(tonumber(s) or 0)
 end
