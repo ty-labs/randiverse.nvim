@@ -6,7 +6,7 @@ local expected_flags = {
     lowercase = {
         bool = true,
     },
-    cross_flags_validator = function(_) end,
+    cross_flags_validator = utils.no_cross_flag_checks,
 }
 
 local flag_mappings = {

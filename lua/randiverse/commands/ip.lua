@@ -19,39 +19,48 @@ local expected_flags = {
             return ip_mappings[s]
         end,
     },
+    lowercase = {
+        bool = true,
+    },
+    cross_flags_validator = function(flags)
+        if (flags["version"] == "ipv4" or not flags["version"]) and flags["lowercase"] then
+            error("flag 'lowercase' is only applicable with '--version ipv6'")
+        end
+    end,
 }
 
 local flag_mappings = {
     v = "version",
+    l = "lowercase",
 }
 
 local ip_generators = {
-    ipv4 = function()
+    ipv4 = function(_)
         local ipv4_blocks = {}
         for _ = 1, 4 do
             table.insert(ipv4_blocks, math.random(0, 255))
         end
         return table.concat(ipv4_blocks, ".")
     end,
-    ipv6 = function()
+    ipv6 = function(flags)
         local ipv6_blocks = {}
+        local format = flags["lowercase"] and "%04x" or "%04X"
         for _ = 1, 8 do
-            table.insert(ipv6_blocks, string.format("%04X", math.random(0, 65535)))
+            table.insert(ipv6_blocks, string.format(format, math.random(0, 65535)))
         end
         return table.concat(ipv6_blocks, ":")
     end,
 }
 
--- TODO: Flag --lowercase / -l to enable Hexadecimal to be lower
 M.normal_random_ip = function(args)
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
     if not transformed_flags["version"] then
-        return ip_generators["ipv4"]()
+        return ip_generators["ipv4"](transformed_flags)
     end
-    return ip_generators[transformed_flags["version"]]()
+    return ip_generators[transformed_flags["version"]](transformed_flags)
 end
 
 return M

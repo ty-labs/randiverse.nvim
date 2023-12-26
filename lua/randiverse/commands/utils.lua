@@ -65,6 +65,8 @@ M.validate_and_transform_command_flags = function(expected, received)
             transformed_flags[flag] = expected[flag]["transformer"](value)
         end
     end
+    -- run cross-flag checks on command flags
+    expected["cross_flags_validator"](transformed_flags)
     return transformed_flags
 end
 
@@ -95,6 +97,8 @@ end
 M.string_to_number = function(s)
     return tonumber(s)
 end
+
+M.no_cross_flag_checks = function(_) end
 
 -- for assets and reading --
 local file_cache = {}

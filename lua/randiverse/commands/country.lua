@@ -24,6 +24,11 @@ local expected_flags = {
             return code_mappings[s]
         end,
     },
+    cross_flags_validator = function(flags)
+        if flags["code"] and flags["numeric"] then
+            error("'code' and 'numeric' can't both be set")
+        end
+    end,
 }
 
 local flag_mappings = {

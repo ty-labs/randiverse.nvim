@@ -16,6 +16,7 @@ local expected_flags = {
         transformer = utils.string_to_integer,
         validator_error_msg = "value must be an integer",
     },
+    cross_flags_validator = utils.no_cross_flag_checks,
 }
 
 local flag_mappings = {
