@@ -120,7 +120,7 @@ describe("Randiverse 'word' command", function()
         })
         assert.is_false(success)
         assert.is_truthy(
-            string.find(error, "flag 'corpus' can not accept value 'dummy': value must be one of the following")
+            string.find(error, "flag 'corpus' can not accept value 'dummy': value must be one of the following %[")
         )
     end)
 

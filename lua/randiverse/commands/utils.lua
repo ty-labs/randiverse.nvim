@@ -45,17 +45,9 @@ M.validate_and_transform_command_flags = function(expected, received)
         if not expected[flag]["bool"] and value == true then
             error(string.format("flag '%s' expects a value and no value was provided", flag))
         end
-        -- check if key validator function works on flags with provided value
-        if not expected[flag]["bool"] and not expected[flag]["validator"](value) then
-            -- TODO: This should return validator unique error message not generic!
-            error(
-                string.format(
-                    "flag '%s' can not accept value '%s': %s",
-                    flag,
-                    value,
-                    expected[flag]["validator_error_msg"]
-                )
-            )
+        -- run flag validator if non-boolean
+        if not expected[flag]["bool"] then
+            expected[flag]["validator"](value)
         end
 
         -- transform the command flags (if applicable) --

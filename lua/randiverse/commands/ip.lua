@@ -13,7 +13,15 @@ local expected_flags = {
     version = {
         bool = false,
         validator = function(s)
-            return ip_mappings[s] ~= nil
+            if ip_mappings[s] == nil then
+                error(
+                    string.format(
+                        "flag 'version' can not accept value '%s': value must be one of the following [%s]",
+                        s,
+                        utils.concat_table_keys(ip_mappings)
+                    )
+                )
+            end
         end,
         transformer = function(s)
             return ip_mappings[s]

@@ -227,6 +227,17 @@ describe("Randiverse 'ip' command", function()
         assert.is_truthy(string.find(error, "flag 'lowercase' is only applicable with '%-%-version ipv6'"))
     end)
 
+    it("should error when called with '-v' and an invalid value", function()
+        local success, error = pcall(ip.normal_random_ip, {
+            "-v",
+            "dummy",
+        })
+        assert.is_false(success)
+        assert.is_truthy(
+            string.find(error, "flag 'version' can not accept value 'dummy': value must be one of the following %[")
+        )
+    end)
+
     it("should error when called with '-l' and a value", function()
         local success, error = pcall(ip.normal_random_ip, {
             "-l",

@@ -144,6 +144,15 @@ describe("Randiverse 'int' command", function()
         assert.is_truthy(string.find(error, "flag 'start' can not accept value 'dummy': value must be an integer"))
     end)
 
+    it("should error when called with '-S' flag and invalid value", function()
+        local success, error = pcall(int.normal_random_int, {
+            "-S",
+            "dummy",
+        })
+        assert.is_false(success)
+        assert.is_truthy(string.find(error, "flag 'stop' can not accept value 'dummy': value must be an integer"))
+    end)
+
     it("should error when called with unknown '-q' flag", function()
         local success, error = pcall(int.normal_random_int, {
             "-q",

@@ -10,9 +10,17 @@ local expected_flags = {
     corpus = {
         bool = false,
         validator = function(s)
+            if config.user_opts.data.word.corpuses[s] == nil then
+                error(
+                    string.format(
+                        "flag 'corpus' can not accept value '%s': value must be one of the following [%s]",
+                        s,
+                        utils.concat_table_keys(config.user_opts.data.word.corpuses)
+                    )
+                )
+            end
             return config.user_opts.data.word.corpuses[s] ~= nil
         end,
-        validator_error_msg = "value must be one of the following",
         transformer = utils.pass_through,
     },
     cross_flags_validator = function(flags)
@@ -30,6 +38,7 @@ local flag_mappings = {
 -- TODO: Validate the word corpuses to ensure it is in the English dictionary and not a name!
 -- TODO: Add a means to pass multiple corpuses into word for selection (Ex: Med + Long corpuses -- probably space separated after -c flag)
 -- TODO: Flag that specifies the start letter for the word! (-s [--sort])
+-- TODO: MERGE TEXT/WORD together --> They do literally same thing just with a size parameter lol
 M.normal_random_word = function(args)
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)

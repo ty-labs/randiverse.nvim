@@ -6,12 +6,8 @@ local M = {}
 local expected_flags = {
     format = {
         bool = false,
-        validator = function(_) -- TODO: perhaps validator should just return error? if false instead...
-            return true
-        end,
-        transformer = function(s)
-            return s
-        end,
+        validator = utils.no_validations,
+        transformer = utils.pass_through,
     },
     date = {
         bool = true,

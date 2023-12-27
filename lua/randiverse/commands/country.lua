@@ -17,9 +17,16 @@ local expected_flags = {
     code = {
         bool = false,
         validator = function(s)
-            return code_mappings[s] ~= nil
+            if code_mappings[s] == nil then
+                error(
+                    string.format(
+                        "flag 'code' can not accept value '%s': value must be one of the following [%s]",
+                        s,
+                        utils.concat_table_keys(code_mappings)
+                    )
+                )
+            end
         end,
-        validator_error_msg = "value must be one of the following [2, 3, alpha-2, alpha-3]",
         transformer = function(s)
             return code_mappings[s]
         end,

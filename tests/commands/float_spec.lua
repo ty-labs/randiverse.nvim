@@ -192,6 +192,15 @@ describe("Randiverse 'float' command", function()
         assert.is_truthy(string.find(error, "flag 'start' can not accept value 'dummy': value must be an integer"))
     end)
 
+    it("should error when called with '-S' flag and invalid value", function()
+        local success, error = pcall(float.normal_random_float, {
+            "-S",
+            "dummy",
+        })
+        assert.is_false(success)
+        assert.is_truthy(string.find(error, "flag 'stop' can not accept value 'dummy': value must be an integer"))
+    end)
+
     it("should error when called with '-d' flag and no value", function()
         local success, error = pcall(float.normal_random_float, {
             "-d",

@@ -5,20 +5,31 @@ local M = {}
 local expected_flags = {
     start = {
         bool = false,
-        validator = utils.string_is_integer,
-        validator_error_msg = "value must be an integer",
+        validator = function(s)
+            if not utils.string_is_integer(s) then
+                error(string.format("flag 'start' can not accept value '%s': value must be an integer", s))
+            end
+        end,
         transformer = utils.string_to_integer,
     },
     stop = {
         bool = false,
-        validator = utils.string_is_integer,
-        validator_error_msg = "value must be an integer",
+        validator = function(s)
+            if not utils.string_is_integer(s) then
+                error(string.format("flag 'stop' can not accept value '%s': value must be an integer", s))
+            end
+        end,
         transformer = utils.string_to_integer,
     },
     decimals = {
         bool = false,
-        validator = utils.string_is_non_negative_integer,
-        validator_error_msg = "value must be a non-negative integer",
+        validator = function(s)
+            if not utils.string_is_non_negative_integer(s) then
+                error(
+                    string.format("flag 'decimals' can not accept value '%s': value must be a non-negative integer", s)
+                )
+            end
+        end,
         transformer = utils.string_to_integer,
     },
     cross_flags_validator = utils.no_validations,
