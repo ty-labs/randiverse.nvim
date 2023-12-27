@@ -104,7 +104,7 @@ M.set_keymaps = function()
         lhs = M.user_opts.keymaps.country.keymap,
         rhs = string.format(":Randiverse %s<CR>", M.user_opts.keymaps.country.command),
         opts = {
-            M.user_opts.keymaps.country.desc,
+            desc = M.user_opts.keymaps.country.desc,
             noremap = true,
             silent = true,
         },
