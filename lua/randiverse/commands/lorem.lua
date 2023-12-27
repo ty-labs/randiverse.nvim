@@ -2,6 +2,7 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+-- TODO: These should be configurations for lorem
 local sentence_lengths = {
     ["mixed"] = { 5, 100 },
     ["mixed-long"] = { 30, 100 },
@@ -11,6 +12,7 @@ local sentence_lengths = {
     ["short"] = { 5, 20 },
 }
 
+-- TODO: cross_flags_validator + updated validators
 local expected_flags = {
     length = {
         bool = false,

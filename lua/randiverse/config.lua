@@ -67,10 +67,10 @@ M.default_opts = {
                 short = "%H:%M:%S",
                 long = "%%I:%M:%S %p",
             },
-            defaults = { -- TODO: Defaults should be keys like in 'word' (no repeats)
-                datetime = "%Y-%m-%dT%H:%M:%SZ",
-                date = "%Y-%m-%d",
-                time = "%H:%M:%S",
+            defaults = {
+                datetime = "iso",
+                date = "iso",
+                time = "iso",
             },
         },
     },

@@ -72,9 +72,11 @@ M.normal_random_datetime = function(args)
         min = math.random(0, 59),
         sec = math.random(0, 59),
     })
+    local default =
+        config.user_opts.formats.datetime[output_type][config.user_opts.formats.datetime.defaults[output_type]]
     local format = transformed_flags["format"]
             and config.user_opts.formats.datetime[output_type][transformed_flags["format"]]
-        or config.user_opts.formats.datetime.defaults[output_type]
+        or default
     local random_datetime = os.date(format, timestamp)
     return random_datetime
 end

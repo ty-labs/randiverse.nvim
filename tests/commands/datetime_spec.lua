@@ -10,7 +10,7 @@ describe("Randiverse 'datetime' command", function()
         local year, month, day, hour, min, sec = random_datetime:match("^(%d+)-(%d+)-(%d+)T(%d+):(%d+):(%d+)Z$")
         assert.is_truthy(year and month and day and hour and min and sec)
         local replica = os.date(
-            config.user_opts.formats.datetime.defaults.datetime,
+            config.user_opts.formats.datetime.datetime[config.user_opts.formats.datetime.defaults.datetime],
             os.time({
                 year = year,
                 month = month,
@@ -33,7 +33,7 @@ describe("Randiverse 'datetime' command", function()
         local year, month, day = random_datetime:match("^(%d+)-(%d+)-(%d+)$")
         assert.is_truthy(year and month and day)
         local replica = os.date(
-            config.user_opts.formats.datetime.defaults.date,
+            config.user_opts.formats.datetime.date[config.user_opts.formats.datetime.defaults.date],
             os.time({
                 year = year,
                 month = month,
@@ -53,7 +53,7 @@ describe("Randiverse 'datetime' command", function()
         local year, month, day = random_datetime:match("^(%d+)-(%d+)-(%d+)$")
         assert.is_truthy(year and month and day)
         local replica = os.date(
-            config.user_opts.formats.datetime.defaults.date,
+            config.user_opts.formats.datetime.date[config.user_opts.formats.datetime.defaults.date],
             os.time({
                 year = year,
                 month = month,
@@ -74,7 +74,7 @@ describe("Randiverse 'datetime' command", function()
         local year, month, day = os.date("*t").year, 1, 1
         assert.is_truthy(year and month and day and hour and min and sec)
         local replica = os.date(
-            config.user_opts.formats.datetime.defaults.time,
+            config.user_opts.formats.datetime.time[config.user_opts.formats.datetime.defaults.time],
             os.time({
                 year = year,
                 month = month,
@@ -98,7 +98,7 @@ describe("Randiverse 'datetime' command", function()
         local year, month, day = os.date("*t").year, 1, 1
         assert.is_truthy(year and month and day and hour and min and sec)
         local replica = os.date(
-            config.user_opts.formats.datetime.defaults.time,
+            config.user_opts.formats.datetime.time[config.user_opts.formats.datetime.defaults.time],
             os.time({
                 year = year,
                 month = month,
@@ -122,7 +122,7 @@ describe("Randiverse 'datetime' command", function()
         local year, month, day, hour, min, sec = random_datetime:match("^(%d+)-(%d+)-(%d+)T(%d+):(%d+):(%d+)Z$")
         assert.is_truthy(year and month and day and hour and min and sec)
         local replica = os.date(
-            config.user_opts.formats.datetime.datetime.iso,
+            config.user_opts.formats.datetime.datetime[config.user_opts.formats.datetime.defaults.datetime],
             os.time({
                 year = year,
                 month = month,
@@ -146,7 +146,7 @@ describe("Randiverse 'datetime' command", function()
         local year, month, day, hour, min, sec = random_datetime:match("^(%d+)-(%d+)-(%d+)T(%d+):(%d+):(%d+)Z$")
         assert.is_truthy(year and month and day and hour and min and sec)
         local replica = os.date(
-            config.user_opts.formats.datetime.datetime.iso,
+            config.user_opts.formats.datetime.datetime[config.user_opts.formats.datetime.defaults.datetime],
             os.time({
                 year = year,
                 month = month,
