@@ -3,8 +3,9 @@ local M = {}
 M.default_opts = {
     keymaps = {
         country = {
-            lhs = "<leader>rc",
-            rhs = ":Randiverse country<CR>",
+            keymap = "<leader>rc",
+            command = "country",
+            desc = "Generates a random country",
         },
     },
     enabled = true, -- TODO: Enables setup + register of command
@@ -100,10 +101,10 @@ end
 M.set_keymaps = function()
     M.set_keymap({
         mode = "n",
-        lhs = M.user_opts.keymaps.country.lhs,
-        rhs = M.user_opts.keymaps.country.rhs,
+        lhs = M.user_opts.keymaps.country.keymap,
+        rhs = string.format(":Randiverse %s<CR>", M.user_opts.keymaps.country.command),
         opts = {
-            desc = "Generate a random country (normal mode)",
+            M.user_opts.keymaps.country.desc,
             noremap = true,
             silent = true,
         },
