@@ -98,7 +98,7 @@ M.string_to_number = function(s)
     return tonumber(s)
 end
 
-M.no_cross_flag_checks = function(_) end
+M.no_validations = function(_) end
 
 -- for assets and reading --
 local file_cache = {}

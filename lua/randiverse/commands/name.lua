@@ -4,42 +4,40 @@ local utils = require("randiverse.commands.utils")
 local M = {}
 
 local expected_flags = {
-    fname = {
+    first = {
         bool = true,
     },
-    lname = {
+    last = {
         bool = true,
     },
+    cross_flags_validator = utils.no_validations,
 }
 
 local flag_mappings = {
-    f = "fname",
-    l = "lname",
+    f = "first",
+    l = "last",
 }
 
+-- defaults: first & last name included
+-- TODO: Add starting letter? + female vs male?
 M.normal_random_name = function(args)
-    print("inside normal_random_name")
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
-    -- defaults: first & last name included (potentially in future include A-Z + languages)
-    local include_fname, include_lname = true, true
-    if transformed_flags["fname"] or transformed_flags["lname"] then
-        include_fname = transformed_flags["fname"] or false
-        include_lname = transformed_flags["lname"] or false
+    local include_first, include_last = true, true
+    if transformed_flags["first"] or transformed_flags["last"] then
+        include_first = transformed_flags["first"] or false
+        include_last = transformed_flags["last"] or false
     end
 
-    local fname = include_fname
+    local first = include_first
             and utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.FIRST)
         or ""
-    local lname = include_lname
-            and utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST)
+    local last = include_last and utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST)
         or ""
-    local include_full_name = include_fname and include_lname
-    local random_name = include_full_name and (fname .. " " .. lname) or (fname .. lname)
-    print("finished normal_random_name")
-
+    local include_full_name = include_first and include_last
+    local random_name = include_full_name and (first .. " " .. last) or (first .. last)
     return random_name
 end
 

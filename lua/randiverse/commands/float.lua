@@ -21,7 +21,7 @@ local expected_flags = {
         validator_error_msg = "value must be a non-negative integer",
         transformer = utils.string_to_integer,
     },
-    cross_flags_validator = utils.no_cross_flag_checks,
+    cross_flags_validator = utils.no_validations,
 }
 
 local flag_mappings = {
