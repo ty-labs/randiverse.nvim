@@ -70,7 +70,6 @@ describe("Randiverse 'uuid' command", function()
 
     it("should error when called with unknown '-q' flag", function()
         local success, error = pcall(uuid.normal_random_uuid, {
-            "-f",
             "-q",
         })
         assert.is_false(success)

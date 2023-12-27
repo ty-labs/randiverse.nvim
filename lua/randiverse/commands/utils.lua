@@ -98,6 +98,10 @@ M.string_to_number = function(s)
     return tonumber(s)
 end
 
+M.pass_through = function(s)
+    return s
+end
+
 M.no_validations = function(_) end
 
 -- for assets and reading --

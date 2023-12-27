@@ -1,7 +1,9 @@
 local M = {}
 
 M.default_opts = {
-    keymaps = {},
+    keymaps = {
+        -- TODO: These will likely be <leader>r<first-letter-of-command> => calls default randiverse command but can be changed!
+    },
     data = {
         ROOT = (function()
             local path = debug.getinfo(1, "S").source:sub(2)
@@ -28,9 +30,13 @@ M.default_opts = {
             tlds = {},
         },
         word = {
-            SHORT = "words_short.txt",
-            MEDIUM = "words_medium.txt",
-            LONG = "words_long.txt",
+            -- TODO: These are key-value for corpuses that user can provide! + a default!!!
+            corpuses = {
+                ["short"] = "words_short.txt",
+                ["medium"] = "words_medium.txt",
+                ["long"] = "words_long.txt",
+            },
+            default = "medium",
         },
     },
     formats = {
