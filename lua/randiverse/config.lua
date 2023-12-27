@@ -2,7 +2,10 @@ local M = {}
 
 M.default_opts = {
     keymaps = {
-        -- TODO: These will likely be <leader>r<first-letter-of-command> => calls default randiverse command but can be changed!
+        country = {
+            lhs = "<leader>rc",
+            rhs = ":Randiverse country<CR>",
+        },
     },
     enabled = true, -- TODO: Enables setup + register of command
     data = {
@@ -91,7 +94,20 @@ M.set_keymap = function(args)
         args.lhs = M.user_opts.keymaps[args.name]
         args.rhs = "<NOP>"
     end
-    vim.keymap.set(args.mode, args.lhs, args.rhs, args.opts)
+    vim.api.nvim_set_keymap(args.mode, args.lhs, args.rhs, args.opts)
+end
+
+M.set_keymaps = function()
+    M.set_keymap({
+        mode = "n",
+        lhs = M.user_opts.keymaps.country.lhs,
+        rhs = M.user_opts.keymaps.country.rhs,
+        opts = {
+            desc = "Generate a random country (normal mode)",
+            noremap = true,
+            silent = true,
+        },
+    })
 end
 
 -- TODO: Enable ability to override any command default values to user desire
@@ -103,6 +119,7 @@ M.setup = function(user_opts)
     vim.cmd([[command! -nargs=* Randiverse lua require('randiverse').randiverse({<f-args>})]])
 
     -- TODO: 2nd register the keymaps which call command w/ args
+    M.set_keymaps()
 
     -- 3rd set seed for randomness
     math.randomseed(os.time())
