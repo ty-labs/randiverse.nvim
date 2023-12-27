@@ -4,6 +4,7 @@ M.default_opts = {
     keymaps = {
         -- TODO: These will likely be <leader>r<first-letter-of-command> => calls default randiverse command but can be changed!
     },
+    enabled = true, -- TODO: Enables setup + register of command
     data = {
         ROOT = (function()
             local path = debug.getinfo(1, "S").source:sub(2)
@@ -30,7 +31,6 @@ M.default_opts = {
             tlds = {},
         },
         word = {
-            -- TODO: These are key-value for corpuses that user can provide! + a default!!!
             corpuses = {
                 ["short"] = "words_short.txt",
                 ["medium"] = "words_medium.txt",
@@ -67,7 +67,7 @@ M.default_opts = {
                 short = "%H:%M:%S",
                 long = "%%I:%M:%S %p",
             },
-            defaults = {
+            defaults = { -- TODO: Defaults should be keys like in 'word' (no repeats)
                 datetime = "%Y-%m-%dT%H:%M:%SZ",
                 date = "%Y-%m-%d",
                 time = "%H:%M:%S",

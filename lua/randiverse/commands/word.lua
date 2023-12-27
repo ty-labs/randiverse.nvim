@@ -19,9 +19,17 @@ local expected_flags = {
                     )
                 )
             end
-            return config.user_opts.data.word.corpuses[s] ~= nil
         end,
         transformer = utils.pass_through,
+    },
+    size = {
+        bool = false,
+        validator = function(s)
+            if not utils.string_is_positive_integer(s) then
+                error(string.format("flag 'size' can not accept value '%s': value must be a positive integer", s))
+            end
+        end,
+        transformer = utils.string_to_integer,
     },
     cross_flags_validator = function(flags)
         if flags["all"] and flags["corpus"] then
@@ -33,12 +41,13 @@ local expected_flags = {
 local flag_mappings = {
     a = "all",
     c = "corpus",
+    s = "size",
 }
 
 -- TODO: Validate the word corpuses to ensure it is in the English dictionary and not a name!
 -- TODO: Add a means to pass multiple corpuses into word for selection (Ex: Med + Long corpuses -- probably space separated after -c flag)
 -- TODO: Flag that specifies the start letter for the word! (-s [--sort])
--- TODO: MERGE TEXT/WORD together --> They do literally same thing just with a size parameter lol
+-- TODO: Flag -p/--paragraphs to enable # of paragraphs in output text (separated by \n\n)
 M.normal_random_word = function(args)
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
@@ -59,8 +68,16 @@ M.normal_random_word = function(args)
         corpus_set[corpus_mappings[transformed_flags["corpus"]]] = true
     end
 
-    local random_word = utils.read_random_line(config.user_opts.data.ROOT .. utils.get_random_from_set(corpus_set))
-    return random_word
+    local corpuses = {}
+    for k, _ in pairs(corpus_set) do
+        table.insert(corpuses, k)
+    end
+
+    local words = {}
+    for _ = 1, transformed_flags["size"] or 1 do
+        table.insert(words, utils.read_random_line(config.user_opts.data.ROOT .. corpuses[math.random(#corpuses)]))
+    end
+    return table.concat(words, " ")
 end
 
 return M
