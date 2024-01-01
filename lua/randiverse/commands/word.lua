@@ -57,7 +57,7 @@ M.normal_random_word = function(args)
     local corpus_set = {}
 
     if not transformed_flags["all"] and not transformed_flags["corpus"] then
-        corpus_set[corpus_mappings[config.user_opts.data.word.default]] = true
+        corpus_set[corpus_mappings[config.user_opts.data.word.default_corpus]] = true
     end
     if transformed_flags["all"] then
         for _, v in pairs(corpus_mappings) do

@@ -72,66 +72,83 @@ M.default_opts = {
             return path .. "data/"
         end)(),
         country = {
+            -- constants are required due to command behavior, users can change to alter command --
             COUNTRIES = "countries.txt",
             ALPHA2 = "countries_alpha2.txt",
             ALPHA3 = "countries_alpha3.txt",
             NUMERIC = "countries_numeric.txt",
         },
-        email = {
-            domains = {},
-            tlds = {},
+        datetime = {
+            formats = {
+                datetime = {
+                    iso = "%Y-%m-%dT%H:%M:%SZ",
+                    rfc = "%a, %d %b %Y %H:%M:%S",
+                    sortable = "%Y%m%d%H%M%S",
+                    human = "%B %d, %Y %I:%M:%S %p",
+                    short = "%m/%d/%y %H:%M:%S",
+                    long = "%A, %B %d, %Y %I:%M:%S %p",
+                    epoch = "%s",
+                },
+                date = {
+                    iso = "%Y-%m-%d",
+                    rfc = "%a, %d %b %Y",
+                    sortable = "%Y%m%d",
+                    human = "%B %d, %Y",
+                    short = "%m/%d/%y",
+                    long = "%A, %B %d, %Y",
+                    epoch = "%s",
+                },
+                time = {
+                    iso = "%H:%M:%S",
+                    rfc = "%H:%M:%S",
+                    sortable = "%H%M%S",
+                    human = "%I:%M:%S %p",
+                    short = "%H:%M:%S",
+                    long = "%%I:%M:%S %p",
+                },
+            },
+            default_formats = {
+                datetime = "iso",
+                date = "iso",
+                time = "iso",
+            },
         },
-        lorem = {},
+        email = {
+            domains = { "example", "company", "mail", "gmail", "yahoo", "outlook" },
+            tlds = { "com", "net", "org" },
+        },
+        lorem = {
+            corpuses = {
+                ["lorem"] = "words_lorem.txt",
+            },
+            default_corpus = "lorem",
+            sentence_lengths = {
+                ["short"] = { 5, 20 },
+                ["medium"] = { 20, 40 },
+                ["long"] = { 40, 60 },
+                ["mixed-short"] = { 5, 30 },
+                ["mixed"] = { 5, 100 },
+                ["mixed-long"] = { 30, 100 },
+            },
+            default_sentence_length = "mixed-short",
+        },
         name = {
             FIRST = "names_first.txt",
             LAST = "names_last.txt",
         },
         url = {
-            protocols = {},
-            tlds = {},
+            protocols = { "http", "https" },
+            tlds = { "com", "org", "net", "edu", "gov" },
         },
         word = {
+            -- corpuses are dynamic data that can be added by users to alter command --
+            -- pass the corpus 'name' and file in data root it maps too --
             corpuses = {
                 ["short"] = "words_short.txt",
                 ["medium"] = "words_medium.txt",
                 ["long"] = "words_long.txt",
             },
-            default = "medium",
-        },
-    },
-    formats = {
-        datetime = {
-            datetime = {
-                iso = "%Y-%m-%dT%H:%M:%SZ",
-                rfc = "%a, %d %b %Y %H:%M:%S",
-                sortable = "%Y%m%d%H%M%S",
-                human = "%B %d, %Y %I:%M:%S %p",
-                short = "%m/%d/%y %H:%M:%S",
-                long = "%A, %B %d, %Y %I:%M:%S %p",
-                epoch = "%s",
-            },
-            date = {
-                iso = "%Y-%m-%d",
-                rfc = "%a, %d %b %Y",
-                sortable = "%Y%m%d",
-                human = "%B %d, %Y",
-                short = "%m/%d/%y",
-                long = "%A, %B %d, %Y",
-                epoch = "%s",
-            },
-            time = {
-                iso = "%H:%M:%S",
-                rfc = "%H:%M:%S",
-                sortable = "%H%M%S",
-                human = "%I:%M:%S %p",
-                short = "%H:%M:%S",
-                long = "%%I:%M:%S %p",
-            },
-            defaults = {
-                datetime = "iso",
-                date = "iso",
-                time = "iso",
-            },
+            default_corpus = "medium",
         },
     },
 }
@@ -277,6 +294,7 @@ M.set_keymaps = function()
     })
 end
 
+-- TODO: Validate config inputs? (Files are readable, Defaults not nil + readable, Commands, etc.)
 M.setup = function(user_opts)
     -- 1st overwrite default options w/ potential user-defined if exist
     M.user_opts = vim.tbl_deep_extend("force", M.default_opts, user_opts or {})

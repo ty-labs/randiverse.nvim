@@ -12,7 +12,7 @@ describe("Randiverse 'word' command", function()
             assert.same(type(random_word), "string")
             local match = random_word:match("^(%a+)$")
             assert.is_truthy(match)
-            local default = config.user_opts.data.word.corpuses[config.user_opts.data.word.default]
+            local default = config.user_opts.data.word.corpuses[config.user_opts.data.word.default_corpus]
             assert.is_true(test_utils.list_contains(utils.read_lines(config.user_opts.data.ROOT .. default), match))
         end
     end)
@@ -125,7 +125,7 @@ describe("Randiverse 'word' command", function()
             table.insert(words, w)
         end
         assert.same(50, #words)
-        local default = config.user_opts.data.word.corpuses[config.user_opts.data.word.default]
+        local default = config.user_opts.data.word.corpuses[config.user_opts.data.word.default_corpus]
         for _, w in ipairs(words) do
             assert.same(type(w), "string")
             assert.is_true(

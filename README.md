@@ -26,6 +26,9 @@ nvim --headless --noplugin -u tests/minimal_init.lua -c "PlenaryBustedDirectory 
 - ipv4
 - ipv6
 
+-- CORE USE CASES:
+
+
 looking for eyes on:
 - math.randomseed location
 - opening files and their paths
@@ -38,8 +41,12 @@ looking for eyes on:
 - better to have text files or just a function return long list of items to select random?
 - how to handle ability to get a random item where it starts with a letter? (text, in-memory table, split files, etc.) 
 - IK how to make it downloadable for Lazy... but how and which other managers should I consider and setting up infra for that..
+- I liked this over Luasnips because Luasnips were either static or required input every time or then separate snippets for each functionality/random attribute you may want to add.
+- Liked being able to consolidate it under one command that can be called (like Sublime/VScode) and ability to create keymaps for them and user defined commands that run for Randiverse
+- Or, if you wanted to build a fully dymamic Luasnip like mine have it either requires prompting it every time with values for flags you don't care about to get what you want...
 
-inspirations:
-- [Random Text Sublime Plugin](https://github.com/kimpettersen/random-sublime-text-plugin)
-- [Random Everything VSCode Plugin](https://github.com/helixquar/randomeverything)
-- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim)
+Inspirations/Related Work:
+- [Random Everything VSCode Plugin](https://github.com/helixquar/randomeverything) --> Original inspiration (a VSCode convert :smile:)
+- [Random Text Sublime Plugin](https://github.com/kimpettersen/random-sublime-text-plugin) -> Original inspiration for VSCode plugin
+- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim) --> Inspiration for writing a Lorem Ipsum gtext generator
+- [nvim-surround] --> General inspiration for writing nvim plugins

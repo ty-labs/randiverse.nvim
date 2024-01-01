@@ -22,11 +22,10 @@ local expected_flags = {
             local time = flags["time"] and "time" or ""
             type = date .. time
         end
-        if flags["format"] and config.user_opts.formats.datetime[type][flags["format"]] == nil then
-            local valid = string.format(
-                "value must be one of the following [%s]",
-                utils.concat_table_keys(config.user_opts.formats.datetime[type])
-            )
+        local format_mappings = config.user_opts.data.datetime.formats
+        if flags["format"] and format_mappings[type][flags["format"]] == nil then
+            local valid =
+                string.format("value must be one of the following [%s]", utils.concat_table_keys(format_mappings[type]))
             error(string.format("flag '%s' can not accept value '%s': %s", "format", flags["format"], valid))
         end
     end,
@@ -39,7 +38,6 @@ local flag_mappings = {
 }
 
 -- TODO: Add the ability to specify start/stop Y/M/D/H/M/S + ability to pass own datetime format string!
--- TODO: Add cross-flag validations (code and numeric can't both be set...)
 M.normal_random_datetime = function(args)
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
@@ -52,16 +50,10 @@ M.normal_random_datetime = function(args)
         output_type = date .. time
     end
 
-    if
-        transformed_flags["format"]
-        and config.user_opts.formats.datetime[output_type][transformed_flags["format"]] == nil
-    then
-        local valid = string.format(
-            "value must be one of the following [%s]",
-            utils.concat_table_keys(config.user_opts.formats.datetime[output_type])
-        )
-        error(string.format("flag '%s' can not accept value '%s': %s", "format", transformed_flags["format"], valid))
-    end
+    local format_mappings = config.user_opts.data.datetime.formats
+    local format_defaults = config.user_opts.data.datetime.default_formats
+    local default = format_mappings[output_type][format_defaults[output_type]]
+    local format = transformed_flags["format"] and format_mappings[output_type][transformed_flags["format"]] or default
 
     local curr_year = os.date("*t").year
     local timestamp = os.time({
@@ -72,13 +64,7 @@ M.normal_random_datetime = function(args)
         min = math.random(0, 59),
         sec = math.random(0, 59),
     })
-    local default =
-        config.user_opts.formats.datetime[output_type][config.user_opts.formats.datetime.defaults[output_type]]
-    local format = transformed_flags["format"]
-            and config.user_opts.formats.datetime[output_type][transformed_flags["format"]]
-        or default
-    local random_datetime = os.date(format, timestamp)
-    return random_datetime
+    return os.date(format, timestamp)
 end
 
 return M
