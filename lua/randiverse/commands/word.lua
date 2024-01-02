@@ -22,11 +22,11 @@ local expected_flags = {
         end,
         transformer = utils.pass_through,
     },
-    size = {
+    length = {
         bool = false,
         validator = function(s)
             if not utils.string_is_positive_integer(s) then
-                error(string.format("flag 'size' can not accept value '%s': value must be a positive integer", s))
+                error(string.format("flag 'length' can not accept value '%s': value must be a positive integer", s))
             end
         end,
         transformer = utils.string_to_integer,
@@ -41,7 +41,7 @@ local expected_flags = {
 local flag_mappings = {
     a = "all",
     c = "corpus",
-    s = "size",
+    l = "length",
 }
 
 -- TODO: Validate the word corpuses to ensure it is in the English dictionary and not a name!
@@ -53,9 +53,9 @@ M.normal_random_word = function(args)
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
+    -- set word corpus(es) --
     local corpus_mappings = config.user_opts.data.word.corpuses
     local corpus_set = {}
-
     if not transformed_flags["all"] and not transformed_flags["corpus"] then
         corpus_set[corpus_mappings[config.user_opts.data.word.default_corpus]] = true
     end
@@ -67,15 +67,17 @@ M.normal_random_word = function(args)
     if transformed_flags["corpus"] then
         corpus_set[corpus_mappings[transformed_flags["corpus"]]] = true
     end
-
-    local corpuses = {}
+    local corpus = {}
     for k, _ in pairs(corpus_set) do
-        table.insert(corpuses, k)
+        local c = utils.read_lines(config.user_opts.data.ROOT .. k)
+        for _, w in ipairs(c) do
+            table.insert(corpus, w)
+        end
     end
 
     local words = {}
-    for _ = 1, transformed_flags["size"] or 1 do
-        table.insert(words, utils.read_random_line(config.user_opts.data.ROOT .. corpuses[math.random(#corpuses)]))
+    for _ = 1, transformed_flags["length"] or config.user_opts.data.word.default_length do
+        table.insert(words, corpus[math.random(#corpus)])
     end
     return table.concat(words, " ")
 end

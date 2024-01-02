@@ -113,9 +113,9 @@ describe("Randiverse 'word' command", function()
         end
     end)
 
-    it("should return multiple words with '-s 50' flag", function()
+    it("should return multiple words with '-l 50' flag", function()
         local success, random_words = pcall(word.normal_random_word, {
-            "-s",
+            "-l",
             "50",
         })
         assert.is_true(success)
@@ -134,9 +134,9 @@ describe("Randiverse 'word' command", function()
         end
     end)
 
-    it("should return multiple words with '--size 50 --all' flag", function()
+    it("should return multiple words with '--length 50 --all' flag", function()
         local success, random_words = pcall(word.normal_random_word, {
-            "--size",
+            "--length",
             "50",
             "--all",
         })
@@ -169,11 +169,11 @@ describe("Randiverse 'word' command", function()
         end
     end)
 
-    it("should return multiple words with '-c short -s 100' flag", function()
+    it("should return multiple words with '-c short -l 100' flag", function()
         local success, random_words = pcall(word.normal_random_word, {
             "-c",
             "short",
-            "-s",
+            "-l",
             "100",
         })
         assert.is_true(success)
@@ -225,32 +225,32 @@ describe("Randiverse 'word' command", function()
         assert.is_truthy(string.find(error, "flag 'all' is boolean and does not expect a value"))
     end)
 
-    it("should error when called with '-s' flag and invalid value", function()
+    it("should error when called with '-l' flag and invalid value", function()
         local success, error = pcall(word.normal_random_word, {
-            "-s",
+            "-l",
             "dummy",
         })
         assert.is_false(success)
         assert.is_truthy(
-            string.find(error, "flag 'size' can not accept value 'dummy': value must be a positive integer")
+            string.find(error, "flag 'length' can not accept value 'dummy': value must be a positive integer")
         )
     end)
 
-    it("should error when called with '--size' flag and invalid value", function()
+    it("should error when called with '--length' flag and invalid value", function()
         local success, error = pcall(word.normal_random_word, {
-            "-s",
+            "-l",
             "0",
         })
         assert.is_false(success)
-        assert.is_truthy(string.find(error, "flag 'size' can not accept value '0': value must be a positive integer"))
+        assert.is_truthy(string.find(error, "flag 'length' can not accept value '0': value must be a positive integer"))
     end)
 
-    it("should error when called with '-s' flag and no value", function()
+    it("should error when called with '-l' flag and no value", function()
         local success, error = pcall(word.normal_random_word, {
-            "-s",
+            "-l",
         })
         assert.is_false(success)
-        assert.is_truthy(string.find(error, "flag 'size' expects a value and no value was provided"))
+        assert.is_truthy(string.find(error, "flag 'length' expects a value and no value was provided"))
     end)
 
     it("should error when called with '-a' flag and a value", function()

@@ -72,7 +72,6 @@ M.default_opts = {
             return path .. "data/"
         end)(),
         country = {
-            -- constants are required due to command behavior, users can change to alter command --
             COUNTRIES = "countries.txt",
             ALPHA2 = "countries_alpha2.txt",
             ALPHA3 = "countries_alpha3.txt",
@@ -121,7 +120,6 @@ M.default_opts = {
             corpuses = {
                 ["lorem"] = "words_lorem.txt",
             },
-            default_corpus = "lorem",
             sentence_lengths = {
                 ["short"] = { 5, 20 },
                 ["medium"] = { 20, 40 },
@@ -130,7 +128,10 @@ M.default_opts = {
                 ["mixed"] = { 5, 100 },
                 ["mixed-long"] = { 30, 100 },
             },
+            default_corpus = "lorem",
             default_sentence_length = "mixed-short",
+            default_comma_property = 0.1,
+            default_length = 100,
         },
         name = {
             FIRST = "names_first.txt",
@@ -141,14 +142,13 @@ M.default_opts = {
             tlds = { "com", "org", "net", "edu", "gov" },
         },
         word = {
-            -- corpuses are dynamic data that can be added by users to alter command --
-            -- pass the corpus 'name' and file in data root it maps too --
             corpuses = {
                 ["short"] = "words_short.txt",
                 ["medium"] = "words_medium.txt",
                 ["long"] = "words_long.txt",
             },
             default_corpus = "medium",
+            default_length = 1,
         },
     },
 }
