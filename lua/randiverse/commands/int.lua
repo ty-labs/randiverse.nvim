@@ -2,7 +2,6 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
--- TODO: Add a cross_flag validator to each (if applicable), then add a fn to validate all params together??
 local expected_flags = {
     start = {
         bool = false,
@@ -30,6 +29,7 @@ local flag_mappings = {
     S = "stop",
 }
 
+-- TODO: Default values in config
 M.normal_random_int = function(args)
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)

@@ -7,18 +7,16 @@ M.parse_command_flags = function(args, flag_mappings)
 
     while i <= #args do
         local arg = args[i]
-        local flag = arg:match("^%-%-?(%w+)$")
+        local flag = arg:match("^%-%-?(%a+[%a%-]*)$")
 
-        -- get the flag
-        if not flag then
-            error("invalid flag format: ", arg) -- error for flag
+        if not flag or flag:match("%-%-+") ~= nil or flag:match("%-$") then
+            error("invalid flag format: " .. arg)
         end
         i = i + 1
 
         local mapped_flag = flag_mappings[flag] or flag
-        if i <= #args and (not args[i]:match("^%-%-?(%w+)$") or args[i]:match("^%-?%d+$")) then
-            -- we want optional flag value if NOT flag or it is a number (potentially negative)
-            -- TODO: i wonder if this would bug out somehow?
+        if i <= #args and not args[i]:match("^%-%-?(%a+[%a%-]*)$") then
+            -- TODO: i wonder if this would bug out somehow? (negatives work fine)
             flags[mapped_flag] = args[i]
             i = i + 1
         else

@@ -9,7 +9,11 @@ local expected_flags = {
     },
     ["comma"] = {
         bool = false,
-        validator = utils.string_is_probability,
+        validator = function(s)
+            if not utils.string_is_probability(s) then
+                error(string.format("flag 'comma' can not accept value '%s': value must be in range [0.0, 1.0]", s))
+            end
+        end,
         transformer = utils.string_to_number,
     },
     ["corpus"] = {
@@ -29,7 +33,11 @@ local expected_flags = {
     },
     ["length"] = {
         bool = false,
-        validator = utils.string_is_integer,
+        validator = function(s)
+            if not utils.string_is_positive_integer(s) then
+                error(string.format("flag 'length' can not accept value '%s': value must be a positive integer", s))
+            end
+        end,
         transformer = utils.string_to_integer,
     },
     ["sentence-length"] = {
@@ -87,7 +95,7 @@ local function generate_lorem(flags)
 
     -- set lorem ipsum sentence bounds --
     local sentence_length_mappings = config.user_opts.data.lorem.sentence_lengths
-    local bounds = flags["sentence_lengths"] and sentence_length_mappings[flags["sentence-length"]]
+    local bounds = flags["sentence-length"] and sentence_length_mappings[flags["sentence-length"]]
         or sentence_length_mappings[config.user_opts.data.lorem.default_sentence_length]
     local lower_bound, upper_bound = bounds[1], bounds[2]
 
