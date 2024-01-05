@@ -87,7 +87,7 @@ local generate_username = function(flags)
         table.insert(chars, char)
     end
     for i = #chars, 1, -1 do
-        if math.random() < flags["muddle-property"] or config.user_opts.data.email.default_muddle_property then
+        if math.random() < (flags["muddle-property"] or config.user_opts.data.email.default_muddle_property) then
             -- TODO: don't allow separators to exist in 1 or last range!
             local j = math.random(i)
             chars[i], chars[j] = chars[j], chars[i]
