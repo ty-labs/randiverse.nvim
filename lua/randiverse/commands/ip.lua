@@ -9,8 +9,13 @@ local ip_mappings = {
     ["ipv6"] = "ipv6",
 }
 
+local flag_mappings = {
+    v = "version",
+    l = "lowercase",
+}
+
 local expected_flags = {
-    version = {
+    ["version"] = {
         bool = false,
         validator = function(s)
             if ip_mappings[s] == nil then
@@ -27,7 +32,7 @@ local expected_flags = {
             return ip_mappings[s]
         end,
     },
-    lowercase = {
+    ["lowercase"] = {
         bool = true,
     },
     cross_flags_validator = function(flags)
@@ -35,11 +40,6 @@ local expected_flags = {
             error("flag 'lowercase' is only applicable with '--version ipv6'")
         end
     end,
-}
-
-local flag_mappings = {
-    v = "version",
-    l = "lowercase",
 }
 
 local ip_generators = {

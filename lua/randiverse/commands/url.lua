@@ -3,6 +3,13 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local flag_mappings = {
+    s = "subdomains",
+    p = "paths",
+    q = "query-params",
+    f = "fragement",
+}
+
 local expected_flags = {
     ["subdomains"] = {
         bool = false,
@@ -22,13 +29,6 @@ local expected_flags = {
     ["fragement"] = {
         bool = true,
     },
-}
-
-local flag_mappings = {
-    s = "subdomains",
-    p = "paths",
-    q = "query-params",
-    f = "fragement",
 }
 
 M.normal_random_url = function(args)

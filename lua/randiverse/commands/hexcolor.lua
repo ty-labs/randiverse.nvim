@@ -2,15 +2,15 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local flag_mappings = {
+    l = "lowercase",
+}
+
 local expected_flags = {
-    lowercase = {
+    ["lowercase"] = {
         bool = true,
     },
     cross_flags_validator = utils.no_validations,
-}
-
-local flag_mappings = {
-    l = "lowercase",
 }
 
 M.normal_random_hexcolor = function(args)

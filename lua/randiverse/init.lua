@@ -41,7 +41,6 @@ local randiverse_commands = {
 }
 
 M.randiverse = function(args)
-    print("starting randiverse command")
     if #args < 1 then
         vim.api.nvim_err_writeln("Randiverse requires at least 1 command argument.")
         return
@@ -58,7 +57,6 @@ M.randiverse = function(args)
         return
     end
     buffer.curpos_insert_text(random_output)
-    print("finished randiverse command")
 end
 
 return M

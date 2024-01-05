@@ -3,21 +3,21 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
-local expected_flags = {
-    first = {
-        bool = true,
-    },
-    last = {
-        bool = true,
-    },
-    cross_flags_validator = utils.no_validations,
-}
-
 local flag_mappings = {
     f = "first",
     l = "last",
 }
 
+local expected_flags = {
+    ["first"] = {
+        bool = true,
+    },
+    ["last"] = {
+        bool = true,
+    },
+    cross_flags_validator = utils.no_validations,
+}
+--
 -- defaults: first & last name included
 -- TODO: Add starting letter? + female vs male?
 M.normal_random_name = function(args)

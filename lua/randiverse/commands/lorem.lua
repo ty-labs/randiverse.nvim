@@ -3,6 +3,14 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local flag_mappings = {
+    a = "all",
+    c = "corpus",
+    C = "comma",
+    l = "length",
+    s = "sentence-length",
+}
+
 local expected_flags = {
     ["all"] = {
         bool = true,
@@ -60,14 +68,6 @@ local expected_flags = {
             error("flags 'all' and 'corpus' can not be both set")
         end
     end,
-}
-
-local flag_mappings = {
-    a = "all",
-    c = "corpus",
-    C = "comma",
-    l = "length",
-    s = "sentence-length",
 }
 
 local function generate_lorem_sentence(comma, corpus, length)

@@ -3,8 +3,13 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local flag_mappings = {
+    s = "start",
+    S = "stop",
+}
+
 local expected_flags = {
-    start = {
+    ["start"] = {
         bool = false,
         validator = function(s)
             if not utils.string_is_integer(s) then
@@ -13,7 +18,7 @@ local expected_flags = {
         end,
         transformer = utils.string_to_integer,
     },
-    stop = {
+    ["stop"] = {
         bool = false,
         validator = function(s)
             if not utils.string_is_integer(s) then
@@ -23,11 +28,6 @@ local expected_flags = {
         transformer = utils.string_to_integer,
     },
     cross_flags_validator = utils.no_validations,
-}
-
-local flag_mappings = {
-    s = "start",
-    S = "stop",
 }
 
 M.normal_random_int = function(args)

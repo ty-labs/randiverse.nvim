@@ -10,11 +10,13 @@ local code_mappings = {
     ["alpha-3"] = "alpha-3",
 }
 
+local flag_mappings = {
+    c = "code",
+    n = "numeric",
+}
+
 local expected_flags = {
-    numeric = {
-        bool = true,
-    },
-    code = {
+    ["code"] = {
         bool = false,
         validator = function(s)
             if code_mappings[s] == nil then
@@ -31,16 +33,14 @@ local expected_flags = {
             return code_mappings[s]
         end,
     },
+    ["numeric"] = {
+        bool = true,
+    },
     cross_flags_validator = function(flags)
         if flags["code"] and flags["numeric"] then
             error("'code' and 'numeric' can't both be set")
         end
     end,
-}
-
-local flag_mappings = {
-    n = "numeric",
-    c = "code",
 }
 
 -- TODO: Flag for staring letter

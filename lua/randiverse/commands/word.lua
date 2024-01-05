@@ -3,11 +3,17 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local flag_mappings = {
+    a = "all",
+    c = "corpus",
+    l = "length",
+}
+
 local expected_flags = {
-    all = {
+    ["all"] = {
         bool = true,
     },
-    corpus = {
+    ["corpus"] = {
         bool = false,
         validator = function(s)
             if config.user_opts.data.word.corpuses[s] == nil then
@@ -22,7 +28,7 @@ local expected_flags = {
         end,
         transformer = utils.pass_through,
     },
-    length = {
+    ["length"] = {
         bool = false,
         validator = function(s)
             if not utils.string_is_positive_integer(s) then
@@ -36,12 +42,6 @@ local expected_flags = {
             error("flags 'all' and 'corpus' can not be both set")
         end
     end,
-}
-
-local flag_mappings = {
-    a = "all",
-    c = "corpus",
-    l = "length",
 }
 
 -- TODO: Validate the word corpuses to ensure it is in the English dictionary and not a name!

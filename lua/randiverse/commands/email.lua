@@ -3,6 +3,14 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local flag_mappings = {
+    m = "muddleness",
+    l = "letters-only",
+    a = "alphanumeric-only",
+    s = "specials",
+    c = "capitalize",
+}
+
 local expected_flags = {
     ["muddleness"] = {
         bool = false,
@@ -21,14 +29,6 @@ local expected_flags = {
     ["capitalize"] = {
         bool = true,
     },
-}
-
-local flag_mappings = {
-    m = "muddleness",
-    l = "letters-only",
-    a = "alphanumeric-only",
-    s = "specials",
-    c = "capitalize",
 }
 
 -- TODO: Probability that first/last name is substring + first/last name positions odds

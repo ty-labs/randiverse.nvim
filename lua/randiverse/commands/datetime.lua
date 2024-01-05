@@ -3,17 +3,23 @@ local utils = require("randiverse.commands.utils")
 
 local M = {}
 
+local flag_mappings = {
+    d = "date",
+    t = "time",
+    f = "format",
+}
+
 local expected_flags = {
-    format = {
+    ["date"] = {
+        bool = true,
+    },
+    ["time"] = {
+        bool = true,
+    },
+    ["format"] = {
         bool = false,
         validator = utils.no_validations,
         transformer = utils.pass_through,
-    },
-    date = {
-        bool = true,
-    },
-    time = {
-        bool = true,
     },
     cross_flags_validator = function(flags)
         local type = "datetime"
@@ -29,12 +35,6 @@ local expected_flags = {
             error(string.format("flag '%s' can not accept value '%s': %s", "format", flags["format"], valid))
         end
     end,
-}
-
-local flag_mappings = {
-    f = "format",
-    d = "date",
-    t = "time",
 }
 
 -- TODO: Add the ability to specify start/stop Y/M/D/H/M/S + ability to pass own datetime format string!
