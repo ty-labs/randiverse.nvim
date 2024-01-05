@@ -1,3 +1,4 @@
+local config = require("randiverse.config")
 local float = require("randiverse.commands.float")
 
 describe("Randiverse 'float' command", function()
@@ -10,7 +11,9 @@ describe("Randiverse 'float' command", function()
             assert.is_truthy(decimals)
             local n = tonumber(random_float)
             assert.is_true(n ~= nil)
-            assert.is_true(n >= 1 and n <= 100)
+            assert.is_true(
+                n >= config.user_opts.data.float.default_start and n <= config.user_opts.data.float.default_stop
+            )
         end
     end)
 
@@ -26,7 +29,7 @@ describe("Randiverse 'float' command", function()
             assert.is_truthy(decimals)
             local n = tonumber(random_float)
             assert.is_true(n ~= nil)
-            assert.is_true(n >= 1 and n <= 50)
+            assert.is_true(n >= config.user_opts.data.float.default_start and n <= 50)
         end
     end)
 
@@ -42,7 +45,7 @@ describe("Randiverse 'float' command", function()
             assert.is_truthy(decimals)
             local n = tonumber(random_float)
             assert.is_true(n ~= nil)
-            assert.is_true(n >= 50 and n <= 100)
+            assert.is_true(n >= 50 and n <= config.user_opts.data.float.default_stop)
         end
     end)
 
@@ -58,7 +61,7 @@ describe("Randiverse 'float' command", function()
             assert.is_truthy(decimals)
             local n = tonumber(random_float)
             assert.is_true(n ~= nil)
-            assert.is_true(n >= 1 and n <= 50)
+            assert.is_true(n >= config.user_opts.data.float.default_start and n <= 50)
         end
     end)
 
@@ -74,7 +77,7 @@ describe("Randiverse 'float' command", function()
             assert.is_truthy(decimals)
             local n = tonumber(random_float)
             assert.is_true(n ~= nil)
-            assert.is_true(n >= 50 and n <= 100)
+            assert.is_true(n >= 50 and n <= config.user_opts.data.float.default_stop)
         end
     end)
 
@@ -144,7 +147,9 @@ describe("Randiverse 'float' command", function()
             assert.is_truthy(decimals)
             local n = tonumber(random_float)
             assert.is_true(n ~= nil)
-            assert.is_true(n >= 1 and n <= 100)
+            assert.is_true(
+                n >= config.user_opts.data.float.default_start and n <= config.user_opts.data.float.default_stop
+            )
         end
     end)
 
@@ -160,7 +165,9 @@ describe("Randiverse 'float' command", function()
             assert.is_truthy(decimals)
             local n = tonumber(random_float)
             assert.is_true(n ~= nil)
-            assert.is_true(n >= 1 and n <= 100)
+            assert.is_true(
+                n >= config.user_opts.data.float.default_start and n <= config.user_opts.data.float.default_stop
+            )
         end
     end)
 

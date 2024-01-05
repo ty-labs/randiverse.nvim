@@ -298,6 +298,16 @@ describe("Randiverse 'lorem' command", function()
             string.find(error, "flag 'comma' can not accept value '1.5': value must be in range %[0.0, 1.0%]")
         )
     end)
+    it("should error when called with '--comma' flag and non-probability number", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--comma",
+            "-0.1",
+        })
+        assert.is_false(success)
+        assert.is_truthy(
+            string.find(error, "flag 'comma' can not accept value '%-0.1': value must be in range %[0.0, 1.0%]")
+        )
+    end)
     it("should error when called with '--comma' flag and no value", function()
         local success, error = pcall(lorem.normal_random_lorem, {
             "--comma",
@@ -306,11 +316,63 @@ describe("Randiverse 'lorem' command", function()
         assert.is_truthy(string.find(error, "flag 'comma' expects a value and no value was provided"))
     end)
 
-    it("should error when called with '--length' flag and no value", function() end)
-    it("should error when called with '--length' flag and invalid value", function() end)
+    it("should error when called with '--length' flag and no value", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--length",
+        })
+        assert.is_false(success)
+        assert.is_truthy(string.find(error, "flag 'length' expects a value and no value was provided"))
+    end)
+    it("should error when called with '--length' flag and invalid value", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--length",
+            "dummy",
+        })
+        assert.is_false(success)
+        assert.is_truthy(
+            string.find(error, "flag 'length' can not accept value 'dummy': value must be a positive integer")
+        )
+    end)
+    it("should error when called with '--length' flag and zero", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--length",
+            "0",
+        })
+        assert.is_false(success)
+        assert.is_truthy(string.find(error, "flag 'length' can not accept value '0': value must be a positive integer"))
+    end)
 
-    it("should error when called with '--sentence-length' flag and no value", function() end)
-    it("should error when called with '--sentence-length' flag and invalid value", function() end)
+    it("should error when called with '--length' flag and negative integer", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--length",
+            "-1",
+        })
+        assert.is_false(success)
+        assert.is_truthy(
+            string.find(error, "flag 'length' can not accept value '%-1': value must be a positive integer")
+        )
+    end)
+
+    it("should error when called with '--sentence-length' flag and no value", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--sentence-length",
+        })
+        assert.is_false(success)
+        assert.is_truthy(string.find(error, "flag 'sentence%-length' expects a value and no value was provided"))
+    end)
+    it("should error when called with '--sentence-length' flag and invalid value", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--sentence-length",
+            "dummy",
+        })
+        assert.is_false(success)
+        assert.is_truthy(
+            string.find(
+                error,
+                "flag 'sentence%-length' can not accept value 'dummy': value must be one of the following %["
+            )
+        )
+    end)
 
     it("should error when called with '--all' flag and a value", function()
         local success, error = pcall(lorem.normal_random_lorem, {
@@ -321,7 +383,15 @@ describe("Randiverse 'lorem' command", function()
         assert.is_truthy(string.find(error, "flag 'all' is boolean and does not expect a value"))
     end)
 
-    it("should error when called with incompatable flags", function() end)
+    it("should error when called with incompatible flags", function()
+        local success, error = pcall(lorem.normal_random_lorem, {
+            "--all",
+            "--corpus",
+            "lorem",
+        })
+        assert.is_false(success)
+        assert.is_truthy(string.find(error, "flags 'all' and 'corpus' can not be both set"))
+    end)
 
     it("should error when called with unknown '-e' flag", function()
         local success, error = pcall(lorem.normal_random_lorem, {

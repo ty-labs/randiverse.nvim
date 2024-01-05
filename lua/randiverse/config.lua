@@ -116,6 +116,15 @@ M.default_opts = {
             domains = { "example", "company", "mail", "gmail", "yahoo", "outlook" },
             tlds = { "com", "net", "org" },
         },
+        float = {
+            default_start = 1,
+            default_stop = 100,
+            default_decimals = 2,
+        },
+        int = {
+            default_start = 1,
+            default_stop = 100,
+        },
         lorem = {
             corpuses = {
                 ["lorem"] = "words_lorem.txt",

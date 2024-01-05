@@ -1,6 +1,5 @@
 local M = {}
 
--- TODO: IDK if it responds to '--sentence-length' type flags...
 M.parse_command_flags = function(args, flag_mappings)
     local flags = {}
     local i = 1

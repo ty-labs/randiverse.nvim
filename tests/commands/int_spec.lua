@@ -1,3 +1,4 @@
+local config = require("randiverse.config")
 local int = require("randiverse.commands.int")
 
 describe("Randiverse 'int' command", function()
@@ -8,7 +9,7 @@ describe("Randiverse 'int' command", function()
             assert.same(type(random_int), "string")
             local n = tonumber(random_int)
             assert.is_true(n ~= nil and n == math.floor(n))
-            assert.is_true(n >= 1 and n <= 100)
+            assert.is_true(n >= config.user_opts.data.int.default_start and n <= config.user_opts.data.int.default_stop)
         end
     end)
 
@@ -22,7 +23,7 @@ describe("Randiverse 'int' command", function()
             assert.same(type(random_int), "string")
             local n = tonumber(random_int)
             assert.is_true(n ~= nil and n == math.floor(n))
-            assert.is_true(n >= 1 and n <= 50)
+            assert.is_true(n >= config.user_opts.data.int.default_start and n <= 50)
         end
     end)
 
@@ -36,7 +37,7 @@ describe("Randiverse 'int' command", function()
             assert.same(type(random_int), "string")
             local n = tonumber(random_int)
             assert.is_true(n ~= nil and n == math.floor(n))
-            assert.is_true(n >= 50 and n <= 100)
+            assert.is_true(n >= 50 and n <= config.user_opts.data.int.default_stop)
         end
     end)
 
@@ -50,7 +51,7 @@ describe("Randiverse 'int' command", function()
             assert.same(type(random_int), "string")
             local n = tonumber(random_int)
             assert.is_true(n ~= nil and n == math.floor(n))
-            assert.is_true(n >= 1 and n <= 50)
+            assert.is_true(n >= config.user_opts.data.int.default_start and n <= 50)
         end
     end)
 
@@ -64,7 +65,7 @@ describe("Randiverse 'int' command", function()
             assert.same(type(random_int), "string")
             local n = tonumber(random_int)
             assert.is_true(n ~= nil and n == math.floor(n))
-            assert.is_true(n >= 50 and n <= 100)
+            assert.is_true(n >= 50 and n <= config.user_opts.data.int.default_stop)
         end
     end)
 

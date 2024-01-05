@@ -1,3 +1,4 @@
+local config = require("randiverse.config")
 local utils = require("randiverse.commands.utils")
 
 local M = {}
@@ -46,10 +47,9 @@ M.normal_random_float = function(args)
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
-    -- defaults: [1-100] float range w/ 2 decimal places
-    local start = transformed_flags["start"] or 1
-    local stop = transformed_flags["stop"] or 100
-    local decimals = transformed_flags["decimals"] or 2
+    local start = transformed_flags["start"] or config.user_opts.data.float.default_start
+    local stop = transformed_flags["stop"] or config.user_opts.data.float.default_stop
+    local decimals = transformed_flags["decimals"] or config.user_opts.data.float.default_decimals
     if stop < start then
         error(string.format("the range stop can not be less than range start: currently [%s, %s]", start, stop))
     end
