@@ -157,10 +157,10 @@ describe("Randiverse 'lorem' command", function()
         end
     end)
 
-    it("should return no-comma random lorem ipsum with '--comma 0.0'", function()
+    it("should return no-comma random lorem ipsum with '--comma-property 0.0'", function()
         for _ = 1, 20 do
             local success, random_lorem = pcall(lorem.normal_random_lorem, {
-                "--comma",
+                "--comma-property",
                 "0.0",
             })
             assert.is_true(success)
@@ -179,10 +179,10 @@ describe("Randiverse 'lorem' command", function()
         end
     end)
 
-    it("should return comma-every-third-word random lorem ipsum with '--comma 1.0'", function()
+    it("should return comma-every-third-word random lorem ipsum with '--comma-property 1.0'", function()
         for _ = 1, 20 do
             local success, random_lorem = pcall(lorem.normal_random_lorem, {
-                "--comma",
+                "--comma-property",
                 "1.0",
             })
             assert.is_true(success)
@@ -278,42 +278,48 @@ describe("Randiverse 'lorem' command", function()
         assert.is_truthy(string.find(error, "flag 'corpus' expects a value and no value was provided"))
     end)
 
-    it("should error when called with '--comma' flag and invalid value", function()
+    it("should error when called with '--comma-property' flag and invalid value", function()
         local success, error = pcall(lorem.normal_random_lorem, {
-            "--comma",
+            "--comma-property",
             "dummy",
         })
         assert.is_false(success)
         assert.is_truthy(
-            string.find(error, "flag 'comma' can not accept value 'dummy': value must be in range %[0.0, 1.0%]")
+            string.find(
+                error,
+                "flag 'comma%-property' can not accept value 'dummy': value must be in range %[0.0, 1.0%]"
+            )
         )
     end)
-    it("should error when called with '--comma' flag and non-probability number", function()
+    it("should error when called with '--comma-property' flag and non-probability number", function()
         local success, error = pcall(lorem.normal_random_lorem, {
-            "--comma",
+            "--comma-property",
             "1.5",
         })
         assert.is_false(success)
         assert.is_truthy(
-            string.find(error, "flag 'comma' can not accept value '1.5': value must be in range %[0.0, 1.0%]")
+            string.find(error, "flag 'comma%-property' can not accept value '1.5': value must be in range %[0.0, 1.0%]")
         )
     end)
-    it("should error when called with '--comma' flag and non-probability number", function()
+    it("should error when called with '--comma-property' flag and non-probability number", function()
         local success, error = pcall(lorem.normal_random_lorem, {
-            "--comma",
+            "--comma-property",
             "-0.1",
         })
         assert.is_false(success)
         assert.is_truthy(
-            string.find(error, "flag 'comma' can not accept value '%-0.1': value must be in range %[0.0, 1.0%]")
+            string.find(
+                error,
+                "flag 'comma%-property' can not accept value '%-0.1': value must be in range %[0.0, 1.0%]"
+            )
         )
     end)
-    it("should error when called with '--comma' flag and no value", function()
+    it("should error when called with '--comma-property' flag and no value", function()
         local success, error = pcall(lorem.normal_random_lorem, {
-            "--comma",
+            "--comma-property",
         })
         assert.is_false(success)
-        assert.is_truthy(string.find(error, "flag 'comma' expects a value and no value was provided"))
+        assert.is_truthy(string.find(error, "flag 'comma%-property' expects a value and no value was provided"))
     end)
 
     it("should error when called with '--length' flag and no value", function()

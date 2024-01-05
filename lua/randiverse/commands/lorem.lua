@@ -6,7 +6,7 @@ local M = {}
 local flag_mappings = {
     a = "all",
     c = "corpus",
-    C = "comma",
+    C = "comma-property",
     l = "length",
     s = "sentence-length",
 }
@@ -15,11 +15,16 @@ local expected_flags = {
     ["all"] = {
         bool = true,
     },
-    ["comma"] = {
+    ["comma-property"] = {
         bool = false,
         validator = function(s)
             if not utils.string_is_probability(s) then
-                error(string.format("flag 'comma' can not accept value '%s': value must be in range [0.0, 1.0]", s))
+                error(
+                    string.format(
+                        "flag 'comma-property' can not accept value '%s': value must be in range [0.0, 1.0]",
+                        s
+                    )
+                )
             end
         end,
         transformer = utils.string_to_number,
@@ -70,14 +75,14 @@ local expected_flags = {
     end,
 }
 
-local function generate_lorem_sentence(comma, corpus, length)
+local function generate_lorem_sentence(comma_property, corpus, length)
     local sentence_table = {}
 
     local last_comma = 0
     for i = 1, length do
         table.insert(sentence_table, corpus[math.random(#corpus)])
 
-        if i < length and i - last_comma > 2 and math.random() < comma then
+        if i < length and i - last_comma > 2 and math.random() < comma_property then
             sentence_table[i] = sentence_table[i] .. ","
             last_comma = i
         end
@@ -91,7 +96,7 @@ end
 
 local function generate_lorem(flags)
     local length = flags["length"] or config.user_opts.data.lorem.default_length
-    local comma = flags["comma"] or config.user_opts.data.lorem.default_comma_property
+    local comma_property = flags["comma-property"] or config.user_opts.data.lorem.default_comma_property
 
     -- set lorem ipsum sentence bounds --
     local sentence_length_mappings = config.user_opts.data.lorem.sentence_lengths
@@ -124,13 +129,13 @@ local function generate_lorem(flags)
     local lorem_table, lorem_length = {}, 0
     while lorem_length + upper_bound <= length do
         local sentence_length = math.random(lower_bound, upper_bound)
-        table.insert(lorem_table, generate_lorem_sentence(comma, corpus, sentence_length))
+        table.insert(lorem_table, generate_lorem_sentence(comma_property, corpus, sentence_length))
         lorem_length = lorem_length + sentence_length
     end
 
     local remains = length - lorem_length
     if remains > 2 then
-        table.insert(lorem_table, generate_lorem_sentence(comma, corpus, remains))
+        table.insert(lorem_table, generate_lorem_sentence(comma_property, corpus, remains))
     end
 
     return table.concat(lorem_table, " ")

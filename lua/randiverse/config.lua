@@ -113,8 +113,14 @@ M.default_opts = {
             },
         },
         email = {
-            domains = { "example", "company", "mail", "gmail", "yahoo", "outlook" },
-            tlds = { "com", "net", "org" },
+            domains = { "example", "company", "mail", "test", "random" },
+            tlds = { "com", "net", "org", "dev", "edu" },
+            digits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+            specials = { "!", "#", "$", "%", "^", "&", "*" },
+            separators = { "_", "-", "." },
+            default_digits = 0,
+            default_specials = 0,
+            default_muddle_property = 0.0,
         },
         float = {
             default_start = 1,
