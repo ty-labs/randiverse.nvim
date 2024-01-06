@@ -17,10 +17,10 @@ describe("Randiverse 'email' command", function()
         end
     end)
 
-    it("should return random email with '--separator'", function()
+    it("should return random email with '--separate'", function()
         for _ = 1, 20 do
             local success, random_email = pcall(email.normal_random_email, {
-                "--separator",
+                "--separate",
             })
             assert.is_true(success)
             assert.same(type(random_email), "string")
@@ -144,11 +144,12 @@ describe("Randiverse 'email' command", function()
     end)
 
     it(
-        "should return a capitalized random email with 2-digit, 1-special suffix with '--separator --digits 2 --capitalize --specials 1'",
+        "should return a capitalized random email with 2-digit, 1-special suffix with '"
+            .. "--separate --digits 2 --capitalize --specials 1",
         function()
             for _ = 1, 20 do
                 local success, random_email = pcall(email.normal_random_email, {
-                    "--separator",
+                    "--separate",
                     "--digits",
                     "2",
                     "--capitalize",
@@ -185,7 +186,7 @@ describe("Randiverse 'email' command", function()
         end
     )
 
-    it("should return muddled random email with '--muddle-property'", function() end)
+    it("should return muddled random email with '--muddle-property'", function() end) -- TODO: How to test muddle?
 
     it("should error when called with 'digits' flag and invalid value", function()
         local success, error = pcall(email.normal_random_email, {
@@ -300,13 +301,13 @@ describe("Randiverse 'email' command", function()
         assert.is_truthy(string.find(error, "flag 'muddle%-property' expects a value and no value was provided"))
     end)
 
-    it("should error when called with '--separator' and a value", function()
+    it("should error when called with '--separate' and a value", function()
         local success, error = pcall(email.normal_random_email, {
-            "--separator",
+            "--separate",
             "dummy",
         })
         assert.is_false(success)
-        assert.is_truthy(string.find(error, "flag 'separator' is boolean and does not expect a value"))
+        assert.is_truthy(string.find(error, "flag 'separate' is boolean and does not expect a value"))
     end)
 
     it("should error when called with '--capitalize' and a value", function()

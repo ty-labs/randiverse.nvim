@@ -6,8 +6,8 @@ local M = {}
 local flag_mappings = {
     c = "capitalize",
     d = "digits",
-    s = "specials",
-    S = "separator",
+    s = "specials", -- TODO: 'separate' verb sounds better w/ the API
+    S = "separate",
     m = "muddle-property",
 }
 
@@ -35,7 +35,7 @@ local expected_flags = {
         end,
         transformer = utils.string_to_integer,
     },
-    ["separator"] = {
+    ["separate"] = {
         bool = true,
     },
     ["muddle-property"] = {
@@ -67,7 +67,7 @@ local generate_username = function(flags)
         table.insert(username_components, last_name)
         table.insert(username_components, first_name)
     end
-    if flags["separator"] then
+    if flags["separate"] then
         local separators = config.user_opts.data.email.separators
         table.insert(username_components, 2, separators[math.random(#separators)])
     end
