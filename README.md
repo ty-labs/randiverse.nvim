@@ -30,6 +30,7 @@ nvim --headless --noplugin -u tests/minimal_init.lua -c "PlenaryBustedDirectory 
 
 
 looking for eyes on:
+- Randiverse command calling options (keymaps + does it make sense to have UNIVERSAL randiverse with passed 'secondary' commands?)
 - math.randomseed location
 - opening files and their paths
 - correctly passing errors to nvim so it is displayed

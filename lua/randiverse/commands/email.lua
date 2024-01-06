@@ -55,13 +55,12 @@ local expected_flags = {
     cross_flags_validator = utils.pass_through,
 }
 
--- TODO: Probability that first/last name is substring + first/last name positions odds?
 local generate_username = function(flags)
     local first_name = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.FIRST)
     local last_name = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST)
 
     local username_components = {}
-    if math.random() < 0.7 then
+    if math.random() < 0.7 then -- TODO: Perhaps people might want to configure this setting
         table.insert(username_components, first_name)
         table.insert(username_components, last_name)
     else
@@ -88,10 +87,17 @@ local generate_username = function(flags)
     end
     for i = #chars, 1, -1 do
         if math.random() < (flags["muddle-property"] or config.user_opts.data.email.default_muddle_property) then
-            -- TODO: don't allow separators to exist in 1 or last range!
             local j = math.random(i)
             chars[i], chars[j] = chars[j], chars[i]
         end
+    end
+    if utils.list_contains(config.user_opts.data.email.separators, chars[1]) then
+        local j = math.random(2, #chars - 1) -- prevent separators from being first/last
+        chars[1], chars[j] = chars[j], chars[1]
+    end
+    if utils.list_contains(config.user_opts.data.email.separators, chars[#chars]) then
+        local j = math.random(2, #chars - 1)
+        chars[#chars], chars[j] = chars[j], chars[#chars]
     end
     local username = table.concat(chars)
 
