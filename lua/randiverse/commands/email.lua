@@ -6,7 +6,7 @@ local M = {}
 local flag_mappings = {
     c = "capitalize",
     d = "digits",
-    s = "specials", -- TODO: 'separate' verb sounds better w/ the API
+    s = "specials",
     S = "separate",
     m = "muddle-property",
 }

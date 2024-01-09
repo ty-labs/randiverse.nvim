@@ -186,7 +186,93 @@ describe("Randiverse 'email' command", function()
         end
     )
 
-    it("should return muddled random email with '--muddle-property'", function() end) -- TODO: How to test muddle?
+    it("should return muddled random email with '--muddle-property'", function()
+        for _ = 1, 20 do
+            local success, random_email = pcall(email.normal_random_email, {
+                "--muddle-property",
+                "0.5",
+            })
+            assert.is_true(success)
+            assert.same(type(random_email), "string")
+            local user, domain, tld = random_email:match("^(%l+)@(%l+)%.(%l+)$")
+            assert.is_truthy(user and domain and tld)
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.domains, domain))
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.tlds, tld))
+        end
+    end)
+
+    it("should return muddled capitalized random email with '--muddle-property'", function()
+        for _ = 1, 20 do
+            local success, random_email = pcall(email.normal_random_email, {
+                "--muddle-property",
+                "0.5",
+                "--capitalize",
+            })
+            assert.is_true(success)
+            assert.same(type(random_email), "string")
+            local s1, s2, domain, tld = random_email:match("^(%l*%u%l*)(%l*%u%l*)@(%l+)%.(%l+)$")
+            assert.is_truthy(s1 and s2 and domain and tld)
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.domains, domain))
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.tlds, tld))
+        end
+    end)
+
+    it("should return never muddle separator at ends with '--muddle-property'", function()
+        for _ = 1, 20 do
+            local success, random_email = pcall(email.normal_random_email, {
+                "--muddle-property",
+                "0.5",
+                "--separate",
+            })
+            assert.is_true(success)
+            assert.same(type(random_email), "string")
+            local s1, separator, s2, domain, tld = random_email:match("^(%l)(.*)(%l)@(%l+)%.(%l+)$")
+            assert.is_truthy(s1 and separator and s2 and domain and tld)
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.domains, domain))
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.tlds, tld))
+        end
+    end)
+
+    it("should return unmuddled random email with '--muddle-property' at 0.0", function()
+        for _ = 1, 20 do
+            local success, random_email = pcall(email.normal_random_email, {
+                "--separate",
+                "--digits",
+                "2",
+                "--muddle-property",
+                "0.0",
+                "--capitalize",
+                "--specials",
+                "1",
+            })
+            assert.is_true(success)
+            assert.same(type(random_email), "string")
+            local name_1, separator, name_2, digits, specials, domain, tld =
+                random_email:match("^(%u%l+)([^%w])(%u%l+)(%d%d)([^%w])@(%l+)%.(%l+)$")
+            assert.is_truthy(name_1 and separator and name_2 and digits and specials and domain and tld)
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.domains, domain))
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.tlds, tld))
+            assert.is_true(test_utils.list_contains(config.user_opts.data.email.separators, separator))
+            local name_1_first = test_utils.list_contains(
+                utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.name.FIRST),
+                name_1
+            )
+            local name_1_last = test_utils.list_contains(
+                utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST),
+                name_1
+            )
+            assert.is_true(name_1_first or name_1_last)
+            local name_2_first = test_utils.list_contains(
+                utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.name.FIRST),
+                name_2
+            )
+            local name_2_last = test_utils.list_contains(
+                utils.read_lines(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST),
+                name_2
+            )
+            assert.is_true(name_2_first or name_2_last)
+        end
+    end)
 
     it("should error when called with 'digits' flag and invalid value", function()
         local success, error = pcall(email.normal_random_email, {

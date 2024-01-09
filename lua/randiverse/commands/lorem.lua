@@ -5,7 +5,7 @@ local M = {}
 
 local flag_mappings = {
     a = "all",
-    c = "corpus",
+    c = "corpus", -- TODO: How to pass MULTIPLE corpuses through an arg?
     C = "comma-property",
     l = "length",
     s = "sentence-length",
