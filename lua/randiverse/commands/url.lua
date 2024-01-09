@@ -55,7 +55,7 @@ local expected_flags = {
 }
 
 M.normal_random_url = function(args)
-    local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings) -- TODO: This for every command
+    local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
     local protocols = config.user_opts.data.url.protocols
@@ -88,7 +88,7 @@ M.normal_random_url = function(args)
         random_url = random_url .. "/" .. table.concat(paths, "/")
     end
 
-    local query_params = {} -- TODO: Better query params options
+    local query_params = {} -- TODO: Better query params options!
     local param_corpus = config.user_opts.data.ROOT
         .. config.user_opts.data.word.corpuses[config.user_opts.data.url.default_param_corpus]
     local value_corpus = config.user_opts.data.ROOT

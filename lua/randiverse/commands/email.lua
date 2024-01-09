@@ -108,8 +108,7 @@ local generate_username = function(flags)
 end
 
 M.normal_random_email = function(args)
-    args = args or {}
-    local parsed_flags = utils.parse_command_flags(args, flag_mappings)
+    local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
     local username = generate_username(transformed_flags)

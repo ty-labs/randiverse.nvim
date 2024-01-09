@@ -47,8 +47,7 @@ local expected_flags = {
 -- TODO: Add cross-flag validations (code and numeric can't both be set...)
 -- TODO: Peraps v1 should only have ACTUAL countries and no accents?
 M.normal_random_country = function(args)
-    args = args or {}
-    local parsed_flags = utils.parse_command_flags(args, flag_mappings)
+    local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
     if transformed_flags["code"] and transformed_flags["code"] == "alpha-2" then
