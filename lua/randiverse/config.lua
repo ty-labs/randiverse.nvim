@@ -160,6 +160,7 @@ M.default_opts = {
             default_path_corpus = "medium",
             default_fragment_corpus = "long",
             default_param_corpus = "medium",
+            default_value_corpus = "medium",
             default_subdomains = 0,
             default_paths = 0,
             default_query_params = 0,
