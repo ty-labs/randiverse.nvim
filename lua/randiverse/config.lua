@@ -155,6 +155,14 @@ M.default_opts = {
         url = {
             protocols = { "http", "https" },
             tlds = { "com", "org", "net", "edu", "gov" },
+            default_domain_corpus = "medium",
+            default_subdomain_corpus = "short",
+            default_path_corpus = "medium",
+            default_fragment_corpus = "long",
+            default_param_corpus = "medium",
+            default_subdomains = 0,
+            default_paths = 0,
+            default_query_params = 0,
         },
         word = {
             corpuses = {

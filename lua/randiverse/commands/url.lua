@@ -7,79 +7,106 @@ local flag_mappings = {
     s = "subdomains",
     p = "paths",
     q = "query-params",
-    f = "fragement",
+    f = "fragment",
 }
 
 local expected_flags = {
     ["subdomains"] = {
         bool = false,
-        validator = utils.string_is_integer,
+        validator = function(s)
+            if not utils.string_is_non_negative_integer(s) then
+                error(
+                    string.format(
+                        "flag 'subdomains' can not accept value '%s': value must be a non-negative integer",
+                        s
+                    )
+                )
+            end
+        end,
         transformer = utils.string_to_integer,
     },
     ["paths"] = {
         bool = false,
-        validator = utils.string_is_integer,
+        validator = function(s)
+            if not utils.string_is_non_negative_integer(s) then
+                error(string.format("flag 'paths' can not accept value '%s': value must be a non-negative integer", s))
+            end
+        end,
         transformer = utils.string_to_integer,
     },
     ["query-params"] = {
         bool = false,
-        validator = utils.string_is_integer,
+        validator = function(s)
+            if not utils.string_is_non_negative_integer(s) then
+                error(
+                    string.format(
+                        "flag 'query-params' can not accept value '%s': value must be a non-negative integer",
+                        s
+                    )
+                )
+            end
+        end,
         transformer = utils.string_to_integer,
     },
-    ["fragement"] = {
+    ["fragment"] = {
         bool = true,
     },
+    cross_flags_validator = utils.pass_through,
 }
 
 M.normal_random_url = function(args)
-    print("inside normal_random_email")
     args = args or {}
     local parsed_flags = utils.parse_command_flags(args, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
 
-    -- let protocols/tld to be overridden in plugin configuration! --
-    -- perhaps we should allow which corpus they choose strings for params? --
-    local protocols = { "http", "https" }
-    local domain = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.word.LONG)
-    if transformed_flags["subdomains"] then
-        local subdomains = {}
-        for _ = 1, transformed_flags["subdomains"] do
-            table.insert(
-                subdomains,
-                utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.word.SHORT)
-            )
-        end
-        domain = string.format("%s.%s", table.concat(subdomains, "."), domain)
+    local protocols = config.user_opts.data.url.protocols
+    local tlds = config.user_opts.data.url.tlds
+
+    local domains = {}
+    local subdomain_corpus = config.user_opts.data.ROOT
+        .. config.user_opts.data.word.corpuses[config.user_opts.data.url.default_subdomain_corpus]
+    for _ = 1, transformed_flags["subdomains"] or config.user_opts.data.url.default_subdomains do
+        table.insert(domains, utils.read_random_line(subdomain_corpus))
     end
-    local tld = { "com", "org", "net", "edu", "gov" }
+    local domain_corpus = config.user_opts.data.ROOT
+        .. config.user_opts.data.word.corpuses[config.user_opts.data.url.default_domain_corpus]
+    table.insert(domains, utils.read_random_line(domain_corpus))
 
-    local random_url = string.format("%s://%s.%s", protocols[math.random(#protocols)], domain, tld[math.random(#tld)])
+    local random_url = string.format(
+        "%s://%s.%s",
+        protocols[math.random(#protocols)],
+        table.concat(domains, "."),
+        tlds[math.random(#tlds)]
+    )
 
-    -- add paths, params, then fragement if requested
-    -- there can be mulitple levels of paths...
-    if transformed_flags["paths"] then
-        local paths = {}
-        for _ = 1, transformed_flags["paths"] do
-            table.insert(paths, utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.word.MEDIUM))
-        end
+    local paths = {}
+    local path_corpus = config.user_opts.data.ROOT
+        .. config.user_opts.data.word.corpuses[config.user_opts.data.url.default_path_corpus]
+    for _ = 1, transformed_flags["paths"] or config.user_opts.data.url.default_paths do
+        table.insert(paths, utils.read_random_line(path_corpus))
+    end
+    if #paths > 0 then
         random_url = random_url .. "/" .. table.concat(paths, "/")
     end
-    if transformed_flags["query-params"] then
-        local query_params = {}
-        for _ = 1, transformed_flags["query-params"] do
-            local param = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.word.MEDIUM)
-            local value = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.word.MEDIUM)
-            table.insert(query_params, param .. "=" .. value)
-        end
+
+    local query_params = {}
+    local param_corpus = config.user_opts.data.ROOT
+        .. config.user_opts.data.word.corpuses[config.user_opts.data.url.default_param_corpus]
+    for _ = 1, transformed_flags["query-params"] or config.user_opts.data.url.default_query_params do
+        local param = utils.read_random_line(param_corpus)
+        local value = utils.read_random_line(param_corpus)
+        table.insert(query_params, param .. "=" .. value)
+    end
+    if #query_params > 0 then
         random_url = random_url .. "?" .. table.concat(query_params, "&")
     end
-    if transformed_flags["fragement"] then
-        random_url = random_url
-            .. "#"
-            .. utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.word.LONG)
+
+    if transformed_flags["fragment"] then
+        local fragment_corpus = config.user_opts.data.ROOT
+            .. config.user_opts.data.word.corpuses[config.user_opts.data.url.default_fragment_corpus]
+        random_url = random_url .. "#" .. utils.read_random_line(fragment_corpus)
     end
 
-    print("finished normal_random_email")
     return random_url
 end
 
