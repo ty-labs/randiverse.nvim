@@ -1,4 +1,3 @@
-local buffer = require("randiverse.buffer")
 local config = require("randiverse.config")
 local utils = require("randiverse.utils")
 
@@ -19,10 +18,6 @@ local M = {}
 
 M.setup = function(user_opts)
     config.setup(user_opts)
-end
-
-M.buffer_setup = function(buffer_opts)
-    config.buffer_setup(buffer_opts)
 end
 
 local randiverse_commands = {
@@ -56,7 +51,7 @@ M.randiverse = function(args)
         vim.api.nvim_err_writeln("Error in Randiverse: " .. random_output)
         return
     end
-    buffer.curpos_insert_text(random_output)
+    vim.api.nvim_put({ tostring(random_output) }, "", true, true)
 end
 
 return M
