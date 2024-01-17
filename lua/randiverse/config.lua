@@ -332,7 +332,7 @@ M.setup = function(user_opts)
         return { "rocks", "rocket", "sushi", "ate" }
     end
     vim.cmd(
-        [[command! -nargs=* -complete=customlist,auto_completion Randiverse lua require('randiverse').randiverse({<f-args>})]]
+        [[command! -nargs=* -complete=customlist,v:lua.auto_completion Randiverse lua require('randiverse').randiverse({<f-args>})]]
     )
 
     -- 3rd register the keymaps if applicable
