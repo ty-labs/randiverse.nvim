@@ -36,6 +36,7 @@ local randiverse_commands = {
 }
 
 M.randiverse_completion = function(findstart, base)
+    print("Running autocomplete")
     if findstart == 1 then
         -- When findstart is 1, return the start position of completion
         return vim.fn.col(".") - 1
