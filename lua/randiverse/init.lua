@@ -35,23 +35,16 @@ local randiverse_commands = {
     word = word.normal_random_word,
 }
 
-M.randiverse_completion = function(findstart, base)
-    print("Running autocomplete")
-    if findstart == 1 then
-        -- When findstart is 1, return the start position of completion
-        return vim.fn.col(".") - 1
-    else
-        -- When findstart is 0, return completion suggestions based on the base string
-        local matches = {}
-        print("HERE")
+M.auto_completion = function(A, _, _)
+    local matches = {}
+    print("HERE")
 
-        for key, _ in pairs(randiverse_commands) do
-            if key:match("^" .. base) then
-                table.insert(matches, key)
-            end
+    for key, _ in pairs(randiverse_commands) do
+        if key:match("^" .. A) then
+            table.insert(matches, key)
         end
-        return matches
     end
+    return matches
 end
 
 M.randiverse = function(args)
