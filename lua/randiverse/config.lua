@@ -328,8 +328,11 @@ M.setup = function(user_opts)
     end
 
     -- 2nd register the command
+    local auto_completion = function(findstart, base)
+        return { "rocks", "sushi", "ate" }
+    end
     vim.cmd(
-        [[command! -nargs=* -complete=customlist,v:lua.require('randiverse').auto_completion Randiverse lua require('randiverse').randiverse({<f-args>})]]
+        [[command! -nargs=* -complete=customlist,auto_completion Randiverse lua require('randiverse').randiverse({<f-args>})]]
     )
 
     -- 3rd register the keymaps if applicable
