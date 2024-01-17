@@ -42,6 +42,7 @@ M.randiverse_completion = function(findstart, base)
     else
         -- When findstart is 0, return completion suggestions based on the base string
         local matches = {}
+        print("HERE")
 
         for key, _ in pairs(randiverse_commands) do
             if key:match("^" .. base) then
