@@ -63,7 +63,7 @@ M.normal_random_datetime = function(args)
         min = math.random(0, 59),
         sec = math.random(0, 59),
     })
-    return os.date(format, timestamp)
+    return tostring(os.date(format, timestamp))
 end
 
 return M

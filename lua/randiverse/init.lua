@@ -35,6 +35,23 @@ local randiverse_commands = {
     word = word.normal_random_word,
 }
 
+M.randiverse_completion = function(findstart, base)
+    if findstart == 1 then
+        -- When findstart is 1, return the start position of completion
+        return vim.fn.col(".") - 1
+    else
+        -- When findstart is 0, return completion suggestions based on the base string
+        local matches = {}
+
+        for key, _ in pairs(randiverse_commands) do
+            if key:match("^" .. base) then
+                table.insert(matches, key)
+            end
+        end
+        return matches
+    end
+end
+
 M.randiverse = function(args)
     if #args < 1 then
         vim.api.nvim_err_writeln("Randiverse requires at least 1 command argument.")
@@ -51,7 +68,7 @@ M.randiverse = function(args)
         vim.api.nvim_err_writeln(string.format("Error in Randiverse '%s': %s", command, random_output))
         return
     end
-    vim.api.nvim_put({ tostring(random_output) }, "", true, true)
+    vim.api.nvim_put({ random_output }, "", true, true)
 end
 
 return M
