@@ -329,7 +329,7 @@ M.setup = function(user_opts)
 
     -- 2nd register the command
     local auto_completion = function(findstart, base)
-        return { "rocks", "sushi", "ate" }
+        return { "rocks", "rocket", "sushi", "ate" }
     end
     vim.cmd(
         [[command! -nargs=* -complete=customlist,auto_completion Randiverse lua require('randiverse').randiverse({<f-args>})]]
