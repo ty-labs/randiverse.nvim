@@ -328,12 +328,7 @@ M.setup = function(user_opts)
     end
 
     -- 2nd register the command
-    local auto_completion = function(findstart, base)
-        return { "rocks", "rocket", "sushi", "ate" }
-    end
-    vim.cmd(
-        [[command! -nargs=* -complete=customlist,v:lua.auto_completion Randiverse lua require('randiverse').randiverse({<f-args>})]]
-    )
+    vim.cmd([[command! -nargs=* Randiverse lua require('randiverse').randiverse({<f-args>})]])
 
     -- 3rd register the keymaps if applicable
     if M.user_opts.keymaps_enabled then

@@ -35,18 +35,6 @@ local randiverse_commands = {
     word = word.normal_random_word,
 }
 
-M.auto_completion = function(A, _, _)
-    local matches = {}
-    print("HERE")
-
-    for key, _ in pairs(randiverse_commands) do
-        if key:match("^" .. A) then
-            table.insert(matches, key)
-        end
-    end
-    return matches
-end
-
 M.randiverse = function(args)
     if #args < 1 then
         vim.api.nvim_err_writeln("Randiverse requires at least 1 command argument.")
