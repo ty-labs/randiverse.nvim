@@ -38,10 +38,8 @@ local randiverse_commands = {
 M.auto_completion = function(arg_lead, _, _)
     local matches = {}
 
-    print(arg_lead)
     for key, _ in pairs(randiverse_commands) do
         if key:find("^" .. arg_lead) then
-            print(key)
             table.insert(matches, key)
         end
     end
@@ -51,7 +49,6 @@ end
 
 M.randiverse = function(args)
     args = args["fargs"]
-    print(args["fargs"])
     if #args < 1 then
         vim.api.nvim_err_writeln("Randiverse requires at least 1 command argument.")
         return

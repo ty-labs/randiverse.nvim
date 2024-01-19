@@ -329,7 +329,6 @@ M.setup = function(user_opts)
 
     -- 2nd register the command
     local randiverse = require("randiverse")
-    print("HERE")
     vim.api.nvim_create_user_command("Randiverse", randiverse.randiverse, {
         nargs = "*",
         complete = randiverse.auto_completion,
