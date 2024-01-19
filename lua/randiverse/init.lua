@@ -56,12 +56,12 @@ M.randiverse = function(args)
     local command = args[1]
     local remaining_args = utils.slice_table(args, 2, #args)
     if not randiverse_commands[command] then
-        vim.api.nvim_err_writeln("`" .. command .. "` is not a known Randiverse command.")
+        vim.api.nvim_err_writeln(string.format("'%s' is not a known Randiverse command.", command))
         return
     end
     local success, random_output = pcall(randiverse_commands[command], remaining_args)
     if not success then
-        vim.api.nvim_err_writeln("Error in Randiverse: " .. random_output)
+        vim.api.nvim_err_writeln(string.format("Error in Randiverse command '%s': %s", command, random_output))
         return
     end
     vim.api.nvim_put({ random_output }, "", true, true)
