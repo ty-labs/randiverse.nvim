@@ -332,9 +332,7 @@ M.setup = function(user_opts)
     print("HERE")
     vim.api.nvim_create_user_command("Randiverse", randiverse.randiverse, {
         nargs = "*",
-        complete = function(_, _, _)
-            return { "dummy", "dummy2", "other" }
-        end,
+        complete = randiverse.auto_completion,
     })
 
     -- 3rd register the keymaps if applicable
