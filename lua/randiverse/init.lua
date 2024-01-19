@@ -36,6 +36,7 @@ local randiverse_commands = {
 }
 
 M.randiverse = function(args)
+    print(args["fargs"])
     if #args < 1 then
         vim.api.nvim_err_writeln("Randiverse requires at least 1 command argument.")
         return

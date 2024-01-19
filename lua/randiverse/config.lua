@@ -328,7 +328,14 @@ M.setup = function(user_opts)
     end
 
     -- 2nd register the command
-    vim.cmd([[command! -nargs=* Randiverse lua require('randiverse').randiverse({<f-args>})]])
+    local randiverse = require("randiverse")
+    print("HERE")
+    vim.api.nvim_create_user_command("Randiverse", randiverse.randiverse, {
+        nargs = "*",
+        complete = function(_, _, _)
+            return { "dummy", "dummy2", "other" }
+        end,
+    })
 
     -- 3rd register the keymaps if applicable
     if M.user_opts.keymaps_enabled then
