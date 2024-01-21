@@ -53,7 +53,7 @@ jobs:
       - name: panvimdoc
         uses: kdheepak/panvimdoc@main
         with:
-          vimdoc: randiverse.nvim
+          vimdoc: randiverse
           treesitter: true
           demojify: true
       - uses: stefanzweifel/git-auto-commit-action@v4
