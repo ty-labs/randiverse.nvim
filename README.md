@@ -1,6 +1,6 @@
 # randiverse.nvim 💥
 
-Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details 😆)? Randiverse--the "Random Universe"--is a flexible, integrated nvim plugin that can generate random text for a variety of scenarios including _ints_, _floats_, _names_, _dates_, _lorem ipsum_, _emails_, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
+Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details 😆)?? Randiverse--the "Random Universe"--is a flexible, integrated nvim plugin that can generate random text for a variety of scenarios including _ints_, _floats_, _names_, _dates_, _lorem ipsum_, _emails_, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
 
 **Insert Demo Video Clip Here**
 
@@ -28,8 +28,8 @@ Dummy Text
 
 # Shoutouts 😄
 
-- [Random Everything](https://github.com/helixquar/randomeverything) --> Original inspiration as a revamped version of the VScode extension.
-- [Random Text](https://github.com/kimpettersen/random-sublime-text-plugin) --> Sublime random text generator which Random Everything was based on.
-- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim) --> Inspiration for building the Lorem Ipsum generator feature.
-- [nvim-surround](https://github.com/kylechui/nvim-surround/tree/main) --> General structure for writing nvim plugins.
+- [Random Everything](https://github.com/helixquar/randomeverything)         --> Original inspiration as a revamped version of the VScode extension.
+- [Random Text](https://github.com/kimpettersen/random-sublime-text-plugin)  --> Sublime random text generator which Random Everything was based on.
+- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim)           --> Inspiration for building the Lorem Ipsum generator feature.
+- [nvim-surround](https://github.com/kylechui/nvim-surround/tree/main)       --> General structure for writing nvim plugins.
 - If you like this project consider giving a [⭐](https://github.com/ty-labs/randiverse.nvim/tree/main) to show your support!
