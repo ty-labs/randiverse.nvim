@@ -1,53 +1,35 @@
-# randiverse.nvim
-Tired of raking your brain trying to generate 'random' inputs to test/sample cases (and secretly leaking your life details :laugh:)! Try out the Random Universe to create & input necessary random strings.
+# randiverse.nvim 💥
 
-Work in progress!
-```bash
-nvim --headless --noplugin -u tests/minimal_init.lua -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal_init.lua'}"
-```
+Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details 😆)? Randiverse--the "Random Universe"--is a flexible, integrated nvim plugin that can generate random text for a variety of scenarios including _ints_, _floats_, _names_, _dates_, _lorem ipsum_, _emails_, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
 
--- TODO: Refactor below functions in separate Lua modules to handle args & processing
-- int
-- float
-- name 
-- country
-- letter 
-- letter and number
-- word
-- text
-- lorem
-- uuid 
-- url
-- email
-- hex 
-- date 
-- time
-- phone
-- ipv4
-- ipv6
+**Insert Demo Video Clip Here**
 
--- CORE USE CASES:
+Author: [Tyler Lowe](https://github.com/ty-labs)
 
+License: [MIT License](https://github.com/ty-labs/randiverse.nvim/blob/main/LICENSE)
 
-looking for eyes on:
-- Randiverse command calling options (keymaps + does it make sense to have UNIVERSAL randiverse with passed 'secondary' commands?)
-- math.randomseed location
-- opening files and their paths
-- correctly passing errors to nvim so it is displayed
-- where should cursor be placed after insert?? (before or after inserted)
-- flag to add "" around the inserted?
-- flags for each of the potential commands + structure of passing flags (-flag=xx or -flag xx or etc.)
-- keymaps for the essential default commands?
-- method of exposing Randiverse API make sense?
-- better to have text files or just a function return long list of items to select random?
-- how to handle ability to get a random item where it starts with a letter? (text, in-memory table, split files, etc.) 
-- IK how to make it downloadable for Lazy... but how and which other managers should I consider and setting up infra for that..
-- I liked this over Luasnips because Luasnips were either static or required input every time or then separate snippets for each functionality/random attribute you may want to add.
-- Liked being able to consolidate it under one command that can be called (like Sublime/VScode) and ability to create keymaps for them and user defined commands that run for Randiverse
-- Or, if you wanted to build a fully dymamic Luasnip like mine have it either requires prompting it every time with values for flags you don't care about to get what you want...
+# Requirements 🔒
 
-Inspirations/Related Work:
-- [Random Everything VSCode Plugin](https://github.com/helixquar/randomeverything) --> Original inspiration (a VSCode convert :smile:)
-- [Random Text Sublime Plugin](https://github.com/kimpettersen/random-sublime-text-plugin) -> Original inspiration for VSCode plugin
-- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim) --> Inspiration for writing a Lorem Ipsum gtext generator
-- [nvim-surround] --> General inspiration for writing nvim plugins
+randiverse.nvim was built w/ minimal dependencies using standard Lua and Neovim:
+- [Neovim 0.8+](https://github.com/neovim/neovim/releases)
+- [Lua 5.1.5+]()
+
+# Usage 💻
+
+Dummy Text
+
+# Configuration 🏗️
+
+Dummy Text
+
+# Contributing ✍️
+
+Dummy Text
+
+# Shoutouts 😄
+
+- [Random Everything](https://github.com/helixquar/randomeverything) --> Original inspiration as a revamped version of the VScode extension.
+- [Random Text](https://github.com/kimpettersen/random-sublime-text-plugin) --> Sublime random text generator which Random Everything was based on.
+- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim) --> Inspiration for building the Lorem Ipsum generator feature.
+- [nvim-surround](https://github.com/kylechui/nvim-surround/tree/main) --> General structure for writing nvim plugins.
+- If you like this project consider giving a [⭐](https://github.com/ty-labs/randiverse.nvim/tree/main) to show your support!
