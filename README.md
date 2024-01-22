@@ -68,8 +68,7 @@ Picks a random int from within a range. The default range is 1-100.
 | Flag | Description |
 | :--- |    :----    |
 | -s/--start start | Set the start for the range (integer). |
-| -l/--stop stop | Set the stop for the range (integer). |
-| -d/--decimals | Set the # of decimals in the output (non-negative integer). |
+| -l/--stop stop | Set the stop for the range (integer). | <br/>
 
 Default Keymap: `<leader>ri`
 
