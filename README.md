@@ -70,6 +70,7 @@ Picks a random int from within a range. The default range is 1-100.
 | -s/--start start | Set the start for the range (integer). |
 | -l/--stop stop | Set the stop for the range (integer). |
 
+
 Default Keymap: `<leader>ri`
 
 **Insert Demo Video**
