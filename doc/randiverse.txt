@@ -5,7 +5,8 @@ Table of Contents                               *randiverse-table-of-contents*
 
 1. randiverse.nvim                                |randiverse-randiverse.nvim|
 2. Requirements                                      |randiverse-requirements|
-3. Usage                                                    |randiverse-usage|
+3. Installation                                      |randiverse-installation|
+4. Usage                                                    |randiverse-usage|
   - The Basics                                   |randiverse-usage-the-basics|
   - int                                                 |randiverse-usage-int|
   - float                                             |randiverse-usage-float|
@@ -19,9 +20,9 @@ Table of Contents                               *randiverse-table-of-contents*
   - uuid                                               |randiverse-usage-uuid|
   - ip                                                   |randiverse-usage-ip|
   - hexcolor                                       |randiverse-usage-hexcolor|
-4. Configuration                                    |randiverse-configuration|
-5. Contributing                                      |randiverse-contributing|
-6. Shoutouts                                            |randiverse-shoutouts|
+5. Configuration                                    |randiverse-configuration|
+6. Contributing                                      |randiverse-contributing|
+7. Shoutouts                                            |randiverse-shoutouts|
 
 ==============================================================================
 1. randiverse.nvim                                *randiverse-randiverse.nvim*
@@ -52,7 +53,44 @@ Neovim:
 
 
 ==============================================================================
-3. Usage                                                    *randiverse-usage*
+3. Installation                                      *randiverse-installation*
+
+Install randiverse.nvim using your favorite plugin manager, then call
+`require("randiverse").setup()`
+
+
+LAZY.NVIM ~
+
+>lua
+    {
+        "ty-labs/randiverse.nvim",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("randiverse").setup({
+                -- Custom configurations here, or leave empty to use defaults
+            })
+        end
+    }
+<
+
+
+PACKER.NVIM ~
+
+>lua
+    use({
+        "ty-labs/randiverse.nvim",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("randiverse").setup({
+                -- Custom configuration here, or leave empty to use defaults
+            })
+        end
+    })
+<
+
+
+==============================================================================
+4. Usage                                                    *randiverse-usage*
 
 
 THE BASICS                                       *randiverse-usage-the-basics*
@@ -121,19 +159,19 @@ Dummy Text
 
 
 ==============================================================================
-4. Configuration                                    *randiverse-configuration*
+5. Configuration                                    *randiverse-configuration*
 
 Dummy Text
 
 
 ==============================================================================
-5. Contributing                                      *randiverse-contributing*
+6. Contributing                                      *randiverse-contributing*
 
 Dummy Text
 
 
 ==============================================================================
-6. Shoutouts                                            *randiverse-shoutouts*
+7. Shoutouts                                            *randiverse-shoutouts*
 
 - Random Everything <https://github.com/helixquar/randomeverything> –> Original inspiration as a revamped version of the VScode extension.
 - Random Text <https://github.com/kimpettersen/random-sublime-text-plugin> –> Sublime random text generator which Random Everything was based on.
