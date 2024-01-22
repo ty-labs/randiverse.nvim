@@ -17,6 +17,56 @@ randiverse.nvim was built w/ minimal dependencies using standard Lua and Neovim:
 
 # Usage💻
 
+## The Basics
+
+Dummy Text
+
+## int
+
+Dummy Text
+
+## float
+
+Dummy Text
+
+## name
+
+Dummy Text
+
+## word
+
+Dummy Text
+
+## lorem
+
+Dummy Text
+
+## country
+
+Dummy Text
+
+## datetime
+
+Dummy Text
+
+## email
+
+Dummy Text
+
+## url
+
+Dummy Text
+
+## uuid
+
+Dummy Text
+
+## ip
+
+Dummy Text
+
+## hexcolor
+
 Dummy Text
 
 # Configuration🏗️
