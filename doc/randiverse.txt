@@ -104,7 +104,7 @@ like the following:
 
 `:Randiverse <command> <optional command flags>`
 
-**Insert Demo Video**
+**Insert Demo Video (opening and auto-completion features…)**
 
 Command flags can either be short or long hand but are inputted as `flag value`
 NOT `flag=value`. Each Randiverse command also comes with a default keymap that
@@ -123,6 +123,8 @@ Picks a random integer from within a range. The default range is 1-100.
   -s/–start start   set the start for the range (integer).
   -l/–last          set the stop for the range (integer).
 Default Keymap: `<leader>ri`
+
+**Insert Demo Video**
 
 Configurations:
 
@@ -146,6 +148,8 @@ having two decimals.
   -----------------------------------------------------------------------
 Default Keymap: `<leader>rf`
 
+**Insert Demo Video**
+
 Configurations:
 
 
@@ -161,6 +165,10 @@ are set.
   -f/–first   return a random first name
   -l/–last    return a random last name
 Default Keymap: `<leader>rn`
+
+**Insert Demo Video**
+
+Configurations:
 
 
 WORD                                                   *randiverse-usage-word*
