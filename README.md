@@ -55,7 +55,7 @@ Generally, the plugin functionality is accessed via the registered editor comman
 
 `:Randiverse <command> <optional command flags>`
 
-**Insert Demo Video**
+**Insert Demo Video (opening and auto-completion features...)**
 
 Command flags can either be short or long hand but are inputted as `flag value` NOT `flag=value`. Each Randiverse command also comes with a default keymap that is prefixed by `<leader>r...` and maps to the default random text generation for the command. 
 
@@ -71,6 +71,8 @@ Picks a random integer from within a range. The default range is 1-100.
 | -l/--last    | set the stop for the range (integer).        |
 
 Default Keymap: `<leader>ri`
+
+**Insert Demo Video**
 
 Configurations: 
 
@@ -88,6 +90,8 @@ Picks a random float from within a range. The default range is 1-100 w/ float ha
 
 Default Keymap: `<leader>rf`
 
+**Insert Demo Video**
+
 Configurations: 
 
 ## name
@@ -102,6 +106,10 @@ Selects a random name. The default is a full name (first and last) unless flags 
 | -l/--last    | return a random last name        |
 
 Default Keymap: `<leader>rn`
+
+**Insert Demo Video**
+
+Configurations:
 
 ## word
 
