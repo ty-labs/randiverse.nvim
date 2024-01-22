@@ -116,7 +116,7 @@ INT                                                     *randiverse-usage-int*
 
 `:Randiverse int <optional int flags>`
 
-Picks a random integer from within a range. The default range is 1-100.
+Picks a random int from within a range. The default range is 1-100.
 
   Flag              Description
   ----------------- ----------------------------------------
