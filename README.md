@@ -57,7 +57,7 @@ Generally, the plugin functionality is accessed via the registered editor comman
 
 **Insert Demo Video (opening and auto-completion features...)**
 
-Command flags can either be short or long hand but are inputted as `flag value` NOT `flag=value`. Each Randiverse command also comes with a default keymap that is prefixed by `<leader>r...` and maps to the default random text generation for the command. 
+Command flags can either be short or long hand but are inputted as `flag value` NOT `flag=value` or simply boolean flag. Each Randiverse command also comes with a default keymap that is prefixed by `<leader>r...` and maps to the default random text generation for the command. 
 
 ## int
 
@@ -65,10 +65,10 @@ Command flags can either be short or long hand but are inputted as `flag value` 
 
 Picks a random integer from within a range. The default range is 1-100.
 
-| Flag      | Description |
-| :---        |    :----   |
-| -s/--start start      | set the start for the range (integer).       |
-| -l/--last    | set the stop for the range (integer).        |
+| Flag | Description |
+| :--- |    :----    |
+| -s/--start start | Set the start for the range (integer). |
+| -l/--stop stop | Set the stop for the range (integer). |
 
 Default Keymap: `<leader>ri`
 
@@ -80,13 +80,13 @@ Configurations:
 
 `:Randiverse float <optional float flags>`
 
-Picks a random float from within a range. The default range is 1-100 w/ float having two decimals.
+Picks a random float from within a range. The default range is 1-100 w/ the output having two decimals.
 
-| Flag      | Description |
-| :---        |    :----   |
-| -s/--start start      | set the start for the range (integer).       |
-| -l/--last    | set the stop for the range (integer).        |
-| -d/--decimals | set the # of decimals in the output (non-negative integer). |
+| Flag | Description |
+| :--- |    :----    |
+| -s/--start start | Set the start for the range (integer). |
+| -l/--stop stop | Set the stop for the range (integer). |
+| -d/--decimals | Set the # of decimals in the output (non-negative integer). |
 
 Default Keymap: `<leader>rf`
 
@@ -102,8 +102,8 @@ Selects a random name. The default is a full name (first and last) unless flags 
 
 | Flag      | Description |
 | :---        |    :----   |
-| -f/--first      | return a random first name       |
-| -l/--last    | return a random last name        |
+| -f/--first      | Return a random first name. |
+| -l/--last    | Return a random last name. |
 
 Default Keymap: `<leader>rn`
 
@@ -113,7 +113,21 @@ Configurations:
 
 ## word
 
-Dummy Text
+`:Randiverse word <optional word flags>`
+
+Selects a random word(s) from a corpus. The default # of words is 1 and the default corpus is the 'medium' word corpus bundled in the plugin (short, medium, long).
+
+| Flag      | Description |
+| :---        |    :----   |
+| -a/--all      | use all the provided corpuses when selecting a random word       |
+| -c/--corpus corpus   | specify a corpus to select random word from (string). default includes short, medium, long       |
+| -l/--length length  | set the # of words to return (separated by " "). The default is 1       |
+
+Default Keymap: `<leader>rn`
+
+**Insert Demo Video**
+
+Configurations:
 
 ## lorem
 
@@ -153,7 +167,7 @@ Dummy Text
 
 # Contributing✍️
 
-Dummy Text
+I'm always looking for new random text commands to add as well as more flags and enhancements. Feel free to mark an issue or try handling it yourself!
 
 # Shoutouts📢
 
