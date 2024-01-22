@@ -1,6 +1,6 @@
 # randiverse.nvim💥
 
-Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the "Random Universe"—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
+Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the "Random Universe"—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode —> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
 
 **Insert Demo Video Clip Here**
 
@@ -71,7 +71,6 @@ Picks a random int from within a range. The default range is 1-100.
 | -s/--start start | Set the start for the range (integer). |
 | -l/--stop stop | Set the stop for the range (integer). |
 
--- 
 
 Default Keymap: `<leader>ri`
 
@@ -174,8 +173,8 @@ I'm always looking for new random text commands to add as well as more flags and
 
 # Shoutouts📢
 
-- [Random Everything](https://github.com/helixquar/randomeverything)         --> Original inspiration as a revamped version of the VScode extension.
-- [Random Text](https://github.com/kimpettersen/random-sublime-text-plugin)  --> Sublime random text generator which Random Everything was based on.
-- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim)           --> Inspiration for building the Lorem Ipsum generator feature.
-- [nvim-surround](https://github.com/kylechui/nvim-surround/tree/main)       --> General structure for writing nvim plugins.
-- If you like this project consider giving a [star⭐](https://github.com/ty-labs/randiverse.nvim/tree/main) to show your support!
+- [Random Everything](https://github.com/helixquar/randomeverything)         —> Original inspiration as a revamped version of the VScode extension.
+- [Random Text](https://github.com/kimpettersen/random-sublime-text-plugin)  —> Sublime random text generator which Random Everything was based on.
+- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim)           —> Inspiration for building the Lorem Ipsum generator feature.
+- [nvim-surround](https://github.com/kylechui/nvim-surround/tree/main)       —> General structure for writing nvim plugins.
+- If you like this project consider a [star⭐](https://github.com/ty-labs/randiverse.nvim/tree/main) to show your support!
