@@ -1,6 +1,6 @@
 # randiverse.nvim💥
 
-Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse--the "Random Universe"--is a flexible, integrated nvim plugin that can generate random text for a variety of scenarios including _ints_, _floats_, _names_, _dates_, _lorem ipsum_, _emails_, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
+Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the "Random Universe"—is a flexible, integrated nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
 
 **Insert Demo Video Clip Here**
 
