@@ -6,6 +6,19 @@ Table of Contents                               *randiverse-table-of-contents*
 1. randiverse.nvim                                |randiverse-randiverse.nvim|
 2. Requirements                                      |randiverse-requirements|
 3. Usage                                                    |randiverse-usage|
+  - The Basics                                   |randiverse-usage-the-basics|
+  - int                                                 |randiverse-usage-int|
+  - float                                             |randiverse-usage-float|
+  - name                                               |randiverse-usage-name|
+  - word                                               |randiverse-usage-word|
+  - lorem                                             |randiverse-usage-lorem|
+  - country                                         |randiverse-usage-country|
+  - datetime                                       |randiverse-usage-datetime|
+  - email                                             |randiverse-usage-email|
+  - url                                                 |randiverse-usage-url|
+  - uuid                                               |randiverse-usage-uuid|
+  - ip                                                   |randiverse-usage-ip|
+  - hexcolor                                       |randiverse-usage-hexcolor|
 4. Configuration                                    |randiverse-configuration|
 5. Contributing                                      |randiverse-contributing|
 6. Shoutouts                                            |randiverse-shoutouts|
@@ -40,6 +53,69 @@ Neovim:
 
 ==============================================================================
 3. Usage                                                    *randiverse-usage*
+
+
+THE BASICS                                       *randiverse-usage-the-basics*
+
+Dummy Text
+
+
+INT                                                     *randiverse-usage-int*
+
+Dummy Text
+
+
+FLOAT                                                 *randiverse-usage-float*
+
+Dummy Text
+
+
+NAME                                                   *randiverse-usage-name*
+
+Dummy Text
+
+
+WORD                                                   *randiverse-usage-word*
+
+Dummy Text
+
+
+LOREM                                                 *randiverse-usage-lorem*
+
+Dummy Text
+
+
+COUNTRY                                             *randiverse-usage-country*
+
+Dummy Text
+
+
+DATETIME                                           *randiverse-usage-datetime*
+
+Dummy Text
+
+
+EMAIL                                                 *randiverse-usage-email*
+
+Dummy Text
+
+
+URL                                                     *randiverse-usage-url*
+
+Dummy Text
+
+
+UUID                                                   *randiverse-usage-uuid*
+
+Dummy Text
+
+
+IP                                                       *randiverse-usage-ip*
+
+Dummy Text
+
+
+HEXCOLOR                                           *randiverse-usage-hexcolor*
 
 Dummy Text
 
