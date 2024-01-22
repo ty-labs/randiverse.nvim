@@ -1,6 +1,6 @@
 # randiverse.nvim💥
 
-Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the "Random Universe"—is a flexible, integrated nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
+Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the "Random Universe"—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode --> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
 
 **Insert Demo Video Clip Here**
 
@@ -18,7 +18,6 @@ randiverse.nvim was built w/ minimal dependencies using standard Lua and Neovim:
 # Installation📦
 
 Install randiverse.nvim using your favorite plugin manager, then call `require("randiverse").setup()`
-
 
 ### [lazy.nvim](https://github.com/folke/lazy.nvim)
 
@@ -52,19 +51,57 @@ use({
 
 ## The Basics
 
-Dummy Text
+Generally, the plugin functionality is accessed via the registered editor command 'Randiverse'. The editor command 'Randiverse' also requires a command (int, float, name, etc.) with possible command flags which tell Randiverse what random text to generate. Note that both 'Randiverse' and its commands have auto-completion as demonstrated below. The Randiverse access pattern will look like the following:
+
+`:Randiverse <command> <optional command flags>`
+
+**Insert Demo Video**
+
+Command flags can either be short or long hand but are inputted as `flag value` NOT `flag=value`. Each Randiverse command also comes with a default keymap that is prefixed by `<leader>r...` and maps to the default random text generation for the command. 
 
 ## int
 
-Dummy Text
+`:Randiverse int <optional int flags>`
+
+Picks a random integer from within a range. The default range is 1-100.
+
+| Flag      | Description |
+| :---        |    :----   |
+| -s/--start start      | set the start for the range (integer).       |
+| -l/--last    | set the stop for the range (integer).        |
+
+Default Keymap: `<leader>ri`
+
+Configurations: 
 
 ## float
 
-Dummy Text
+`:Randiverse float <optional float flags>`
+
+Picks a random float from within a range. The default range is 1-100 w/ float having two decimals.
+
+| Flag      | Description |
+| :---        |    :----   |
+| -s/--start start      | set the start for the range (integer).       |
+| -l/--last    | set the stop for the range (integer).        |
+| -d/--decimals | set the # of decimals in the output (non-negative integer). |
+
+Default Keymap: `<leader>rf`
+
+Configurations: 
 
 ## name
 
-Dummy Text
+`:Randiverse name <optional name flags>`
+
+Selects a random name. The default is a full name (first and last) unless flags are set.
+
+| Flag      | Description |
+| :---        |    :----   |
+| -f/--first      | return a random first name       |
+| -l/--last    | return a random last name        |
+
+Default Keymap: `<leader>rn`
 
 ## word
 
