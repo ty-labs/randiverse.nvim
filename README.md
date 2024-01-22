@@ -15,6 +15,39 @@ randiverse.nvim was built w/ minimal dependencies using standard Lua and Neovim:
 - [Neovim 0.8+](https://github.com/neovim/neovim/releases)
 - [Lua 5.1.5+]()
 
+# Installation📦
+
+Install randiverse.nvim using your favorite plugin manager, then call `require("randiverse").setup()`
+
+
+### [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+```lua
+{
+    "ty-labs/randiverse.nvim",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("randiverse").setup({
+            -- Custom configurations here, or leave empty to use defaults
+        })
+    end
+}
+```
+
+### [packer.nvim](https://github.com/wbthomason/packer.nvim)
+
+```lua
+use({
+    "ty-labs/randiverse.nvim",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("randiverse").setup({
+            -- Custom configuration here, or leave empty to use defaults
+        })
+    end
+})
+```
+
 # Usage💻
 
 ## The Basics
