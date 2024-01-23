@@ -67,8 +67,8 @@ Picks a random int from within a range. The default range is \[1-100\].
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-s/--start start` | Set the start for the range. <br/>Ex: '`-s 50`' would change the range to \[50-100\]. | Integer |
-| `-l/--stop stop` | Set the stop for the range. <br/>Ex: '`-S 70`' would change the range to \[0-70\]. | Integer |
+| `-s/--start start` | Set the start for the range. <br/>Example: '`-s 50`' would change the range to \[50-100\]. | Integer |
+| `-l/--stop stop` | Set the stop for the range. <br/>Example: '`-S 70`' would change the range to \[0-70\]. | Integer |
 
 Default Keymap: `<leader>ri`
 
@@ -95,9 +95,9 @@ Picks a random float from within a range. The default range is \[1-100\] w/ the 
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-s/--start start` | Set the start for the range. <br/>Ex: '`-s 50`' would change the range to \[50-100\]. | Integer |
-| `-l/--stop stop` | Set the stop for the range. <br/>Ex: '`-S 70`' would change the range to \[0-70\]. | Integer |
-| `-d/--decimals decimals` | Set the # of decimal places in the output. <br/>Ex: '`-d 4`' would change output to `xx.xxxx`. | Non-negative Integer |
+| `-s/--start start` | Set the start for the range. <br/>Example: '`-s 50`' would change the range to \[50-100\]. | Integer |
+| `-l/--stop stop` | Set the stop for the range. <br/>Example: '`-S 70`' would change the range to \[0-70\]. | Integer |
+| `-d/--decimals decimals` | Set the # of decimal places in the output. <br/>Example: '`-d 4`' would change output to `xx.xxxx`. | Non-negative Integer |
 
 Default Keymap: `<leader>rf`
 
@@ -125,8 +125,8 @@ Generates a random name. The default is a full name (first and last) unless flag
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-f/--first` | Return the first name component. <br/>Ex: '`-f` would toggle the output to include a first name (plus any other toggled components). | None |
-| `-l/--last` | Return the last name component. <br/>Ex: '`-l`' would toggle the output to include a last name (plus any other toggled components). | None |
+| `-f/--first` | Return the first name component. <br/>Example: '`-f` would toggle the output to include a first name (plus any other toggled components). | None |
+| `-l/--last` | Return the last name component. <br/>Example: '`-l`' would toggle the output to include a last name (plus any other toggled components). | None |
 
 Default Keymap: `<leader>rn`
 
@@ -165,7 +165,7 @@ Configurations:
 
 ## lorem
 
-Dummy Text
+Dummy TExamplet
 
 ## country
 
