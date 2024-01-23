@@ -474,7 +474,7 @@ Dummy Text
 
 IP                                                       *randiverse-usage-ip*
 
-`:Randiverse ip <optional hexcolor flags>`
+`:Randiverse ip <optional ip flags>`
 
 Generates a random ip. The default output is IPv4 and has capitalized
 hexadecimals.
@@ -482,8 +482,8 @@ hexadecimals.
   ---------------------------------------------------------------------------------
   Flag             Description                                  Value
   ---------------- -------------------------------------------- -------------------
-  -v/--version     Return the hexcolor with hexadecimals        ‘4’, ‘6’, ‘ipv4’,
-                   lowercase where applicable. Example: ‘-l’    ‘ipv6’
+  -v/--version     Return the hexcolor with hexadecimals        ‘4’ | ‘6’ | ‘ipv4’
+                   lowercase where applicable. Example: ‘-l’    | ‘ipv6’
                    would change output ‘#A4B16C’ —> ‘#a4b16c’.  
 
   -l/--lowercase   Return the ip with hexadecimals lowercase    None
@@ -501,7 +501,7 @@ Configurations:
 >lua
     {
         data: {
-            hexcolor: {} --None
+            ip: {} --None
         }
     }
 <
