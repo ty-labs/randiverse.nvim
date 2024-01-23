@@ -327,7 +327,7 @@ Generates a random ip. The default output is IPv4 and has capitalized hexadecima
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-v/--version enum` | Return the hexcolor with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`#A4B16C`' —> '`#a4b16c`'. | '4', '6', 'ipv4', 'ipv6' |
+| `-v/--version enum` | Set the ip version for the output. <br/>Example: '`-v ipv6`' would change output to '`XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX`' format, such as '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`'. | '4', '6', 'ipv4', 'ipv6' |
 | `-l/--lowercase` | Return the ip with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`' —> '`3d08:3a01:7856:ba7a:6f40:2073:d398:a5e8`'. | None |
 
 Default Keymap: `<leader>rI`
