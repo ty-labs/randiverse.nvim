@@ -67,8 +67,8 @@ Picks a random int from within a range. The default range is \[1-100\].
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-s/--start start` | Set the start for the range. Ex: `-s 50` would change the range to \[50-100\] | Integer |
-| `-l/--stop stop` | Set the stop for the range. Ex: `-S 70` would change the range to \[0-70\] | Integer |
+| `-s/--start start` | Set the start for the range. Ex: '`-s 50`' would change the range to \[50-100\]. | Integer |
+| `-l/--stop stop` | Set the stop for the range. Ex: '`-S 70`' would change the range to \[0-70\]. | Integer |
 
 Default Keymap: `<leader>ri`
 
@@ -91,19 +91,31 @@ Configurations:
 
 `:Randiverse float <optional float flags>`
 
-Picks a random float from within a range. The default range is \[1-100\] w/ the output having two decimals.
+Picks a random float from within a range. The default range is \[1-100\] w/ the output having two decimal places.
 
-| Flag | Description |
-| :--- |    :----    |
-| `-s/--start start` | Set the start for the range (integer). |
-| `-l/--stop stop` | Set the stop for the range (integer). |
-| `-d/--decimals` | Set the # of decimals in the output (non-negative integer). |
+| Flag | Description | Value |
+|:-----|:------------|:------|
+| `-s/--start start` | Set the start for the range. Ex: '`-s 50`' would change the range to \[50-100\]. | Integer |
+| `-l/--stop stop` | Set the stop for the range. Ex: '`-S 70`' would change the range to \[0-70\]. | Integer |
+| `-d/--decimals decimals` | Set the number of decimal places in the output. Ex: '`-d 4`' would change output to `xx.xxxx`. | Non-negative Integer |
 
 Default Keymap: `<leader>rf`
 
 **Insert Demo Video**
 
-Configurations: 
+Configurations:
+
+```lua
+{
+    data: {
+        int: {
+            default_start = <int>, --Configuration here, or leave empty to use default (1)
+            default_stop = <int>, --Configuration here, or leave empty to use default (100)
+            default_decimals = <int>, -- Configuration here, or leave empty to use default (2)
+        }
+    }
+}
+```
 
 ## name
 
