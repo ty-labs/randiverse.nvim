@@ -67,8 +67,8 @@ Picks a random int from within a range. The default range is \[1-100\].
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-s/--start start` | Set the start for the range. Ex: '`-s 50`' would change the range to \[50-100\]. | Integer |
-| `-l/--stop stop` | Set the stop for the range. Ex: '`-S 70`' would change the range to \[0-70\]. | Integer |
+| `-s/--start start` | Set the start for the range. <br/>Ex: '`-s 50`' would change the range to \[50-100\]. | Integer |
+| `-l/--stop stop` | Set the stop for the range. <br/>Ex: '`-S 70`' would change the range to \[0-70\]. | Integer |
 
 Default Keymap: `<leader>ri`
 
