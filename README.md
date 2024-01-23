@@ -121,7 +121,7 @@ Configurations:
 
 `:Randiverse name <optional name flags>`
 
-Generates a random name. The default is a full name (first and last) unless flags are set.
+Generates a random name. The default is a full name (first and last) unless flags are set. The random name is generated via random selection from a static first + last name corpus that Randiverse comes bundled with.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
@@ -149,7 +149,7 @@ Configurations:
 
 `:Randiverse word <optional word flags>`
 
-Generates a random word(s). The default number of returned random words is 1. The random words are generated via random selection from a corpus. Corpuses are configured in the '`data.word.corpuses`' map which maps (corpus name —> corpus relative path from the '`data.ROOT`'). By default, Randiverse comes bundled and configured with a 'short', 'medium', and 'long' corpuses available; 'medium' is the default corpus for random word generation.
+Generates a random word(s). The default number of returned random words is 1. The random words are generated via random selection from a corpus. Corpuses are configured in the `data.word.corpuses` map which maps (corpus name —> corpus relative path from the `data.ROOT`). By default, Randiverse comes bundled and configured with a 'short', 'medium', and 'long' corpuses available; 'medium' is the default corpus for random word generation.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
