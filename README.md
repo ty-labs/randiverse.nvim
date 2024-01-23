@@ -97,7 +97,7 @@ Picks a random float from within a range. The default range is \[1-100\] w/ the 
 |:-----|:------------|:------|
 | `-s/--start start` | Set the start for the range. Ex: '`-s 50`' would change the range to \[50-100\]. | Integer |
 | `-l/--stop stop` | Set the stop for the range. Ex: '`-S 70`' would change the range to \[0-70\]. | Integer |
-| `-d/--decimals decimals` | Set the number of decimal places in the output. Ex: '`-d 4`' would change output to `xx.xxxx`. | Non-negative Integer |
+| `-d/--decimals decimals` | Set the # of decimal places in the output. Ex: '`-d 4`' would change output to `xx.xxxx`. | Non-negative Integer |
 
 Default Keymap: `<leader>rf`
 
@@ -121,18 +121,29 @@ Configurations:
 
 `:Randiverse name <optional name flags>`
 
-Selects a random name. The default is a full name (first and last) unless flags are set.
+Generates a random name. The default is a full name (first and last) unless flags are set.
 
-| Flag      | Description |
-| :---        |    :----   |
-| -f/--first      | Return a random first name. |
-| -l/--last    | Return a random last name. |
+| Flag | Description | Value |
+|:-----|:------------|:------|
+| `-f/--first` | Return the first name component. Ex: '`-f` would toggle the output to include a first name (plus any other enabled components). | None |
+| `-l/--last` | Return the last name component. Ex: '`-l`' would toggle the output to include a last name (plus any other enabled components). | None |
 
 Default Keymap: `<leader>rn`
 
 **Insert Demo Video**
 
 Configurations:
+
+```lua
+{
+    data: {
+        name: {
+            FIRST = <file_path>, --Configuration here, or leave empty to use default (included 'names_first.txt')
+            LAST = <file_path>, --Configuration here, or leave empty to use default (included 'names_last.txt')
+        }
+    }
+}
+```
 
 ## word
 
