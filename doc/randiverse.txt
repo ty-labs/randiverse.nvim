@@ -1,4 +1,4 @@
-*randiverse.txt*          For NVIM v0.8.0         Last change: 2024 January 22
+*randiverse.txt*          For NVIM v0.8.0         Last change: 2024 January 23
 
 ==============================================================================
 Table of Contents                               *randiverse-table-of-contents*
@@ -118,10 +118,10 @@ INT                                                     *randiverse-usage-int*
 
 Picks a random int from within a range. The default range is 1-100.
 
-  Flag              Description
-  ----------------- ----------------------------------------
-  -s/–start start   Set the start for the range (integer).
-  -l/–stop stop     Set the stop for the range (integer).
+  Flag               Description
+  ------------------ ----------------------------------------
+  -s/--start start   Set the start for the range (integer).
+  -l/--stop stop     Set the stop for the range (integer).
 Default Keymap: `<leader>ri`
 
 **Insert Demo Video**
@@ -139,11 +139,11 @@ output having two decimals.
   -----------------------------------------------------------------------
   Flag                            Description
   ------------------------------- ---------------------------------------
-  -s/–start start                 Set the start for the range (integer).
+  -s/--start start                Set the start for the range (integer).
 
-  -l/–stop stop                   Set the stop for the range (integer).
+  -l/--stop stop                  Set the stop for the range (integer).
 
-  -d/–decimals                    Set the # of decimals in the output
+  -d/--decimals                   Set the # of decimals in the output
                                   (non-negative integer).
   -----------------------------------------------------------------------
 Default Keymap: `<leader>rf`
