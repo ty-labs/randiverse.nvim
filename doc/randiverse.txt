@@ -121,13 +121,13 @@ Picks a random int from within a range. The default range is [1-100].
   --------------------------------------------------------------------------
   Flag               Description                         Value
   ------------------ ----------------------------------- -------------------
-  -s/--start start   Set the start for the range. Ex:    Integer
-                     ‘-s 50’ would change the range to   
-                     [50-100].                           
+  -s/--start start   Set the start for the range.        Integer
+                     Example: ‘-s 50’ would change the   
+                     range to [50-100].                  
 
-  -l/--stop stop     Set the stop for the range. Ex:     Integer
-                     ‘-S 70’ would change the range to   
-                     [0-70].                             
+  -l/--stop stop     Set the stop for the range.         Integer
+                     Example: ‘-S 70’ would change the   
+                     range to [0-70].                    
   --------------------------------------------------------------------------
 Default Keymap: `<leader>ri`
 
@@ -157,17 +157,17 @@ output having two decimal places.
   --------------------------------------------------------------------------------
   Flag                     Description                         Value
   ------------------------ ----------------------------------- -------------------
-  -s/--start start         Set the start for the range. Ex:    Integer
-                           ‘-s 50’ would change the range to   
-                           [50-100].                           
+  -s/--start start         Set the start for the range.        Integer
+                           Example: ‘-s 50’ would change the   
+                           range to [50-100].                  
 
-  -l/--stop stop           Set the stop for the range. Ex:     Integer
-                           ‘-S 70’ would change the range to   
-                           [0-70].                             
+  -l/--stop stop           Set the stop for the range.         Integer
+                           Example: ‘-S 70’ would change the   
+                           range to [0-70].                    
 
   -d/--decimals decimals   Set the # of decimal places in the  Non-negative
-                           output. Ex: ‘-d 4’ would change     Integer
-                           output to xx.xxxx.                  
+                           output. Example: ‘-d 4’ would       Integer
+                           change output to xx.xxxx.           
   --------------------------------------------------------------------------------
 Default Keymap: `<leader>rf`
 
@@ -199,14 +199,15 @@ flags are set.
   Flag             Description                         Value
   ---------------- ----------------------------------- -------------------
   -f/--first       Return the first name component.    None
-                   Ex: ’-f would toggle the output to  
-                   include a first name (plus any      
-                   other toggled components).          
+                   Example: ’-f would toggle the       
+                   output to include a first name      
+                   (plus any other toggled             
+                   components).                        
 
-  -l/--last        Return the last name component. Ex: None
-                   ‘-l’ would toggle the output to     
-                   include a last name (plus any other 
-                   toggled components).                
+  -l/--last        Return the last name component.     None
+                   Example: ‘-l’ would toggle the      
+                   output to include a last name (plus 
+                   any other toggled components).      
   ------------------------------------------------------------------------
 Default Keymap: `<leader>rn`
 
@@ -256,7 +257,7 @@ Configurations:
 
 LOREM                                                 *randiverse-usage-lorem*
 
-Dummy Text
+Dummy TExamplet
 
 
 COUNTRY                                             *randiverse-usage-country*
