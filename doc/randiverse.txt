@@ -517,9 +517,11 @@ hexadecimals.
   ------------------------------------------------------------------------------------
   Flag                Description                                  Value
   ------------------- -------------------------------------------- -------------------
-  -v/--version enum   Return the hexcolor with hexadecimals        ‘4’, ‘6’, ‘ipv4’,
-                      lowercase where applicable. Example: ‘-l’    ‘ipv6’
-                      would change output ‘#A4B16C’ —> ‘#a4b16c’.  
+  -v/--version enum   Set the ip version for the output. Example:  ‘4’, ‘6’, ‘ipv4’,
+                      ‘-v ipv6’ would change output to             ‘ipv6’
+                      ‘XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX’    
+                      format, such as                              
+                      ‘3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8’.   
 
   -l/--lowercase      Return the ip with hexadecimals lowercase    None
                       where applicable. Example: ‘-l’ would change 
