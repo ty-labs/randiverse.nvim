@@ -1,6 +1,8 @@
 # randiverse.nvim💥
 
-Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the "Random Universe"—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode —> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode extension.
+Tired of raking your brain trying to generate 'random' text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the "Random Universe"—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode —> NVIM convert and inspired by the simple, albeit handy, "Random Everything" VScode [extension](https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything). It is both a port and an enhancement of the extensions feature set geared for the nvim enviroment.
+
+Disclaimer: I've had discussions w/ some people in the nvim community and am well aware that some of this could be done via Lua Snips or a similar snippet engine. However, for the more complex commands it was helpful to have my own library + I learned a lot about Lua + nvim by doing this.
 
 **Insert Demo Video Clip Here**
 
@@ -258,7 +260,7 @@ Generates a random datetime (or date or time). The default output is a datetime 
 |:-----|:------------|:------|
 | `-d/--date` | Return the date component. <br/>Example: '`-d` would toggle the output to include a random date (plus any other toggled components).  | None |
 | `-t/--time` | Return the time component. <br/>Example: '`-t` would toggle the output to include a random time (plus any other toggled components).  | None |
-| `-f/--format` | Set the output format for the datetime/date/time. <br/>Example: | String; Key in the corresponding '`data.datetime.formats.datetime/date/time`' map |
+| `-f/--format format` | Set the output format for the datetime/date/time. <br/>Example: | String; Key in the corresponding '`data.datetime.formats.datetime/date/time`' map |
 
 Default Keymap: `<leader>rd`
 
@@ -295,7 +297,27 @@ Dummy Text
 
 ## uuid
 
-Dummy Text
+`:Randiverse uuid <optional uuid flags>`
+
+Generates a random uuid (version 4). The default output has capitalized hexadecimals.
+
+| Flag | Description | Value |
+|:-----|:------------|:------|
+| `-l/--lowercase` | Return the uuid with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`18E75D7B-5BD8-4688-87B1-3D51EF560E19`' —> '`18e75d7b-5bd8-4688-87b1-3d51ef560e19`'. | None |
+
+Default Keymap: `<leader>rU`
+
+**Insert Demo Video**
+
+Configurations:
+
+```lua
+{
+    data: {
+        uuid: {} --None
+    }
+}
+```
 
 ## ip
 
@@ -305,7 +327,7 @@ Generates a random ip. The default output is IPv4 and has capitalized hexadecima
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-v/--version` | Return the hexcolor with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`#A4B16C`' —> '`#a4b16c`'. | '4' \| '6' \| 'ipv4' \| 'ipv6' |
+| `-v/--version enum` | Return the hexcolor with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`#A4B16C`' —> '`#a4b16c`'. | '4', '6', 'ipv4', 'ipv6' |
 | `-l/--lowercase` | Return the ip with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`' —> '`3d08:3a01:7856:ba7a:6f40:2073:d398:a5e8`'. | None |
 
 Default Keymap: `<leader>rI`
@@ -348,11 +370,13 @@ Configurations:
 
 # Configuration🏗️
 
-Dummy Text
+All but the simplest commands have configurations to affect their base behavior as well as customize it to your own needs.
+
+Additionally, each of the keymaps have changeable behavior and keymaps to whatever you desire (default is there).
 
 # Contributing✍️
 
-I've included what I hope is a decent starter + decent defaults; however, I'm always looking for new random text commands + new flags/enhancements that people think are useful. Feel free to mark and issue on the project or try handling it yourself! Thanks!
+I've included what I hope is a decent starter + reasonable defaults (ported over pretty much everything from 'Random Everything' and then some); however, I'm always looking for new random text commands + new flags/enhancements that people think are useful. Feel free to mark and issue on the project or try handling it yourself! Thanks!
 
 # Shoutouts📢
 
