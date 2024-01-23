@@ -149,19 +149,33 @@ Configurations:
 
 `:Randiverse word <optional word flags>`
 
-Selects a random word(s) from a corpus. The default # of words is 1 and the default corpus is the 'medium' word corpus bundled in the plugin (short, medium, long).
+Generates a random word(s). The default number of returned random words is 1. The random words are generated via random selection from a corpus. Corpuses are configured in the '`data.word.corpuses`' map which maps (corpus name —> corpus relative path from the '`data.ROOT`'). By default, Randiverse comes bundled and configured with a 'short', 'medium', and 'long' corpuses available; 'medium' is the default corpus for random word generation.
 
-| Flag      | Description |
-| :---        |    :----   |
-| -a/--all      | use all the provided corpuses when selecting a random word       |
-| -c/--corpus corpus   | specify a corpus to select random word from (string). default includes short, medium, long       |
-| -l/--length length  | set the # of words to return (separated by " "). The default is 1       |
+| Flag | Description | Value |
+|:-----|:------------|:------|
+| `-a/--all`| Use all of the configured corpuses to select a random word. <br/>Example: '`-a`' would toggle output s.t. `<word>` could be from 'short', 'medium', or 'long' corpus. | None |
+| `-c/--corpus corpus`   | Set the corpus from configured corpuses to select random word from. <br/>Example: '`-c long`' would change output `<word>` to be from 'long' corpus. | String; Key in '`data.word.corpuses`' map. |
+| `-l/--length length`  | Set the # of words to return (separated by spaces). <br/>Example: '`-l 3`' would change output to `<word> <word> <word>` where words are from the default corpus. | Positive Integer |
 
 Default Keymap: `<leader>rn`
 
 **Insert Demo Video**
 
 Configurations:
+
+```lua
+{
+    data: {
+        word: {
+            corpuses = {
+                -- Configuration here, or leave empty to use default
+            },
+            default_corpus = <key_in_corpuses>, --Configuration here, or leave empty to use default (included 'medium')
+            default_length = <int>, --Configuration here, or leave empty to use default (1)
+        }
+    }
+}
+```
 
 ## lorem
 
