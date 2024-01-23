@@ -65,10 +65,10 @@ Command flags can either be short or long hand but are inputted as `flag value` 
 
 Picks a random int from within a range. The default range is \[1-100\].
 
-| Flag | Description |
-|:-----|:------------|
-| `-s/--start start` | Set the start for the range (integer). Ex: `-s 50` would change the range to be \[50-100\] |
-| `-l/--stop stop` | Set the stop for the range (integer) |
+| Flag | Description | Value |
+|:-----|:------------|:------|
+| `-s/--start start` | Set the start for the range. Ex: `-s 50` would change the range to be \[50-100\] | Integer |
+| `-l/--stop stop` | Set the stop for the range. | Integer |
 
 Default Keymap: `<leader>ri`
 
