@@ -122,10 +122,12 @@ Picks a random int from within a range. The default range is [1-100].
   Flag               Description                         Value
   ------------------ ----------------------------------- -------------------
   -s/--start start   Set the start for the range. Ex:    Integer
-                     -s 50 would change the range to be  
+                     -s 50 would change the range to     
                      [50-100]                            
 
-  -l/--stop stop     Set the stop for the range.         Integer
+  -l/--stop stop     Set the stop for the range. Ex:     Integer
+                     -S 70 would change the range to     
+                     [0-70]                              
   --------------------------------------------------------------------------
 Default Keymap: `<leader>ri`
 
@@ -133,12 +135,23 @@ Default Keymap: `<leader>ri`
 
 Configurations:
 
+>lua
+    {
+        data: {
+            int: {
+                default_start = <int>, --Configuration here, or leave empty to use default (1)
+                default_stop = <int>, --Configuration here, or leave empty to use default (100)
+            }
+        }
+    }
+<
+
 
 FLOAT                                                 *randiverse-usage-float*
 
 `:Randiverse float <optional float flags>`
 
-Picks a random float from within a range. The default range is 1-100 w/ the
+Picks a random float from within a range. The default range is [1-100] w/ the
 output having two decimals.
 
   -----------------------------------------------------------------------
