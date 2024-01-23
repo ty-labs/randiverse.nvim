@@ -34,8 +34,8 @@ text for a variety of scenarios including ints, floats, names, dates, lorem
 ipsum, emails, and more! Created by a recent VScode —> NVIM convert and
 inspired by the simple, albeit handy, "Random Everything" VScode extension
 <https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything>.
-It is both a port and an enhancement of the extensions feature set geared for
-the nvim enviroment.
+It is both a port and an enhancement of the extension’s feature set geared
+for the nvim enviroment.
 
 Disclaimer: I’ve had discussions w/ some people in the nvim community and am
 well aware that some of this could be done via Lua Snips or a similar snippet
