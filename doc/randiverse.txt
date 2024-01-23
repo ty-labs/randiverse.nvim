@@ -202,14 +202,15 @@ configurable.
   ---------------- ----------------------------------- -------------------
   -f/--first       Return the first name component.    None
                    Example: ’-f would toggle the       
-                   output to include a first name      
-                   (plus any other toggled             
+                   output to include a random first    
+                   name (plus any other toggled        
                    components).                        
 
   -l/--last        Return the last name component.     None
                    Example: ‘-l’ would toggle the      
-                   output to include a last name (plus 
-                   any other toggled components).      
+                   output to include a random last     
+                   name (plus any other toggled        
+                   components).                        
   ------------------------------------------------------------------------
 Default Keymap: `<leader>rn`
 
@@ -364,12 +365,96 @@ Configurations:
 
 COUNTRY                                             *randiverse-usage-country*
 
-Dummy Text
+`:Randiverse country <optional country flags>`
+
+Generates a random country. The default output is a standard country name. The
+random country is generated via random selection from static country corpuseses
+that Randiverse comes bundled with & are configurable.
+
+  ------------------------------------------------------------------------
+  Flag             Description                         Value
+  ---------------- ----------------------------------- -------------------
+  -c/--code enum   Set the code format for the         ‘2’, ‘3’,
+                   returned country. Example:          ‘alpha-2’,
+                   ’-c alpha-2 would change the output ‘alpha-3’
+                   to return a country in AA format,   
+                   such as US.                         
+
+  -n/--numeric     Return the country in numeric       None
+                   format. Example: ‘-n’ would toggle  
+                   the output to return a country in   
+                   XXX format, such as 120.            
+  ------------------------------------------------------------------------
+Default Keymap: `<leader>rn`
+
+**Insert Demo Video**
+
+Configurations:
+
+>lua
+    {
+        data: {
+            country: {
+                COUNTRIES = <file_path>, --Configuration here, or leave empty to use default ('countries.txt'; path relative from `data.ROOT`)
+                ALPHA2 = <file_path>, --Configuration here, or leave empty to use default ('countries_alpha2.txt'; path relative from `data.ROOT`)
+                ALPHA3 = <file_path>, --Configuration here, or leave empty to use default ('countries_alpha3.txt'; path relative from `data.ROOT`)
+                NUMERIC = <file_path>, --Configuration here, or leave empty to use default ('countries_numeric.txt'; path relative from `data.ROOT`)
+            }
+        }
+    }
+<
 
 
 DATETIME                                           *randiverse-usage-datetime*
 
-Dummy Text
+`:Randiverse country <optional country flags>`
+
+Generates a random datetime (or date or time). The default output is a datetime
+in the past 10 years. The random country is generated via random selection from
+static country corpuseses that Randiverse comes bundled with & are
+configurable.
+
+  -------------------------------------------------------------------------------------------------
+  Flag             Description                         Value
+  ---------------- ----------------------------------- --------------------------------------------
+  -d/--date        Return the date component. Example: None
+                   ’-d would toggle the output to      
+                   include a random date (plus any     
+                   other toggled components).          
+
+  -t/--time        Return the time component. Example: None
+                   ’-t would toggle the output to      
+                   include a random time (plus any     
+                   other toggled components).          
+
+  -f/--format      Set the output format for the       String; Key in the corresponding
+                   datetime/date/time. Example:        ‘data.datetime.formats.datetime/date/time’
+                                                       map
+  -------------------------------------------------------------------------------------------------
+Default Keymap: `<leader>rd`
+
+**Insert Demo Video**
+
+Configurations:
+
+>lua
+    {
+        data: {
+            datetime: {
+                formats: {
+                    datetime = {},
+                    date = {},
+                    time = {},
+                },
+                default_formats = {
+                    datetime = "",
+                    date = "",
+                    time = "",
+                },
+            }
+        }
+    }
+<
 
 
 EMAIL                                                 *randiverse-usage-email*
@@ -389,12 +474,68 @@ Dummy Text
 
 IP                                                       *randiverse-usage-ip*
 
-Dummy Text
+`:Randiverse ip <optional hexcolor flags>`
+
+Generates a random ip. The default output is IPv4 and has capitalized
+hexadecimals.
+
+  ---------------------------------------------------------------------------------
+  Flag             Description                                  Value
+  ---------------- -------------------------------------------- -------------------
+  -v/--version     Return the hexcolor with hexadecimals        ‘4’, ‘6’, ‘ipv4’,
+                   lowercase where applicable. Example: ‘-l’    ‘ipv6’
+                   would change output ‘#A4B16C’ —> ‘#a4b16c’.  
+
+  -l/--lowercase   Return the ip with hexadecimals lowercase    None
+                   where applicable. Example: ‘-l’ would change 
+                   output                                       
+                   ‘3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8’ —> 
+                   ‘3d08:3a01:7856:ba7a:6f40:2073:d398:a5e8’.   
+  ---------------------------------------------------------------------------------
+Default Keymap: `<leader>rI`
+
+**Insert Demo Video**
+
+Configurations:
+
+>lua
+    {
+        data: {
+            hexcolor: {} --None
+        }
+    }
+<
 
 
 HEXCOLOR                                           *randiverse-usage-hexcolor*
 
-Dummy Text
+`:Randiverse hexcolor <optional hexcolor flags>`
+
+Generates a random hexcolor. The default output has capitalized hexadecimals.
+
+  ------------------------------------------------------------------------
+  Flag             Description                         Value
+  ---------------- ----------------------------------- -------------------
+  -l/--lowercase   Return the hexcolor with            None
+                   hexadecimals lowercase where        
+                   applicable. Example: ‘-l’ would     
+                   change output ‘#A4B16C’ —>          
+                   ‘#a4b16c’.                          
+
+  ------------------------------------------------------------------------
+Default Keymap: `<leader>rh`
+
+**Insert Demo Video**
+
+Configurations:
+
+>lua
+    {
+        data: {
+            hexcolor: {} --None
+        }
+    }
+<
 
 
 ==============================================================================
@@ -406,8 +547,10 @@ Dummy Text
 ==============================================================================
 6. Contributing                                      *randiverse-contributing*
 
-I’m always looking for new random text commands to add as well as more flags
-and enhancements. Feel free to mark an issue or try handling it yourself!
+I’ve included what I hope is a decent starter + decent defaults; however,
+I’m always looking for new random text commands + new flags/enhancements that
+people think are useful. Feel free to mark and issue on the project or try
+handling it yourself! Thanks!
 
 
 ==============================================================================
