@@ -12,10 +12,9 @@ License: [MIT License](https://github.com/ty-labs/randiverse.nvim/blob/main/LICE
 
 # Requirements🔒
 
-randiverse.nvim was built w/ minimal dependencies using standard Lua and Neovim:
+randiverse.nvim was built w/ minimal dependencies using just Neovim and the standard Lua it ships with!
 
 - [Neovim 0.8+](https://github.com/neovim/neovim/releases)
-- [Lua 5.1.5+]()
 
 # Installation📦
 
