@@ -172,7 +172,7 @@ Configurations:
         word: {
             corpuses = {
                 <corpus_name>: <file_path>, -- Configuration here, or leave empty to use default
-                ...
+                ... (more corpus —> file_path mappings) ...
             },
             default_corpus = <key_in_corpuses>, --Configuration here, or leave empty to use default: 'medium'; key in `data.word.corpuses`
             default_length = <int>, --Configuration here, or leave empty to use default: 1
@@ -300,11 +300,11 @@ Dummy Text
 
 `:Randiverse uuid <optional uuid flags>`
 
-Generates a random uuid (version 4). The default output has capitalized hexadecimals.
+Generates a random uuid. The default output has uppercase hexadecimals and is UUIDv4.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-l/--lowercase` | Return the uuid with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`18E75D7B-5BD8-4688-87B1-3D51EF560E19`' —> '`18e75d7b-5bd8-4688-87b1-3d51ef560e19`'. | None |
+| `-l/--lowercase` | Return the output with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`18E75D7B-5BD8-4688-87B1-3D51EF560E19`' —> '`18e75d7b-5bd8-4688-87b1-3d51ef560e19`'. | None |
 
 Default Keymap: `<leader>rU`
 
@@ -324,12 +324,12 @@ Configurations:
 
 `:Randiverse ip <optional ip flags>`
 
-Generates a random ip. The default output is IPv4 and has capitalized hexadecimals.
+Generates a random ip. The default output is IPv4 standard and has uppercase hexadecimals.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
 | `-v/--version enum` | Set the ip version for the output. <br/>Example: '`-v ipv6`' would change output to '`XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX`' format, such as '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`'. | '4', '6', 'ipv4', 'ipv6' |
-| `-l/--lowercase` | Return the ip with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`' —> '`3d08:3a01:7856:ba7a:6f40:2073:d398:a5e8`'. | None |
+| `-l/--lowercase` | Return the output with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change IPv6 output '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`' —> '`3d08:3a01:7856:ba7a:6f40:2073:d398:a5e8`'. | None |
 
 Default Keymap: `<leader>rI`
 
@@ -349,11 +349,11 @@ Configurations:
 
 `:Randiverse hexcolor <optional hexcolor flags>`
 
-Generates a random hexcolor. The default output has capitalized hexadecimals.
+Generates a random hexcolor. The default output has uppercase hexadecimals and the format `#HHHHHH`.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-l/--lowercase` | Return the hexcolor with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`#A4B16C`' —> '`#a4b16c`'. | None |
+| `-l/--lowercase` | Return the output with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change output '`#A4B16C`' —> '`#a4b16c`'. | None |
 
 Default Keymap: `<leader>rh`
 
@@ -371,9 +371,23 @@ Configurations:
 
 # Configuration🏗️
 
-All but the simplest commands have configurations to affect their base behavior as well as customize it to your own needs.
+Configurations can be used to change the base functionality of the command generators as well as customize which corpuses (bodies of text) are used for random text creation. Additionally, configurations enable/disable keymaps and can change what each commands keymap, command, and description is to whatever is desired.
 
 Additionally, each of the keymaps have changeable behavior and keymaps to whatever you desire (default is there).
+
+Below are the randiverse.nvim configurations and their default values w/ explanations:
+
+```lua
+{
+}
+```
+
+To configure randiverse.nvim, simply pass in a map to the setup function containing ONLY the default configuration values that you wish to override. For example, lets override the keymap for name command to return a first name on keymap press and also override the xyz: 
+
+```lua
+{
+}
+```
 
 # Contributing✍️
 
