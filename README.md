@@ -1,6 +1,6 @@
 # randiverse.nvim💥
 
-Tired of raking your brain trying to generate "random" text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the 'Random Universe'—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode —> NVIM convert and inspired by the simple, albeit handy, VScode extension called ["Random Everything"]extension(https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything). It is both a port and an enhancement of the extension's feature set, tailored for the nvim environment.
+Tired of raking your brain trying to generate "random" text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the 'Random Universe'—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode —> NVIM convert and inspired by the simple, albeit handy, VScode extension called ["Random Everything"](https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything). It is both a port and an enhancement of the extension's feature set, tailored for the nvim environment.
 
 Disclaimer: I've had discussions w/ some people in the nvim community and am well aware that some of this could be done via Lua Snips or a similar snippet engine. However, for the more complex commands it was helpful to have my own library + I learned a lot about Lua + nvim by doing this.
 
@@ -12,13 +12,13 @@ License: [MIT License](https://github.com/ty-labs/randiverse.nvim/blob/main/LICE
 
 # Requirements🔒
 
-randiverse.nvim was built w/ zero dependencies outside of an Neovim installation:
+randiverse.nvim is built w/ zero dependencies outside of an Neovim installation:
 
 - [Neovim 0.8+](https://github.com/neovim/neovim/releases)
 
 # Installation📦
 
-Install randiverse.nvim using your favorite plugin manager, then call `require("randiverse").setup()`:
+randiverse.nvim can be installed using your favorite plugin manager, then call `require("randiverse").setup()`:
 
 ### [lazy.nvim](https://github.com/folke/lazy.nvim)
 
@@ -52,13 +52,15 @@ use({
 
 ## The Basics
 
-Generally, the plugin functionality is accessed via the registered editor command 'Randiverse'. The editor command 'Randiverse' also requires a command (int, float, name, etc.) with possible command flags which tell Randiverse what random text to generate. Note that both 'Randiverse' and its commands have auto-completion as demonstrated below. The Randiverse access pattern will look like the following:
+The general access pattern for Randiverse functionality looks like the following:
 
-`:Randiverse <command> <optional command flags>`
+`:Randiverse <Randiverse Command> <Optional Randiverse Command Flags>`
+
+First, the plugin functionality is accessed through the over-arching editor command 'Randiverse'. Second, the editor command requires a 'Randiverse command': this command tells Randiverse which type of random text to generate and is how Randiverse functionality is logically separated (int, float, name, lorem, etc.). Lastly, optional Randiverse command flags are passed which customize the behavior of the random text generator. Command flags can either be short or long hand (`-d`/`--dummy-flag`) but flags that require a value must be inputted as `flag value` NOT `flag=value`. Flag details are listed under each command's help doc. Note that auto-completion for commands is available.
+
+Each Randiverse command also comes with a default registered keymap that is prefixed by `<leader>r...` and executes the default random text generator. Ex: `:Randiverse int` —> `<leader>ri`. These keymaps and their execution values can be configured + disabled.
 
 **Insert Demo Video (opening and auto-completion features...)**
-
-Command flags can either be short or long hand but are inputted as `flag value` NOT `flag=value` or simply boolean flag. Each Randiverse command also comes with a default keymap that is prefixed by `<leader>r...` and maps to the default random text generation for the command. 
 
 ## int
 
@@ -68,8 +70,8 @@ Picks a random int from within a range. The default range is \[1-100\].
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-s/--start start` | Set the start for the range. <br/>Example: '`-s 50`' would change the range to \[50-100\]. | Integer |
-| `-l/--stop stop` | Set the stop for the range. <br/>Example: '`-S 70`' would change the range to \[0-70\]. | Integer |
+| `-s/--start start` | Set the start for the range. <br/>Example: '`-s 50`' would change the range to \[50-100\] where 100 is the default stop. | Integer |
+| `-l/--stop stop` | Set the stop for the range. <br/>Example: '`-S 50`' would change the range to \[0-50\] where 0 is the default start. | Integer |
 
 Default Keymap: `<leader>ri`
 
@@ -81,8 +83,8 @@ Configurations:
 {
     data: {
         int: {
-            default_start = <int>, --Configuration here, or leave empty to use default (1)
-            default_stop = <int>, --Configuration here, or leave empty to use default (100)
+            default_start = <int>, --Configuration here, or leave empty to use default: 1
+            default_stop = <int>, --Configuration here, or leave empty to use default: 100
         }
     }
 }
@@ -92,12 +94,12 @@ Configurations:
 
 `:Randiverse float <optional float flags>`
 
-Picks a random float from within a range. The default range is \[1-100\] w/ the output having two decimal places.
+Picks a random float from within a range. The default range is \[1-100\] with the output having two decimal places.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-s/--start start` | Set the start for the range. <br/>Example: '`-s 50`' would change the range to \[50-100\]. | Integer |
-| `-l/--stop stop` | Set the stop for the range. <br/>Example: '`-S 70`' would change the range to \[0-70\]. | Integer |
+| `-s/--start start` | Set the start for the range. <br/>Example: '`-s 50`' would change the range to \[50-100\] where 100 is the default stop. | Integer |
+| `-l/--stop stop` | Set the stop for the range. <br/>Example: '`-S 50`' would change the range to \[0-50\] where 0 is the default start. | Integer |
 | `-d/--decimals decimals` | Set the # of decimal places in the output. <br/>Example: '`-d 4`' would change output to `xx.xxxx`. | Non-negative Integer |
 
 Default Keymap: `<leader>rf`
@@ -110,9 +112,9 @@ Configurations:
 {
     data: {
         int: {
-            default_start = <int>, --Configuration here, or leave empty to use default (1)
-            default_stop = <int>, --Configuration here, or leave empty to use default (100)
-            default_decimals = <int>, -- Configuration here, or leave empty to use default (2)
+            default_start = <int>, --Configuration here, or leave empty to use default: 1
+            default_stop = <int>, --Configuration here, or leave empty to use default: 100
+            default_decimals = <int>, -- Configuration here, or leave empty to use default: 2
         }
     }
 }
@@ -122,7 +124,7 @@ Configurations:
 
 `:Randiverse name <optional name flags>`
 
-Generates a random name. The default is a full name (first and last) unless flags are set. The random name is generated via random selection from a static first + last name corpuses that Randiverse comes bundled with & are configurable.
+Generates a random name. The default is a full name (first and last) unless flags are set. The random name is created via random selection from static first + last name corpuses that Randiverse comes bundled with & are configurable.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
@@ -139,8 +141,8 @@ Configurations:
 {
     data: {
         name: {
-            FIRST = <file_path>, --Configuration here, or leave empty to use default ('names_first.txt'; path relative from `data.ROOT`)
-            LAST = <file_path>, --Configuration here, or leave empty to use default (included 'names_last.txt'; path relative from `data.ROOT`)
+            FIRST = <file_path>, --Configuration here, or leave empty to use default: 'names_first.txt'; path relative from `data.ROOT`
+            LAST = <file_path>,  --Configuration here, or leave empty to use default: 'names_last.txt'; path relative from `data.ROOT`
         }
     }
 }
@@ -150,11 +152,11 @@ Configurations:
 
 `:Randiverse word <optional word flags>`
 
-Generates a random word(s). The default number of returned random words is 1. The random words are generated via random selection from a corpus. Corpuses are configured in the `data.word.corpuses` map which maps: corpus name —> corpus relative path from the `data.ROOT`. By default, Randiverse comes bundled and configured with a 'short', 'medium', and 'long' corpuses available; 'medium' is the default corpus for random word generation.
+Generates a random word(s). The default number of returned random words is 1. The random word(s) are created via random selection from a corpus. Corpuses are configured in the dynamic `data.word.corpuses` map which maps: corpus name —> corpus relative file path from `data.ROOT`. By default, Randiverse comes bundled with  'short', 'medium', and 'long' corpuses available; 'medium' is the default corpus for random word generation.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-a/--all`| Use all of the configured corpuses to select a random word. <br/>Example: '`-a`' would toggle output s.t. `<word>` could be from 'short', 'medium', or 'long' corpus. | None |
+| `-a/--all`| Use all of the configured word corpuses to select a random word. <br/>Example: '`-a`' would toggle output s.t. `<word>` could be from 'short', 'medium', or 'long' corpus. | None |
 | `-c/--corpus corpus` | Set the corpus from configured corpuses to select random word from. <br/>Example: '`-c long`' would change output `<word>` to be from 'long' corpus. | String; Key in '`data.word.corpuses`' map |
 | `-l/--length length` | Set the # of words to return (separated by spaces). <br/>Example: '`-l 3`' would change output to `<word> <word> <word>` where words are from the 'medium' (default) corpus. | Positive Integer |
 
@@ -172,8 +174,8 @@ Configurations:
                 <corpus_name>: <file_path>, -- Configuration here, or leave empty to use default
                 ...
             },
-            default_corpus = <key_in_corpuses>, --Configuration here, or leave empty to use default (included 'medium')
-            default_length = <int>, --Configuration here, or leave empty to use default (1)
+            default_corpus = <key_in_corpuses>, --Configuration here, or leave empty to use default: 'medium'; key in `data.word.corpuses`
+            default_length = <int>, --Configuration here, or leave empty to use default: 1
         }
     }
 }
