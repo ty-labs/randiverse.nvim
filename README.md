@@ -12,13 +12,13 @@ License: [MIT License](https://github.com/ty-labs/randiverse.nvim/blob/main/LICE
 
 # Requirements🔒
 
-randiverse.nvim was built w/ minimal dependencies using just Neovim and the standard Lua it ships with!
+randiverse.nvim was built w/ zero dependencies outside of an Neovim installation:
 
 - [Neovim 0.8+](https://github.com/neovim/neovim/releases)
 
 # Installation📦
 
-Install randiverse.nvim using your favorite plugin manager, then call `require("randiverse").setup()`
+Install randiverse.nvim using your favorite plugin manager, then call `require("randiverse").setup()`:
 
 ### [lazy.nvim](https://github.com/folke/lazy.nvim)
 
