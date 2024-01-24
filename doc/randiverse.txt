@@ -1,4 +1,4 @@
-*randiverse.txt*          For NVIM v0.8.0         Last change: 2024 January 23
+*randiverse.txt*          For NVIM v0.8.0         Last change: 2024 January 24
 
 ==============================================================================
 Table of Contents                               *randiverse-table-of-contents*
@@ -7,7 +7,7 @@ Table of Contents                               *randiverse-table-of-contents*
 2. Requirements                                      |randiverse-requirements|
 3. Installation                                      |randiverse-installation|
 4. Usage                                                    |randiverse-usage|
-  - The Basics                                   |randiverse-usage-the-basics|
+  - TheBasics                                     |randiverse-usage-thebasics|
   - int                                                 |randiverse-usage-int|
   - float                                             |randiverse-usage-float|
   - name                                               |randiverse-usage-name|
@@ -53,8 +53,8 @@ License: MIT License
 ==============================================================================
 2. Requirements                                      *randiverse-requirements*
 
-randiverse.nvim was built w/ minimal dependencies using just Neovim and the
-standard Lua it ships with!
+randiverse.nvim was built w/ zero dependencies outside of an Neovim
+installation:
 
 - Neovim 0.8+ <https://github.com/neovim/neovim/releases>
 
@@ -100,7 +100,7 @@ PACKER.NVIM ~
 4. Usage                                                    *randiverse-usage*
 
 
-THE BASICS                                       *randiverse-usage-the-basics*
+THEBASICS                                         *randiverse-usage-thebasics*
 
 Generally, the plugin functionality is accessed via the registered editor
 command 'Randiverse'. The editor command 'Randiverse' also requires a command
