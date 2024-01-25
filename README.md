@@ -12,7 +12,7 @@ License: [MIT License](https://github.com/ty-labs/randiverse.nvim/blob/main/LICE
 
 # Requirements🔒
 
-randiverse.nvim is built w/ zero dependencies outside of an Neovim installation:
+randiverse.nvim is built w/ zero dependencies outside of the default Neovim installation:
 
 - [Neovim 0.8+](https://github.com/neovim/neovim/releases)
 
