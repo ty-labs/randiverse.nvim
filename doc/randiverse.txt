@@ -1,4 +1,4 @@
-*randiverse.txt*          For NVIM v0.8.0         Last change: 2024 January 24
+*randiverse.txt*          For NVIM v0.8.0         Last change: 2024 January 25
 
 ==============================================================================
 Table of Contents                               *randiverse-table-of-contents*
@@ -7,7 +7,7 @@ Table of Contents                               *randiverse-table-of-contents*
 2. Requirements                                      |randiverse-requirements|
 3. Installation                                      |randiverse-installation|
 4. Usage                                                    |randiverse-usage|
-  - TheBasics                                     |randiverse-usage-thebasics|
+  - Basics                                           |randiverse-usage-basics|
   - int                                                 |randiverse-usage-int|
   - float                                             |randiverse-usage-float|
   - name                                               |randiverse-usage-name|
@@ -101,9 +101,9 @@ PACKER.NVIM ~
 4. Usage                                                    *randiverse-usage*
 
 
-THEBASICS                                         *randiverse-usage-thebasics*
+BASICS                                               *randiverse-usage-basics*
 
-The general access pattern for Randiverse functionality looks like the
+Thegeneral access pattern for Randiverse functionality looks like the
 following:
 
 `:Randiverse <Randiverse Command> <Optional Randiverse Command Flags>`
