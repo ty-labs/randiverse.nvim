@@ -30,8 +30,8 @@ Table of Contents                               *randiverse-table-of-contents*
 Tired of raking your brain trying to generate "random" text for sample/test
 cases (and secretly leaking your life details)?? Randiverse—the 'Random
 Universe'—is a flexible, configurable nvim plugin that can generate random
-text for a variety of scenarios including ints, floats, names, dates, lorem
-ipsum, emails, and more! Created by a recent VScode —> NVIM convert and
+text for a variety of scenarios including ints, floats, names, lorem ipsum,
+dates, emails, and more! Created by a recent VScode —> NVIM convert and
 inspired by the simple, albeit handy, VScode extension called "Random
 Everything". It is both a port and an enhancement of the extension’s feature
 set, tailored for the nvim environment.
