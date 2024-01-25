@@ -392,9 +392,9 @@ that Randiverse comes bundled with & are configurable.
   ------------------------------------------------------------------------
   Flag             Description                         Value
   ---------------- ----------------------------------- -------------------
-  -c/--code enum   Set the code format for the         ‘2’, ‘3’,
-                   returned country. Example:          ‘alpha-2’,
-                   ’-c alpha-2 would change the output ‘alpha-3’
+  -c/--code enum   Set the code format for the         2, 3, alpha-2,
+                   returned country. Example:          alpha-3
+                   ’-c alpha-2 would change the output 
                    to return a country in AA format,   
                    such as US.                         
 
@@ -527,8 +527,8 @@ hexadecimals.
   ------------------------------------------------------------------------------------
   Flag                Description                                  Value
   ------------------- -------------------------------------------- -------------------
-  -v/--version enum   Set the ip version for the output. Example:  ‘4’, ‘6’, ‘ipv4’,
-                      ‘-v ipv6’ would change output to             ‘ipv6’
+  -v/--version enum   Set the ip version for the output. Example:  4, 6, ipv4, ipv6
+                      ‘-v ipv6’ would change output to             
                       ‘XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX’    
                       format, such as                              
                       ‘3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8’.   
