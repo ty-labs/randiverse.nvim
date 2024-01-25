@@ -5,7 +5,7 @@ local M = {}
 
 local flag_mappings = {
     a = "all",
-    c = "corpus", -- TODO: How to pass MULTIPLE corpuses through an arg?
+    c = "corpus",
     C = "comma-property",
     l = "length",
     s = "sentence-length",
@@ -141,9 +141,6 @@ local function generate_lorem(flags)
     return table.concat(lorem_table, " ")
 end
 
--- TODO: Flag -p/--paragraphs to enable # of paragraphs in output text (separated by \n\n)
--- TODO: Flag to DISABLE prefixing of "Lorem ipsum" to the text
--- TODO: Issue if less than 3 input!
 M.normal_random_lorem = function(args)
     local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)

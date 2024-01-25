@@ -88,7 +88,7 @@ M.normal_random_url = function(args)
         random_url = random_url .. "/" .. table.concat(paths, "/")
     end
 
-    local query_params = {} -- TODO: Better query params options!
+    local query_params = {}
     local param_corpus = config.user_opts.data.ROOT
         .. config.user_opts.data.word.corpuses[config.user_opts.data.url.default_param_corpus]
     local value_corpus = config.user_opts.data.ROOT

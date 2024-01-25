@@ -345,7 +345,6 @@ M.set_keymaps = function()
     })
 end
 
--- TODO: Validate config inputs? (Files are readable, Defaults not nil + readable, Commands, etc.)
 M.setup = function(user_opts)
     -- 1st overwrite default options w/ potential user-defined if exist
     M.user_opts = vim.tbl_deep_extend("force", M.default_opts, user_opts or {})

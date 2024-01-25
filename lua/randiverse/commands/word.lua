@@ -44,10 +44,6 @@ local expected_flags = {
     end,
 }
 
--- TODO: Validate the word corpuses to ensure it is in the English dictionary and not a name!
--- TODO: Add a means to pass multiple corpuses into word for selection (Ex: Med + Long corpuses -- probably space separated after -c flag)
--- TODO: Flag that specifies the start letter for the word! (-s [--sort])
--- TODO: Flag -p/--paragraphs to enable # of paragraphs in output text (separated by \n\n)
 M.normal_random_word = function(args)
     local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)

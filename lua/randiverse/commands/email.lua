@@ -60,7 +60,7 @@ local generate_username = function(flags)
     local last_name = utils.read_random_line(config.user_opts.data.ROOT .. config.user_opts.data.name.LAST)
 
     local username_components = {}
-    if math.random() < 0.7 then -- TODO: Perhaps people might want to configure this setting
+    if math.random() < 0.7 then
         table.insert(username_components, first_name)
         table.insert(username_components, last_name)
     else

@@ -15,7 +15,6 @@ M.parse_command_flags = function(args, flag_mappings)
 
         local mapped_flag = flag_mappings[flag] or flag
         if i <= #args and not args[i]:match("^%-%-?(%a+[%a%-]*)$") then
-            -- TODO: i wonder if this would bug out somehow? (negatives work fine)
             flags[mapped_flag] = args[i]
             i = i + 1
         else
@@ -105,7 +104,6 @@ M.read_lines = function(path)
     if file_cache[path] then
         return file_cache[path]
     end
-    -- TODO: Error catching?
     local lines = {}
     for line in io.lines(path) do
         table.insert(lines, line)

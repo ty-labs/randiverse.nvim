@@ -37,7 +37,6 @@ local expected_flags = {
     end,
 }
 
--- TODO: Add the ability to specify start/stop Y/M/D/H/M/S + ability to pass own datetime format string!
 M.normal_random_datetime = function(args)
     local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)

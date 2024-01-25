@@ -13,7 +13,6 @@ local expected_flags = {
     cross_flags_validator = utils.no_validations,
 }
 
--- TODO: Perhaps in the future other UUID versions (besides 4)
 M.normal_random_uuid = function(args)
     local parsed_flags = utils.parse_command_flags(args or {}, flag_mappings)
     local transformed_flags = utils.validate_and_transform_command_flags(expected_flags, parsed_flags)
