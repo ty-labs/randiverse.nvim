@@ -50,7 +50,7 @@ use({
 
 # Usage💻
 
-## The Basics
+## Basics
 
 The general access pattern for Randiverse functionality looks like the following:
 

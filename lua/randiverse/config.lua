@@ -8,61 +8,73 @@ M.default_opts = {
             keymap = "<leader>rc",
             command = "country",
             desc = "Generates a random country",
+            enabled = true,
         },
         datetime = {
             keymap = "<leader>rd",
             command = "datetime",
             desc = "Generates a random datetime",
+            enabled = true,
         },
         email = {
             keymap = "<leader>re",
             command = "email",
             desc = "Generates a random email address",
+            enabled = true,
         },
         float = {
             keymap = "<leader>rf",
             command = "float",
             desc = "Generates a random float",
+            enabled = true,
         },
         hexcolor = {
             keymap = "<leader>rh",
             command = "hexcolor",
             desc = "Generates a random hexcolor",
+            enabled = true,
         },
         int = {
             keymap = "<leader>ri",
             command = "int",
             desc = "Generates a random integer",
+            enabled = true,
         },
         ip = {
             keymap = "<leader>rI",
             command = "ip",
             desc = "Generates a random ip",
+            enabled = true,
         },
         lorem = {
             keymap = "<leader>rl",
             command = "lorem",
             desc = "Generates random lorem ipsum text",
+            enabled = true,
         },
         name = {
             keymap = "<leader>rn",
             command = "name",
             desc = "Generates a random name",
+            enabled = true,
         },
         url = {
             keymap = "<leader>ru",
             command = "url",
             desc = "Generates a random url",
+            enabled = true,
         },
         uuid = {
             keymap = "<leader>rU",
             command = "uuid",
             desc = "Generates a random uuid",
+            enabled = true,
         },
         word = {
             keymap = "<leader>rw",
             command = "word",
             desc = "Generates a random word",
+            enabled = true,
         },
     },
     data = {
@@ -185,6 +197,9 @@ M.get_data_root_dir = function()
 end
 
 M.set_keymap = function(args)
+    if not args.enabled then
+        return
+    end
     if not args.lhs then
         if not M.user_opts.keymaps[args.name] then
             return
@@ -205,6 +220,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.country.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -215,6 +231,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.datetime.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -225,6 +242,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.email.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -235,6 +253,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.float.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -245,6 +264,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.hexcolor.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -255,6 +275,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.int.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -265,6 +286,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.ip.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -275,6 +297,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.lorem.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -285,6 +308,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.name.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -295,6 +319,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.url.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -305,6 +330,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.uuid.enabled,
     })
     M.set_keymap({
         mode = "n",
@@ -315,6 +341,7 @@ M.set_keymaps = function()
             noremap = true,
             silent = true,
         },
+        enabled = M.user_opts.keymaps.word.enabled,
     })
 end
 
