@@ -1,6 +1,6 @@
 # randiverse.nvim💥
 
-Tired of raking your brain trying to generate "random" text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the 'Random Universe'—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode —> NVIM convert and inspired by the simple, albeit handy, VScode extension called ["Random Everything"](https://marketplace.visualstudio.com/items?itemName=helixquar.randomeverything). It is both a port and an enhancement of the extension's feature set, tailored for the nvim environment.
+Tired of raking your brain trying to generate "random" text for sample/test cases (and secretly leaking your life details😆)?? Randiverse—the 'Random Universe'—is a flexible, configurable nvim plugin that can generate random text for a variety of scenarios including ints, floats, names, dates, lorem ipsum, emails, and more! Created by a recent VScode —> NVIM convert and inspired by the simple, albeit handy, VScode extension called "Random Everything". It is both a port and an enhancement of the extension's feature set, tailored for the nvim environment.
 
 Disclaimer: I've had discussions w/ some people in the nvim community and am well aware that some of this could be done via Lua Snips or a similar snippet engine. However, for the more complex commands it was helpful to have my own library + I learned a lot about Lua + nvim by doing this.
 
@@ -174,7 +174,7 @@ Configurations:
                 <corpus_name>: <file_path>, -- Configuration here, or leave empty to use default
                 ... (more corpus —> file_path mappings) ...
             },
-            default_corpus = <key_in_corpuses>, --Configuration here, or leave empty to use default: 'medium'; key in `data.word.corpuses`
+            default_corpus = <key>, --Configuration here, or leave empty to use default: 'medium'; key in `data.word.corpuses`
             default_length = <int>, --Configuration here, or leave empty to use default: 1
         }
     }
@@ -255,13 +255,13 @@ Configurations:
 
 `:Randiverse country <optional country flags>`
 
-Generates a random datetime (or date or time). The default output is a datetime in the past 10 years. The random country is generated via random selection from static country corpuseses that Randiverse comes bundled with & are configurable.
+Generates a random datetime (or date or time). The random output is generated via creating a random date and then based on if it is datetime/date/time picking a corresponding format to decide what the output is. The default output is a datetime within the past 10 years. A format is selected from the dynamic map `data.datetime.formats.datetime/date/time` which holds the format string to select the required components from the random datetime in the desired style. By default, Randiverse comes bundled w/ iso, rfc, sortable, human, short, long, and epoch formats; however, this is configurable. The default format to use for the datetime/date/time is known from a dynamic map `data.datetime.default_formats` with a key for each. 
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-d/--date` | Return the date component. <br/>Example: '`-d` would toggle the output to include a random date (plus any other toggled components).  | None |
-| `-t/--time` | Return the time component. <br/>Example: '`-t` would toggle the output to include a random time (plus any other toggled components).  | None |
-| `-f/--format format` | Set the output format for the datetime/date/time. <br/>Example: | String; Key in the corresponding '`data.datetime.formats.datetime/date/time`' map |
+| `-d/--date` | Return the date component. <br/>Example: '`-d`' would toggle the output to use the `data.datetime.formats.date` formats if only toggled component | None |
+| `-t/--time` | Return the time component. <br/>Example: '`-t`' would toggle the output to use the `data.datetime.formats.time` formats if only toggled component | None |
+| `-f/--format format` | Set the output format for the datetime/date/time. <br/>Example: '`-f sortable`' would change the output for datetime from default to 'sortable' ("%Y%m%d%H%M%S"). | String; Key in the corresponding '`data.datetime.formats.datetime/date/time`' map |
 
 Default Keymap: `<leader>rd`
 
@@ -274,14 +274,23 @@ Configurations:
     data: {
         datetime: {
             formats: {
-                datetime = {},
-                date = {},
-                time = {},
+                datetime = {
+                    <format_name>: <format_string>, -- Configuration here, or leave empty to use default
+                    ... (more mappings) ...
+                },
+                date = {
+                    <format_name>: <format_string>, -- Configuration here, or leave empty to use default
+                    ... (more mappings) ...
+                },
+                time = {
+                    <format_name>: <format_string>, -- Configuration here, or leave empty to use default
+                    ... (more mappings) ...
+                },
             },
             default_formats = {
-                datetime = "",
-                date = "",
-                time = "",
+                datetime = <key>, --Configuration here, or leave empty to use default: 'iso'; key in `data.datetime.formats.datetime`
+                date = <key>, --Configuration here, or leave empty to use default: 'iso'; key in `data.datetime.formats.time`
+                time = <key>, --Configuration here, or leave empty to use default: 'iso'; key in `data.datetime.formats.time`
             },
         }
     }
@@ -292,12 +301,12 @@ Configurations:
 
 `:Randiverse email <optional email flags>`
 
-Generates a random (fictitious) email address. The default email address has the general pattern: `<first|last><first|last>@<random_domain>.<random_tld>` The names used for email addresses are generated via random selection from the first + last name corpus files used for 'name' command. By default, the email address is lowercase, has no special/digital characters, and is not 'muddled' (scrambled username characters). The list of domains, tlds, digits, and special characters is configurable.
+Generates a random (fictitious) email address. Generated emails have the general pattern: `<first|last><separator><first|last><digits><specials>@<random_domain><random_tld>` The names used for email addresses are generated via random selection from the first + last name corpus files used for 'name' command. By default, the email address is lowercase, has NO special/digital characters nor a separator character, and is not 'muddled' (scrambled username characters). The list of domains, tlds, digits, and special characters is configurable.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-c/--capitalize` | Return the first/last name in the email captialized. <br/>Example: '`-c` would toggle the output from `kimbrabulman@mail.com` —> `KimbraBulman@mail.com`.  | None |
-| `-d/--digits digits` | Set the number of digits to append to the username (default is 0). <br/>Example: '`-d 2` would change output from `kimbrabulman@mail.com` to something like `kimbrabulman21@mail.com`.  | Non-negative Integer |
+| `-c/--capitalize` | Return the first/last name in the email captialized. <br/>Example: '`-c` would toggle the output from `kimbrabulman@mail.com` —> `KimbraBulman@mail.com`  | None |
+| `-d/--digits digits` | Set the number of digits to append to the username (default is 0). <br/>Example: '`-d 2` would change output from `kimbrabulman@mail.com` to something like `kimbrabulman21@mail.com`  | Non-negative Integer |
 | `-s/--specials specials` | Set the number of specials to append to the username (default is 0). <br/>Example: `-s 1` would change output from `kimbrabulman@mail.com` to something like `kimbrabulman!@mail.com` | Non-negative Integer |
 | `-S/--separate` | Return the email with first/last name having a separator inserted between. <br/>Example: `-S` would change output from `kimbrabulman@mail.com` to something like `kimbra.bulman@mail.com` | None |
 | `-m/--muddle-property` | Set the 'muddleness'—how scrambled the username characters are—for the email username. The property is passed as a decimal in \[0,1\] and is the likelihood that a character in the final username will be moved to a different location. <br/>Example: `-m .2` would slightly scramble the output from `kimbrabulman@mail.com` to something like `mikbrabmluan@mail.com` | Decimal in \[0,1\] |
@@ -447,14 +456,211 @@ Below are the randiverse.nvim configurations and their default values w/ explana
 
 ```lua
 {
+    enabled = true,
+    keymaps_enabled = true,
+    keymaps = {
+        country = {
+            keymap = "<leader>rc",
+            command = "country",
+            desc = "Generates a random country",
+            enabled = true,
+        },
+        datetime = {
+            keymap = "<leader>rd",
+            command = "datetime",
+            desc = "Generates a random datetime",
+            enabled = true,
+        },
+        email = {
+            keymap = "<leader>re",
+            command = "email",
+            desc = "Generates a random email address",
+            enabled = true,
+        },
+        float = {
+            keymap = "<leader>rf",
+            command = "float",
+            desc = "Generates a random float",
+            enabled = true,
+        },
+        hexcolor = {
+            keymap = "<leader>rh",
+            command = "hexcolor",
+            desc = "Generates a random hexcolor",
+            enabled = true,
+        },
+        int = {
+            keymap = "<leader>ri",
+            command = "int",
+            desc = "Generates a random integer",
+            enabled = true,
+        },
+        ip = {
+            keymap = "<leader>rI",
+            command = "ip",
+            desc = "Generates a random ip",
+            enabled = true,
+        },
+        lorem = {
+            keymap = "<leader>rl",
+            command = "lorem",
+            desc = "Generates random lorem ipsum text",
+            enabled = true,
+        },
+        name = {
+            keymap = "<leader>rn",
+            command = "name",
+            desc = "Generates a random name",
+            enabled = true,
+        },
+        url = {
+            keymap = "<leader>ru",
+            command = "url",
+            desc = "Generates a random url",
+            enabled = true,
+        },
+        uuid = {
+            keymap = "<leader>rU",
+            command = "uuid",
+            desc = "Generates a random uuid",
+            enabled = true,
+        },
+        word = {
+            keymap = "<leader>rw",
+            command = "word",
+            desc = "Generates a random word",
+            enabled = true,
+        },
+    },
+    data = {
+        ROOT = (function()
+            local path = debug.getinfo(1, "S").source:sub(2)
+            path = path:match("(.*/)")
+            return path .. "data/"
+        end)(),
+        country = {
+            COUNTRIES = "countries.txt",
+            ALPHA2 = "countries_alpha2.txt",
+            ALPHA3 = "countries_alpha3.txt",
+            NUMERIC = "countries_numeric.txt",
+        },
+        datetime = {
+            formats = {
+                datetime = {
+                    iso = "%Y-%m-%dT%H:%M:%SZ",
+                    rfc = "%a, %d %b %Y %H:%M:%S",
+                    sortable = "%Y%m%d%H%M%S",
+                    human = "%B %d, %Y %I:%M:%S %p",
+                    short = "%m/%d/%y %H:%M:%S",
+                    long = "%A, %B %d, %Y %I:%M:%S %p",
+                    epoch = "%s",
+                },
+                date = {
+                    iso = "%Y-%m-%d",
+                    rfc = "%a, %d %b %Y",
+                    sortable = "%Y%m%d",
+                    human = "%B %d, %Y",
+                    short = "%m/%d/%y",
+                    long = "%A, %B %d, %Y",
+                    epoch = "%s",
+                },
+                time = {
+                    iso = "%H:%M:%S",
+                    rfc = "%H:%M:%S",
+                    sortable = "%H%M%S",
+                    human = "%I:%M:%S %p",
+                    short = "%H:%M:%S",
+                    long = "%%I:%M:%S %p",
+                },
+            },
+            default_formats = {
+                datetime = "iso",
+                date = "iso",
+                time = "iso",
+            },
+        },
+        email = {
+            domains = { "example", "company", "mail", "test", "random" },
+            tlds = { "com", "net", "org", "dev", "edu" },
+            digits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+            specials = { "!", "#", "$", "%", "^", "&", "*" },
+            separators = { "_", "-", "." },
+            default_digits = 0,
+            default_specials = 0,
+            default_muddle_property = 0.0,
+        },
+        float = {
+            default_start = 1,
+            default_stop = 100,
+            default_decimals = 2,
+        },
+        int = {
+            default_start = 1,
+            default_stop = 100,
+        },
+        lorem = {
+            corpuses = {
+                ["lorem"] = "words_lorem.txt",
+            },
+            sentence_lengths = {
+                ["short"] = { 5, 20 },
+                ["medium"] = { 20, 40 },
+                ["long"] = { 40, 60 },
+                ["mixed-short"] = { 5, 30 },
+                ["mixed"] = { 5, 100 },
+                ["mixed-long"] = { 30, 100 },
+            },
+            default_corpus = "lorem",
+            default_sentence_length = "mixed-short",
+            default_comma_property = 0.1,
+            default_length = 100,
+        },
+        name = {
+            FIRST = "names_first.txt",
+            LAST = "names_last.txt",
+        },
+        url = {
+            protocols = { "http", "https" },
+            tlds = { "com", "org", "net", "edu", "gov" },
+            default_domain_corpus = "medium",
+            default_subdomain_corpus = "short",
+            default_path_corpus = "medium",
+            default_fragment_corpus = "long",
+            default_param_corpus = "medium",
+            default_value_corpus = "medium",
+            default_subdomains = 0,
+            default_paths = 0,
+            default_query_params = 0,
+        },
+        word = {
+            corpuses = {
+                ["short"] = "words_short.txt",
+                ["medium"] = "words_medium.txt",
+                ["long"] = "words_long.txt",
+            },
+            default_corpus = "medium",
+            default_length = 1,
+        },
+    },
 }
 ```
 
-To configure randiverse.nvim, simply pass in a map to the setup function containing ONLY the default configuration values that you wish to override. For example, lets override the keymap for name command to return a first name on keymap press and also override the xyz: 
+To configure randiverse.nvim, simply pass in a map to the setup function containing ONLY the default configuration values that you wish to override. For example, lets install the plugin (w/ Lazy) and override the keymap for name command to return a first name on keymap press and also override the xyz: Plus say we want default emails to include specials, if we use the keymaps we could do this! Or, we could update the command properties to change the default so it is used for default call: 
 
 ```lua
-{
-}
+  {
+    "ty-labs/randiverse.nvim",
+    version = "*",
+    config = function()
+      require("randiverse").setup({
+        keymaps = {
+          country = {
+            command = "name -f",
+          },
+        },
+      })
+    end,
+  },
 ```
 
 # Contributing✍️
@@ -463,8 +669,8 @@ I've included what I hope is a decent starter + reasonable defaults (ported over
 
 # Shoutouts📢
 
-- [Random Everything](https://github.com/helixquar/randomeverything)         —> Original inspiration as a revamped version of the VScode extension.
-- [Random Text](https://github.com/kimpettersen/random-sublime-text-plugin)  —> Sublime random text generator which Random Everything was based on.
-- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim)           —> Inspiration for building the Lorem Ipsum generator feature.
-- [nvim-surround](https://github.com/kylechui/nvim-surround/tree/main)       —> General structure for writing nvim plugins.
+- [Random Everything](https://github.com/helixquar/randomeverything)         —> Original inspiration as a revamped version of the VScode extension
+- [Random Text](https://github.com/kimpettersen/random-sublime-text-plugin)  —> Sublime random text generator which Random Everything was based on
+- [Lorem Ipsum Generator](https://github.com/derektata/lorem.nvim)           —> Inspiration for building the Lorem Ipsum generator feature
+- [nvim-surround](https://github.com/kylechui/nvim-surround/tree/main)       —> General structure for writing nvim plugins
 - If you like this project consider a [star⭐](https://github.com/ty-labs/randiverse.nvim/tree/main) to show your support!
