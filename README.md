@@ -229,7 +229,7 @@ Generates a random country. The default output is a standard country name. The r
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-c/--code enum` | Set the code format for the returned country. <br/>Example: '`-c alpha-2` would change the output to return a country in `AA` format, such as `US`. | '2', '3', 'alpha-2', 'alpha-3' |
+| `-c/--code enum` | Set the code format for the returned country. <br/>Example: '`-c alpha-2` would change the output to return a country in `AA` format, such as `US`. | 2, 3, alpha-2, alpha-3 |
 | `-n/--numeric` | Return the country in numeric format. <br/>Example: '`-n`' would toggle the output to return a country in `XXX` format, such as `120`. | None |
 
 Default Keymap: `<leader>rn`
@@ -328,7 +328,7 @@ Generates a random ip. The default output is IPv4 standard and has uppercase hex
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
-| `-v/--version enum` | Set the ip version for the output. <br/>Example: '`-v ipv6`' would change output to '`XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX`' format, such as '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`'. | '4', '6', 'ipv4', 'ipv6' |
+| `-v/--version enum` | Set the ip version for the output. <br/>Example: '`-v ipv6`' would change output to '`XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX`' format, such as '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`'. | 4, 6, ipv4, ipv6 |
 | `-l/--lowercase` | Return the output with hexadecimals lowercase where applicable. <br/>Example: '`-l`' would change IPv6 output '`3D08:3A01:7856:bA7A:6F40:2073:D398:A5E8`' —> '`3d08:3a01:7856:ba7a:6f40:2073:d398:a5e8`'. | None |
 
 Default Keymap: `<leader>rI`
