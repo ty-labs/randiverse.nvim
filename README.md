@@ -124,7 +124,7 @@ Configurations:
 
 `:Randiverse name <optional name flags>`
 
-Generates a random name. The default is a full name (first and last) unless flags are set. The random name is created via random selection from static first + last name corpuses that Randiverse comes bundled with & are configurable.
+Generates a random name. The default is a full name (first and last) unless flags are set. The random name is created via random selection from static first + last name corpus files that Randiverse comes bundled with & are configurable.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
@@ -225,7 +225,7 @@ Configurations:
 
 `:Randiverse country <optional country flags>`
 
-Generates a random country. The default output is a standard country name. The random country is generated via random selection from static country corpuseses that Randiverse comes bundled with & are configurable.
+Generates a random country. The default output is a standard country name. The random country is generated via random selection from static country corpus files that Randiverse comes bundled with & are configurable.
 
 | Flag | Description | Value |
 |:-----|:------------|:------|
@@ -290,11 +290,79 @@ Configurations:
 
 ## email
 
-Dummy Text
+`:Randiverse email <optional email flags>`
+
+Generates a random (fictitious) email address. The default email address has the general pattern: `<first|last><first|last>@<random_domain>.<random_tld>` The names used for email addresses are generated via random selection from the first + last name corpus files used for 'name' command. By default, the email address is lowercase, has no special/digital characters, and is not 'muddled' (scrambled username characters). The list of domains, tlds, digits, and special characters is configurable.
+
+| Flag | Description | Value |
+|:-----|:------------|:------|
+| `-c/--capitalize` | Return the first/last name in the email captialized. <br/>Example: '`-c` would toggle the output from `kimbrabulman@mail.com` —> `KimbraBulman@mail.com`.  | None |
+| `-d/--digits digits` | Set the number of digits to append to the username (default is 0). <br/>Example: '`-d 2` would change output from `kimbrabulman@mail.com` to something like `kimbrabulman21@mail.com`.  | Non-negative Integer |
+| `-s/--specials specials` | Set the number of specials to append to the username (default is 0). <br/>Example: `-s 1` would change output from `kimbrabulman@mail.com` to something like `kimbrabulman!@mail.com` | Non-negative Integer |
+| `-S/--separate` | Return the email with first/last name having a separator inserted between. <br/>Example: `-S` would change output from `kimbrabulman@mail.com` to something like `kimbra.bulman@mail.com` | None |
+| `-m/--muddle-property` | Set the 'muddleness'—how scrambled the username characters are—for the email username. The property is passed as a decimal in \[0,1\] and is the likelihood that a character in the final username will be moved to a different location. <br/>Example: `-m .2` would slightly scramble the output from `kimbrabulman@mail.com` to something like `mikbrabmluan@mail.com` | Decimal in \[0,1\] |
+
+Default Keymap: `<leader>re`
+
+**Insert Demo Video**
+
+Configurations:
+
+```lua
+{
+    data: {
+        email: {
+            domains = <list> --Configuration here, or leave empty to use default: { "example", "company", "mail", "test", "random" }
+            tlds = <list> --Configuration here, or leave empty to use default: { "com", "net", "org", "dev", "edu" }
+            digits = <list> --Configuration here, or leave empty to use default: { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+            specials = <list> --Configuration here, or leave empty to use default: { "!", "#", "$", "%", "^", "&", "*" }
+            separators = <list> --Configuration here, or leave empty to use default: { "_", "-", "." }
+            default_digits = <int> --Configuration here, or leave empty to use default: 0
+            default_specials = <int> --Configuration here, or leave empty to use default: 0
+            default_muddle_property = <int> --Configuration here, or leave empty to use default: 0.0
+        }
+    }
+}
+```
 
 ## url
 
-Dummy Text
+`:Randiverse url <optional url flags>`
+
+Generates a random (fictitious) url. Generated urls have the general pattern: `<random_protocol>://<subdomains>.<random_domain>.<random_tld>/<paths>?<query_params>#<fragment>`. By default, the url has no subdomains, no paths, no query parameters, nor a fragment. Additionally, the word corpuses from the 'word' command are used to generate the url.
+
+| Flag | Description | Value |
+|:-----|:------------|:------|
+| `-s/--subdomains subdomains` | Return the first/last name in the email captialized. <br/>Example: '`-c` would toggle the output from `kimbrabulman@mail.com` —> `KimbraBulman@mail.com`.  | None |
+| `-p/--paths paths` | Set the number of digits to append to the username (default is 0). <br/>Example: '`-d 2` would change output from `kimbrabulman@mail.com` to something like `kimbrabulman21@mail.com`.  | Non-negative Integer |
+| `-q/--query-params queryparams` | Set the number of specials to append to the username (default is 0). <br/>Example: `-s 1` would change output from `kimbrabulman@mail.com` to something like `kimbrabulman!@mail.com` | Non-negative Integer |
+| `-f/--fragement` | Return the email with first/last name having a separator inserted between. <br/>Example: `-S` would change output from `kimbrabulman@mail.com` to something like `kimbra.bulman@mail.com` | None |
+
+Default Keymap: `<leader>ru`
+
+**Insert Demo Video**
+
+Configurations:
+
+```lua
+{
+    data: {
+        url = {
+            protocols = <list> --Configuration here, or leave empty to use default: { "http", "https" }
+            tlds = <list> --Configuration here, or leave empty to use default: { "com", "org", "net", "edu", "gov" }
+            default_domain_corpus = <string> --Configuration here, or leave empty to use default: "medium"; key in `data.word.corpuses`
+            default_subdomain_corpus = <string> --Configuration here, or leave empty to use default: "short"; key in `data.word.corpuses`
+            default_path_corpus = <string> --Configuration here, or leave empty to use default: "medium"; key in `data.word.corpuses`
+            default_fragment_corpus = <string> --Configuration here, or leave empty to use default: "long"; key in `data.word.corpuses`
+            default_param_corpus = <string> --Configuration here, or leave empty to use default: "medium"; key in `data.word.corpuses`
+            default_value_corpus = <string> --Configuration here, or leave empty to use default: "medium"; key in `data.word.corpuses`
+            default_subdomains = <int> --Configuration here, or leave empty to use default: 0
+            default_paths = <int> --Configuration here, or leave empty to use default: 0
+            default_query_params = <int> --Configuration here, or leave empty to use default: 0
+        }
+    }
+}
+```
 
 ## uuid
 
